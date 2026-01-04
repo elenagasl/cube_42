@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 21:07:53 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 00:06:19 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,62 @@ typedef struct s_map
 	int	ceiling_color[3];
 }		t_map;
 
+// Argument validation
+
+int		validate_arg(int argc, char *path);
 int		is_valid_extension(char *path, char *ext);
+
+
+// Open and read .cub file
+
 int		open_rdonly_file(char *path);
-void	free_arr_str(char **arr);
 char	**arr_string_from_fd(int fd);
+
+
+// File validation
+
+int		validate_file(char *path, char **arr, int *map_start);
 int		is_texture(char *str);
 int		is_color(char *str);
 int		is_map(char *str);
 int		is_empty_line(char *str);
-void	process_file(char *path, char **arr, int *map_start);
-void	init_int_arr(int *arr, int size, int value);
-int		get_texture(char *line, int textures[4]);
-void	process_metadata(char **arr, t_map *map, int map_start);
-void	ft_trim_whitespace(char *str);
+void	count_lines(char *line, int *i, int *count, int *map_start);
+int		file_validation_status(int count, int map_start);
+
+
+// Metadata parsing
+
+int		parse_metadata(char **arr, t_map *map, int map_start);
+
+
+// Metadata parsing: textures
+
+int		parse_texture(char *line, int textures[4]);
+int		open_texture(int i, int textures[4], char *path);
+int		check_textures(int textures[4]);
 int		cardinal_to_index(char c);
 int		index_to_cardinal(int i);
-int		check_textures(int textures[4]);
-void	close_fd_arr(int *arr, int size);
-int		open_texture(int i, int textures[4], char *path);
-int		validate_color(char *line);
-int		restart_comma(char next_char, int *commas, int *digits);
-void	get_color(char *line, t_map *map);
+
+
+// Metadata parsing: colors
+
+void	parse_color(char *line, t_map *map);
+void	parse_rgb(char *line, int color[3]);
 int		check_colors(int color[3]);
+int		restart_comma(char next_char, int *commas, int *digits);
+int		validate_color(char *line);
+
+
+// Map parsing
+
+int		parse_map(char **arr, t_map *map);
+
+
+// Utils
+
+void	free_arr_str(char **arr);
+void	init_int_arr(int *arr, int size, int value);
+void	close_fd_arr(int *arr, int size);
+void	ft_trim_whitespace(char *str);
 
 #endif
