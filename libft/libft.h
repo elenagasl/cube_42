@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:11:38 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/03 15:22:20 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 09:46:08 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-char	**ft_strappend(char **arr, char *str);
+char	**ft_push_str_to_arr(char **arr, char *str);
 char	*ft_strchr(char *str, int c);
 char	*ft_strrchr(char *str, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strappend.c                                     :+:      :+:    :+:   */
+/*   ft_push_str_to_arr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 21:53:26 by danielji          #+#    #+#             */
-/*   Updated: 2025/12/24 21:56:02 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 09:45:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /* Append string `str` to the end of array `arr`. Return new array. */
-char	**ft_strappend(char **arr, char *str)
+char	**ft_push_str_to_arr(char **arr, char *str)
 {
 	int		i;
 	int		size;
