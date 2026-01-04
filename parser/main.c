@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 20:25:04 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 21:40:32 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	fd = open_rdonly_file(path);
+	if (fd < 0)
+		return (1);
 	file = arr_string_from_fd(fd);
 	process_file(path, file, &map_start);
 	map = malloc(sizeof(t_map));

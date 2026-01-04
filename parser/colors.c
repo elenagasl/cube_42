@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 20:27:48 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 21:20:10 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	check_colors(int color[3])
 	return (1);
 }
 
-/* - Parse a string into an integer
-- Save color value into corresponding 3-sized-array position */
+/* - Parse an RGB color-coded string into an array of integer
+- Save color value into corresponding array position */
 void	parse_color(char *line, int color[3])
 {
 	int	i;
@@ -62,13 +62,22 @@ void	parse_color(char *line, int color[3])
 	}
 }
 
-/* Check if a line is a valid color line:
-- Line must start with 'F' or 'C' followed by whitespace
-- There are only 3 numbers
-- Numbers are less than four digit long
-- Each number is separated by a single comma
+int	restart_comma(char next_char, int *commas, int *digits)
+{
+	if (!ft_isdigit(next_char) && next_char != '\0')
+		return (0);
+	if (*digits == 0 || *digits > 3)
+		return (0);
+	*commas += 1;
+	*digits = 0;
+	return (1);
+}
 
-TODO: TOO MANY LINES*/
+/* Check if a line is a valid color line:
+- 'F' or 'C' may be followed by whitespace
+- There are only 3 numbers
+- Numbers are less than four digits long
+- Each number is separated by a single comma */
 int	validate_color(char *line)
 {
 	int	i;
@@ -84,40 +93,22 @@ int	validate_color(char *line)
 		i++;
 	while (line[i])
 	{
-		if (line[i] == ',')
-		{
-			if (!ft_isdigit(line[i + 1]) && line[i + 1] != '\0')
-			{
-				printf("Error: invalid color format\n");
-				return (0);
-			}
-			if (digits == 0 || digits > 3)
-			{
-				printf("Error: invalid color format\n");
-				return (0);
-			}
-			commas++;
-			digits = 0;
-		}
+		if (line[i] == ',' && !restart_comma(line[i + 1], &commas, &digits))
+			return (printf("Error: invalid color format\n"), 0);
 		else if (ft_isdigit(line[i]))
 			digits++;
 		else if (!ft_isdigit(line[i]) && line[i] != ',')
-		{
-			printf("Error: invalid color format\n");
-			return (0);
-		}
+			return (printf("Error: invalid color format BBBBBBBB\n"), 0);
 		i++;
 	}
 	if (commas != 2 || digits == 0 || digits > 3)
-	{
-		printf("Error: invalid color format\n");
-		return (0);
-	}
+		return (printf("Error: invalid color format\n"), 0);
 	return (1);
 }
 
 /* - Check if line has a valid color format
-- Parse floor or ceiling color into an array of integers */
+- Parse floor or ceiling color into an array of integers
+TODO: Do something if `validate_color` fails !!!*/
 void	get_color(char *line, t_map *map)
 {
 	int	i;

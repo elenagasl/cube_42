@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 20:20:48 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 21:07:53 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int		check_textures(int textures[4]);
 void	close_fd_arr(int *arr, int size);
 int		open_texture(int i, int textures[4], char *path);
 int		validate_color(char *line);
+int		restart_comma(char next_char, int *commas, int *digits);
 void	get_color(char *line, t_map *map);
 int		check_colors(int color[3]);
 
