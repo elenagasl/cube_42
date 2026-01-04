@@ -1,3 +1,4 @@
 build
-.o
-.a
+*.o
+*.a
+*.DS_Store
