@@ -6,12 +6,13 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 14:31:56 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:26:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/* Check if line is a texture line */
 int	is_texture(char *str)
 {
 	int	i;
@@ -30,6 +31,7 @@ int	is_texture(char *str)
 	return (0);
 }
 
+/* Check if line is a floor or ceiling color line */
 int	is_color(char *str)
 {
 	int	i;
@@ -44,6 +46,7 @@ int	is_color(char *str)
 	return (0);
 }
 
+/* Check if line is the starting line of the map */
 int	is_map(char *str)
 {
 	int	i;
@@ -56,6 +59,7 @@ int	is_map(char *str)
 	return (0);
 }
 
+/* Check if a line is composed of whitespace only and a new line character */
 int	is_empty_line(char *str)
 {
 	int	i;
@@ -68,13 +72,20 @@ int	is_empty_line(char *str)
 	return (0);
 }
 
+/* Perform a preliminary validation:
+- File is not empty
+- There are 7 metadata lines (nothing more, nothing less)
+	- 4 texture lines
+	- 2 color lines
+	- 1 map starting line
+- Map must be at the end
+- `map_start` holds the line index at which the map starts
+
+TODO: TOO MANY LINES*/
 void	process_file(char *path, char **arr, int *map_start)
 {
 	int	i;
 	int	count;
-	//int	textures[4] = {-1, -1, -1, -1};
-	//int	floor_color[3] = {-1, -1, -1};
-	//int	ceiling_color[3] = {-1, -1, -1};
 
 	i = 0;
 	count = 0;
@@ -102,7 +113,8 @@ void	process_file(char *path, char **arr, int *map_start)
 		}
 		else
 		{
-			printf("Error: Unexpected line in file %s:%i %s", path, i + 1, arr[i]);
+			printf("Error: Unexpected line in file"
+				"%s:%i %s", path, i + 1, arr[i]);
 			break ;
 		}
 	}
@@ -110,4 +122,6 @@ void	process_file(char *path, char **arr, int *map_start)
 		printf("Error: Empty file\n");
 	else if (count < 7 || *map_start < 7)
 		printf("Error: Missing metadata\n");
+	else if (count > 7)
+		printf("Error: Duplicated metadata\n");
 }

@@ -1,9 +1,9 @@
 NAME		= parser-exe
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3
 SRC_PATH	= parser
 BUILD		= build
-SRC			= main.c files.c file-validation.c trim.c
+SRC			= main.c files.c file-validation.c trim.c colors.c textures.c utils.c
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJS		= $(addprefix $(BUILD)/, $(SRC:.c=.o))
 INCLUDE		= -I./include -I./libft

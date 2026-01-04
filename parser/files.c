@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:09:29 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 14:31:56 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/04 20:22:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	is_valid_extension(char *path, char *ext)
 }
 
 /* Open a read-only file specified by `path` and return its file descriptor.
-On error print message and return `-1`.*/
+On error print message and return `-1`.
+TODO: On error should exit program ????*/
 int	open_rdonly_file(char *path)
 {
 	int	fd;
@@ -41,13 +42,34 @@ int	open_rdonly_file(char *path)
 	{
 		perror("open");
 		return (-1);
-		// Exit??
 	}
 	return (fd);
 }
 
-/* Read file `fd` line by line an return an array of the read strings
-or `NULL` in case of error */
+/* Free an array of strings */
+void	free_arr_str(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		if (arr[i])
+		{
+			free(arr[i]);
+			arr[i] = NULL;
+		}
+		i++;
+	}
+	free(arr);
+	arr = NULL;
+}
+
+/* Read file `fd` line by line an return an array
+of the read strings or `NULL` in case of error
+TODO: Free GNL static ???*/
 char	**arr_string_from_fd(int fd)
 {
 	char	**arr;
@@ -60,6 +82,5 @@ char	**arr_string_from_fd(int fd)
 		arr = ft_push_str_to_arr(arr, line);
 		line = get_next_line(fd);
 	}
-	// TODO: Free GNL static
 	return (arr);
 }

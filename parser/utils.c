@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trim.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 14:11:24 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 19:55:25 by danielji         ###   ########.fr       */
+/*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
+/*   Updated: 2026/01/04 20:28:41 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/* Trim leading & trailing whitespace in place
-Source: https://stackoverflow.com/a/123724 */
-void	ft_trim_whitespace(char *str)
+// TODO Mejor usar enum?
+int	cardinal_to_index(char c)
 {
-	char	*ptr;
-	size_t	len;
+	if (c == 'N')
+		return (0);
+	else if (c == 'S')
+		return (1);
+	else if (c == 'W')
+		return (2);
+	else if (c == 'E')
+		return (3);
+	return (-1);
+}
 
-	ptr = str;
-	len = ft_strlen(ptr);
-	if (len == 0)
-		return ;
-	while (len > 0 && ft_isspace(ptr[len - 1]))
-	{
-		len--;
-		ptr[len] = '\0';
-	}
-	while (*ptr && ft_isspace(*ptr))
-	{
-		len--;
-		ptr++;
-	}
-	ft_memmove(str, ptr, len + 1);
+// TODO Mejor usar enum?
+int	index_to_cardinal(int i)
+{
+	if (i == 0)
+		return ('N');
+	else if (i == 1)
+		return ('S');
+	else if (i == 2)
+		return ('W');
+	else if (i == 3)
+		return ('E');
+	return ('0');
 }
