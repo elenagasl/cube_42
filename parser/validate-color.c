@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:53:20 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 00:13:40 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 08:53:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	validate_color(char *line)
 		i++;
 	while (ft_isspace(line[i]))
 		i++;
-	while (line[i] && line[i])
+	while (line[i])
 	{
 		if (line[i] == ',' && !restart_comma(line[i + 1], &commas, &digits))
 			return (0);
