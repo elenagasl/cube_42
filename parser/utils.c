@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 09:04:25 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 12:29:44 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	close_fd_arr(int *arr, int size)
 			close(arr[i]);
 			arr[i] = -1;
 		}
+		i++;
 	}
 }
