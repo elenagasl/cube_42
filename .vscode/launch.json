@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/parser-exe",
+            "args": ["${input:programArgs}"],
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "build"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "programArgs",
+            "type": "pickString",
+            "description": "Select program arguments",
+            "options": ["./maps/test1.cub"],
+        }
+    ]
+}

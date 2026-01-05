@@ -1,6 +1,6 @@
 NAME		= parser-exe
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -g3
+CFLAGS		= -Wall -Werror -Wextra
 SRC_PATH	= parser
 BUILD		= build
 SRC			= main.c parse-colors.c parse-map.c parse-meta.c parse-textures.c read-file.c utils.c validate-arg.c validate-color.c validate-file1.c validate-file2.c
@@ -28,5 +28,8 @@ fclean : clean
 	$(MAKE) -sC libft fclean
 
 re : fclean all
+
+debug: CFLAGS = -Wall -Wextra -g3 -O0 -fno-omit-frame-pointer
+debug: fclean all
 
 .PHONY : all clean fclean re
