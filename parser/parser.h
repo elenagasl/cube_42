@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 09:39:14 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 12:17:01 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		validate_color(char *line);
 
 // Map parsing
 
-int		parse_map(char **arr, t_map *map);
+int		parse_map(char **arr, t_map *map, int start);
 
 
 // Trim whitespace
