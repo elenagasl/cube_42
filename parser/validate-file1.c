@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 00:13:07 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 12:33:35 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	file_validation_status(int count, int map_start)
 		printf("Error: Empty file or missing data\n");
 		return (0);
 	}
-	else if (count < 7 || map_start < 7)
+	else if (count < 7 || map_start < 6)
 	{
 		printf("Error: Missing data\n");
 		return (0);
