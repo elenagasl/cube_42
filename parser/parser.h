@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 12:17:01 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 15:30:12 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@ typedef struct s_map
 int		validate_arg(int argc, char *path);
 int		is_valid_extension(char *path, char *ext);
 
-
 // Open and read .cub file
 
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
-
 
 // File validation
 
@@ -45,11 +43,9 @@ int		is_empty_line(char *str);
 void	count_lines(char *line, int *i, int *count, int *map_start);
 int		file_validation_status(int count, int map_start);
 
-
 // Metadata parsing
 
 int		parse_metadata(char **arr, t_map *map, int map_start);
-
 
 // Metadata parsing: textures
 
@@ -59,7 +55,6 @@ int		check_textures(int textures[4]);
 int		cardinal_to_index(char c);
 int		index_to_cardinal(int i);
 
-
 // Metadata parsing: colors
 
 void	parse_color(char *line, t_map *map);
@@ -68,18 +63,15 @@ int		check_colors(int color[3]);
 int		restart_comma(char next_char, int *commas, int *digits);
 int		validate_color(char *line);
 
-
 // Map parsing
 
 int		parse_map(char **arr, t_map *map, int start);
-
 
 // Trim whitespace
 
 void	ft_trim_ws_left(char *str);
 void	ft_trim_ws_right(char *str);
 void	ft_trim_whitespace(char *str);
-
 
 // Utils
 
