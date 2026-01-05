@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 00:06:19 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 09:39:14 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,17 @@ int		validate_color(char *line);
 int		parse_map(char **arr, t_map *map);
 
 
+// Trim whitespace
+
+void	ft_trim_ws_left(char *str);
+void	ft_trim_ws_right(char *str);
+void	ft_trim_whitespace(char *str);
+
+
 // Utils
 
 void	free_arr_str(char **arr);
 void	init_int_arr(int *arr, int size, int value);
 void	close_fd_arr(int *arr, int size);
-void	ft_trim_whitespace(char *str);
 
 #endif
