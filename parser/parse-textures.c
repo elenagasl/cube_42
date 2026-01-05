@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 23:45:34 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 12:32:35 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ int	parse_texture(char *line, int textures[4])
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		if (!open_texture(cardinal_to_index(line[0]), textures, path))
-		{
-			close_fd_arr(textures, 4);
-			return (0);
-		}
+			return (close_fd_arr(textures, 4), 0);
 	}
 	return (1);
 }
@@ -55,9 +52,9 @@ int	open_texture(int i, int textures[4], char *path)
 		return (0);
 	}
 	fd = open_rdonly_file(path);
+	textures[i] = fd;
 	if (fd < 0)
 		return (0);
-	textures[i] = i;
 	return (1);
 }
 
