@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 12:46:17 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 14:47:55 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int	is_char_in_set(char c, char const *set)
 	while (*set)
 	{
 		if (*set == c)
-		{
 			return (1);
-		}
 		set++;
 	}
 	return (0);
@@ -63,15 +61,21 @@ int	parse_map(char **arr, t_map *map, int start)
 
 	i = start;
 	if (!is_valid_top_bottom_line(arr[start]))
-		return (printf("Invalid TOP line\n"), 0);
+		return (printf("Error: Invalid map top line\n"), 0);
 	i++;
-	while (arr[i])
+	while (arr[i] && !is_empty_line(arr[i]))
 	{
-		if (is_empty_line(arr[i]))
-			return (printf("Error: Unexpected empty line\n"), 0);
 		ft_trim_ws_right(arr[i]);
 		if (!is_valid_middle_line(arr[i]))
-			return (printf("Invalid MIDDLE line\n"), 0);
+			return (printf("Invalid map middle line\n"), 0);
+		i++;
+	}
+	if (i - 1 == start || !is_valid_top_bottom_line(arr[i - 1]))
+		return (printf("Invalid map bottom line\n"), 0);
+	while (arr[i])
+	{
+		if (!is_empty_line(arr[i]))
+			return (printf("Unexpected line\n"), 0);
 		i++;
 	}
 	(void)map;

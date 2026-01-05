@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 12:33:35 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 15:23:31 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ int	validate_file(char *path, char **arr, int *map_start)
 	while (arr[i] && *map_start == 0)
 	{
 		if (is_empty_line(arr[i]))
-			i++;
-		else if (is_texture(arr[i]) || is_color(arr[i]) || is_map(arr[i]))
 		{
-			count_lines(arr[i], &i, &count, map_start);
+			i++;
+			continue ;
+		}
+		else if (!is_empty_line(arr[i]) && (is_texture(arr[i]) || is_color(arr[i]) || is_map(arr[i])))
+		{
 			if (is_color(arr[i]) && !validate_color(arr[i]))
 				return (printf("Error: Invalid color format"), 0);
+			count_lines(arr[i], &i, &count, map_start);
 		}
 		else
 		{

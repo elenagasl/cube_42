@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 12:16:37 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/05 14:46:34 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	main(int argc, char *argv[])
 	if (!parse_metadata(file, map, map_start))
 		return (free_arr_str(file), free(map), 1);
 	printf("Metadata validation passed! :)\n");
-	parse_map(file, map, map_start);
+	if (!parse_map(file, map, map_start))
+		return (free_arr_str(file), free(map), 1);
+	printf("Map validation passed! :)\n");
 	free_arr_str(file);
 	free(map);
 	return (0);
