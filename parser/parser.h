@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 15:30:12 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 17:03:12 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,67 +16,73 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
-typedef struct s_map
+# define WIN_W 640
+# define WIN_H 480
+# define MAP_W 24
+# define MAP_H 7
+
+typedef struct s_img
 {
-	int	textures[4];
-	int	floor_color[3];
-	int	ceiling_color[3];
-}		t_map;
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
 
-// Argument validation
+typedef struct s_player
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
 
-int		validate_arg(int argc, char *path);
-int		is_valid_extension(char *path, char *ext);
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_img		img;
+	t_player	player;
+	int			map_w;
+	int			map_h;
+	int			(*map)[MAP_W];
+	char		*textures[4];
+	int			floor_color[3];
+	int			ceiling_color[3];
+}	t_game;
 
-// Open and read .cub file
+// Parser
+
+void	parse_file(char *path, t_game *g);
+int		open_cub_file(char *path);
+int		is_valid_file(char **file);
+int		is_empty_line(char *str);
+int		is_first_map_line(char *str);
+void	parse_textures(t_game *g, char **lines);
+int		is_texture(char *str);
+void	get_texture_path(char *textures[4], char *line);
+int		cardinal_to_index(char c);
+int		index_to_cardinal(int i);
+void	parse_colors(t_game *g, char **lines);
+int		is_color(char *str);
+int		is_valid_color(char *str);
+void	parse_rgb(char *line, int color[3]);
+void	print_parsed_data(t_game *g);
+int		validate_parsed_data(t_game *g);
+void	parse_map(t_game *g, char **arr);
+
+// Parser utils
 
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
-
-// File validation
-
-int		validate_file(char *path, char **arr, int *map_start);
-int		is_texture(char *str);
-int		is_color(char *str);
-int		is_map(char *str);
-int		is_empty_line(char *str);
-void	count_lines(char *line, int *i, int *count, int *map_start);
-int		file_validation_status(int count, int map_start);
-
-// Metadata parsing
-
-int		parse_metadata(char **arr, t_map *map, int map_start);
-
-// Metadata parsing: textures
-
-int		parse_texture(char *line, int textures[4]);
-int		open_texture(int i, int textures[4], char *path);
-int		check_textures(int textures[4]);
-int		cardinal_to_index(char c);
-int		index_to_cardinal(int i);
-
-// Metadata parsing: colors
-
-void	parse_color(char *line, t_map *map);
-void	parse_rgb(char *line, int color[3]);
-int		check_colors(int color[3]);
-int		restart_comma(char next_char, int *commas, int *digits);
-int		validate_color(char *line);
-
-// Map parsing
-
-int		parse_map(char **arr, t_map *map, int start);
-
-// Trim whitespace
-
-void	ft_trim_ws_left(char *str);
-void	ft_trim_ws_right(char *str);
-void	ft_trim_whitespace(char *str);
-
-// Utils
-
+int		is_valid_extension(char *path, char *ext);
 void	free_arr_str(char **arr);
 void	init_int_arr(int *arr, int size, int value);
-void	close_fd_arr(int *arr, int size);
+void	trim_left_ws(char *str);
+void	trim_right_ws(char *str);
+void	trim_whitespace(char *str);
 
 #endif
