@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 16:43:25 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 21:22:04 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	is_valid_file(char **lines)
 			return (count == 6);
 		}
 		else if (!is_empty_line(lines[i]))
-			return (printf("Error: invalid line\n"), 0);
+			return (printf("Error: Invalid line\n"), 0);
 		i++;
 	}
 	return (printf("Error: Missing map\n"), 0);
