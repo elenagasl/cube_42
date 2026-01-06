@@ -6,50 +6,33 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 14:46:34 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:58:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/*
-TODO: TOO MANY LINES
-TODO: On error should exit program??? */
+void	init_parse_data(t_game *g)
+{
+	g->textures[0] = NULL;
+	g->textures[1] = NULL;
+	g->textures[2] = NULL;
+	g->textures[3] = NULL;
+	init_int_arr(g->floor_color, 3, -1);
+	init_int_arr(g->ceiling_color, 3, -1);
+}
+
 int	main(int argc, char *argv[])
 {
-	int		fd;
-	char	*path;
-	char	**file;
-	int		map_start;
-	t_map	*map;
+	t_game	g;
 
-	path = argv[1];
-	if (!validate_arg(argc, path))
-		return (1);
-	fd = open_rdonly_file(path);
-	if (fd < 0)
-		return (1);
-	file = arr_string_from_fd(fd);
-	if (!file)
-		return (printf("Error: Empty file\n"), 1);
-	if (!validate_file(path, file, &map_start))
-		return (free_arr_str(file), 1);
-	map = malloc(sizeof(t_map));
-	if (!map)
-	{
-		perror("malloc");
-		return (1);
-	}
-	init_int_arr(map->textures, 4, -1);
-	init_int_arr(map->ceiling_color, 3, -1);
-	init_int_arr(map->floor_color, 3, -1);
-	if (!parse_metadata(file, map, map_start))
-		return (free_arr_str(file), free(map), 1);
-	printf("Metadata validation passed! :)\n");
-	if (!parse_map(file, map, map_start))
-		return (free_arr_str(file), free(map), 1);
-	printf("Map validation passed! :)\n");
-	free_arr_str(file);
-	free(map);
+	if (argc != 2)
+		return (printf("Invalid arguments\n"), 1);
+	init_parse_data(&g);
+	parse_file(argv[1], &g);
+
+	//init_game(&g);
+	//render_frame(&g);
+	//mlx_loop(g.mlx);
 	return (0);
 }
