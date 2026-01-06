@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 17:03:12 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 20:34:20 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ void	parse_rgb(char *line, int color[3]);
 void	print_parsed_data(t_game *g);
 int		validate_parsed_data(t_game *g);
 void	parse_map(t_game *g, char **arr);
-
-// Parser utils
-
+int		is_valid_map(char **arr, char player);
+int		is_valid_top_bottom_line(char *str);
+char	get_player(char **arr);
+int		is_valid_map_line(char *str, char p);
+int		is_char_in_set(char c, char const *set);
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
 int		is_valid_extension(char *path, char *ext);

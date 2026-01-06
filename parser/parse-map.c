@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 16:56:03 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 20:33:41 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,44 @@ TODO: Validar posición player
 TODO: Obtener coordenadas player */
 void	parse_map(t_game *g, char **arr)
 {
+	int		i;
+	char	player;
+
+	i = 0;
+	while (!is_first_map_line(arr[i]))
+		i++;
+	player = get_player(&arr[i]);
+	if (player && is_valid_map(&arr[i], player))
+		printf("Map is valid!\n");
+	
+	
 	(void)g;
-	(void)arr;
 
 /*
-	int	i;
-	int	end;
-	i = 0;
-	if (!is_valid_top_bottom_line(arr[start]))
-		return (printf("Error: Invalid map top line\n"), 0);
-	i++;
-	while (arr[i] && !is_empty_line(arr[i]))
-	{
-		ft_trim_ws_right(arr[i]);
-		if (!is_valid_middle_line(arr[i]))
-			return (printf("Invalid map middle line\n"), 0);
-		i++;
-	}
-	if (i - 1 == start || !is_valid_top_bottom_line(arr[i - 1]))
-		return (printf("Invalid map bottom line\n"), 0);
-	end = i;
-	while (arr[i])
-	{
-		if (!is_empty_line(arr[i]))
-			return (printf("Unexpected line\n"), 0);
-		i++;
-	}
-	if (!validate_player(arr, start, end))
-		return (0);
 	if (!flood_fill(arr, start, end))
 		return (printf("Error: Space not surrounded by wall\n"), 0); */
 }
 
-/* 
-int	is_char_in_set(char c, char const *set)
-{
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
-}
-
-int	is_valid_middle_line(char *str)
+int	is_valid_map(char **arr, char player)
 {
 	int	i;
 
 	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] != '1' || str[ft_strlen(str) - 1] != '1')
-		return (0);
-	while (str[i])
+	if (!is_valid_top_bottom_line(arr[i]))
+		return (printf("Error: Invalid map top line\n"), 0);
+	i++;
+	while (arr[i] && !is_empty_line(arr[i]))
 	{
-		if (!is_char_in_set(str[i], "01NSWE") && !ft_isspace(str[i]))
-			return (0);
+		if (!is_valid_map_line(arr[i], player))
+			return (printf("Error: Invalid map line\n"), 0);
+		i++;
+	}
+	if (!is_valid_top_bottom_line(arr[i - 1]))
+		return (printf("Error: Invalid map bottom line\n"), 0);
+	while (arr[i])
+	{
+		if (!is_empty_line(arr[i]))
+			return (printf("Error: Unexpected line\n"), 0);
 		i++;
 	}
 	return (1);
@@ -95,46 +76,74 @@ int	is_valid_top_bottom_line(char *str)
 	return (1);
 }
 
-int	validate_player(char **arr, int start, int end)
+int	is_valid_map_line(char *str, char p)
 {
-	int	i;
-	int	j;
-	int	player[4];
-	int	result;
+	int		i;
+	int		len;
 
-	i = start + 1;
-	init_int_arr(player, 4, 0);
-	while (i < end)
+	len = ft_strlen(str) - 1;
+	while (ft_isspace(str[len]))
+		len--;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (i == len || str[i] != '1' || str[len] != '1')
+		return (0);
+	while (str[i])
+	{
+		if (!is_char_in_set(str[i], "01") && str[i] != p && !ft_isspace(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+char	get_player(char **arr)
+{
+	int		i;
+	int		j;
+	char	c;
+	char	player;
+
+	i = 0;
+	player = 0;
+	while (arr[i])
 	{
 		j = 0;
 		while (arr[i][j])
 		{
-			if (arr[i][j] == 'N')
-				player[0]++;
-			else if (arr[i][j] == 'S')
-				player[1]++;
-			else if (arr[i][j] == 'W')
-				player[2]++;
-			else if (arr[i][j] == 'E')
-				player[3]++;
+			c = arr[i][j];
+			if (is_char_in_set(c, "NSWE"))
+			{
+				if (player)
+				{
+					printf("Error: No more than one player position allowed\n");
+					return (0);
+				}
+				player = c;
+			}
 			j++;
 		}
 		i++;
 	}
-	i = 0;
-	result = 0;
-	while (i < 4)
-	{
-		result += player[i];
-		i++;
-	}
-	if (result == 0)
+	if (!player)
 		return (printf("Error: Missing player position\n"), 0);
-	else if (result > 1)
-		return (printf("Error: No more than one player position allowed\n"), 0);
-	return (1);
+	return (player);
 }
 
+
+int	is_char_in_set(char c, char const *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
+
+/* 
 // A '0' can't be surrounded by space OR NEW LINE, OR '\0', OR TAB, etc
 // TODO: ¡Cuidado! Al hacer trim los espacios han desaparecido
 int	is_surrounded(char **arr, int x, int y)
