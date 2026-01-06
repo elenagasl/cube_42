@@ -1,7 +1,7 @@
-NAME		= parser-exe
+NAME		= cub3d
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra
-SRC_PATH	= parser
+SRC_PATH	= src
 BUILD		= build
 SRC			= main.c parser.c parse-colors.c parse-map.c parse-textures.c trim.c utils.c validate-file.c
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC))
