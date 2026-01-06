@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#set -e
+
+dir="$1"
+
+# Check that a directory argument was provided
+if [[ -z "$dir" ]]; then
+    echo "Usage: $0 <directory>"
+    exit 1
+fi
+
+# Check that it exists and is a directory
+if [[ ! -d "$dir" ]]; then
+    echo "Error: '$dir' is not a directory"
+    exit 1
+fi
+
+for file in "$dir"/*; do
+    [[ -f "$file" ]] || continue
+    ./cub3d "$file"
+done
