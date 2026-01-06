@@ -6,13 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 09:04:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 09:36:53 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 11:28:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	ft_trim_ws_left(char *str)
+/* Trim leading whitespace in place */
+void	trim_left_ws(char *str)
 {
 	char	*ptr;
 	size_t	len;
@@ -29,7 +30,8 @@ void	ft_trim_ws_left(char *str)
 	ft_memmove(str, ptr, len + 1);
 }
 
-void	ft_trim_ws_right(char *str)
+/* Trim trailing whitespace in place */
+void	trim_right_ws(char *str)
 {
 	char	*ptr;
 	size_t	len;
@@ -46,8 +48,8 @@ void	ft_trim_ws_right(char *str)
 }
 
 /* Trim leading & trailing whitespace in place */
-void	ft_trim_whitespace(char *str)
+void	trim_whitespace(char *str)
 {
-	ft_trim_ws_right(str);
-	ft_trim_ws_left(str);
+	trim_right_ws(str);
+	trim_left_ws(str);
 }
