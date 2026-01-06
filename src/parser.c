@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 17:00:29 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:35:27 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parse_file(char *path, t_game *g)
 	fd = open_cub_file(path);
 	file = arr_string_from_fd(fd);
 	if (!file)
-		return (printf("Error: Empty file\n"), exit(1));
+		return (printf(EMPTY"\n"), exit(1));
 	if (!is_valid_file(file))
 		exit(1);
 	parse_textures(g, file);
@@ -44,7 +44,7 @@ int	open_cub_file(char *path)
 	trim_whitespace(path);
 	if (!is_valid_extension(path, ".cub"))
 	{
-		printf("Only .cub files are supported\n");
+		printf(INV_MAP_EXT"\n");
 		exit(1);
 	}
 	fd = open_rdonly_file(path);
@@ -61,7 +61,9 @@ void	print_parsed_data(t_game *g)
 	printf("South texture: %s\n", g->textures[1]);
 	printf(" West texture: %s\n", g->textures[2]);
 	printf(" East texture: %s\n", g->textures[3]);
-	printf("  Floor color: %d,%d,%d\n", g->floor_color[0], g->floor_color[1], g->floor_color[2]);
-	printf("Ceiling color: %d,%d,%d\n", g->ceiling_color[0], g->ceiling_color[1], g->ceiling_color[2]);
+	printf("  Floor color: %d,%d,%d\n",
+		g->floor_color[0], g->floor_color[1], g->floor_color[2]);
+	printf("Ceiling color: %d,%d,%d\n",
+		g->ceiling_color[0], g->ceiling_color[1], g->ceiling_color[2]);
 	printf("----------------------------------\n");
 }

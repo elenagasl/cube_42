@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 21:22:04 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:16:05 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int	is_valid_file(char **lines)
 		else if (is_first_map_line(lines[i]))
 		{
 			if (count < 6)
-				printf("Error: Missing data\n");
+				printf(MISS_DATA"\n");
 			else if (count > 6)
-				printf("Error: Duplicated data\n");
+				printf(DUP_DATA"\n");
 			return (count == 6);
 		}
 		else if (!is_empty_line(lines[i]))
-			return (printf("Error: Invalid line\n"), 0);
+			return (printf(INV_LIN"\n"), 0);
 		i++;
 	}
-	return (printf("Error: Missing map\n"), 0);
+	return (printf(MISS_MAP"\n"), 0);
 }
 
 /* Check if a line is composed of whitespace only */
@@ -76,7 +76,7 @@ int	validate_parsed_data(t_game *g)
 	{
 		if (!g->textures[i])
 		{
-			printf("Error: Missing %c texture file\n", index_to_cardinal(i));
+			printf(MISS_TEXT"\n");
 			return (0);
 		}
 		i++;
@@ -85,9 +85,9 @@ int	validate_parsed_data(t_game *g)
 	while (i < 3)
 	{
 		if (g->floor_color[i] < 0 || g->ceiling_color[i] < 0)
-			return (printf("Error: Missing or invalid color\n"), 0);
+			return (printf(INV_COL"\n"), 0);
 		if (g->floor_color[i] > 255 || g->ceiling_color[i] > 255)
-			return (printf("Error: Out of range color\n"), 0);
+			return (printf(OOR_COL"\n"), 0);
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 16:58:56 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:32:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int	main(int argc, char *argv[])
 	t_game	g;
 
 	if (argc != 2)
-		return (printf("Invalid arguments\n"), 1);
+		return (printf(INV_ARG"\n"), 1);
 	init_parse_data(&g);
 	parse_file(argv[1], &g);
-
 	//init_game(&g);
 	//render_frame(&g);
 	//mlx_loop(g.mlx);

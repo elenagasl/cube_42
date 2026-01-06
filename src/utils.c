@@ -6,23 +6,24 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 17:03:02 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:31:59 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /* Open a read-only file specified by `path` and return its file descriptor.
-On error print message and return `-1`.
-TODO: Print path */
+On error print message and return `-1`.*/
 int	open_rdonly_file(char *path)
 {
 	int	fd;
+	int	err;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("open");
+		err = errno;
+		printf("Error: %s: %s\n", strerror(err), path);
 		return (-1);
 	}
 	return (fd);

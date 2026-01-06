@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 20:33:41 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:33:27 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	parse_map(t_game *g, char **arr)
 	player = get_player(&arr[i]);
 	if (player && is_valid_map(&arr[i], player))
 		printf("Map is valid!\n");
-	
-	
 	(void)g;
-
 /*
 	if (!flood_fill(arr, start, end))
 		return (printf("Error: Space not surrounded by wall\n"), 0); */
@@ -43,20 +40,20 @@ int	is_valid_map(char **arr, char player)
 
 	i = 0;
 	if (!is_valid_top_bottom_line(arr[i]))
-		return (printf("Error: Invalid map top line\n"), 0);
+		return (printf(INV_TOP_LIN"\n"), 0);
 	i++;
 	while (arr[i] && !is_empty_line(arr[i]))
 	{
 		if (!is_valid_map_line(arr[i], player))
-			return (printf("Error: Invalid map line\n"), 0);
+			return (printf(INV_MAP_LIN"\n"), 0);
 		i++;
 	}
 	if (!is_valid_top_bottom_line(arr[i - 1]))
-		return (printf("Error: Invalid map bottom line\n"), 0);
+		return (printf(INV_BOT_LIN"\n"), 0);
 	while (arr[i])
 	{
 		if (!is_empty_line(arr[i]))
-			return (printf("Error: Unexpected line\n"), 0);
+			return (printf(UNEX_LIN"\n"), 0);
 		i++;
 	}
 	return (1);
@@ -102,7 +99,6 @@ char	get_player(char **arr)
 {
 	int		i;
 	int		j;
-	char	c;
 	char	player;
 
 	i = 0;
@@ -112,25 +108,20 @@ char	get_player(char **arr)
 		j = 0;
 		while (arr[i][j])
 		{
-			c = arr[i][j];
-			if (is_char_in_set(c, "NSWE"))
+			if (is_char_in_set(arr[i][j], "NSWE"))
 			{
 				if (player)
-				{
-					printf("Error: No more than one player position allowed\n");
-					return (0);
-				}
-				player = c;
+					return (printf(MULT_PLYR"\n"), 0);
+				player = arr[i][j];
 			}
 			j++;
 		}
 		i++;
 	}
 	if (!player)
-		return (printf("Error: Missing player position\n"), 0);
+		return (printf(MISS_PLYR"\n"), 0);
 	return (player);
 }
-
 
 int	is_char_in_set(char c, char const *set)
 {

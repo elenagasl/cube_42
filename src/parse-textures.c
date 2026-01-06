@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 13:51:05 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:26:25 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,17 @@ void	get_texture_path(char *textures[4], char *line)
 
 	trim_whitespace(line);
 	if (!is_valid_extension(line, ".png"))
+	{
+		printf(INV_TEXT_EXT"\n");
 		return ;
+	}
 	type = line[0];
 	i = 2;
 	while (ft_isspace(line[i]))
 		i++;
 	if (textures[cardinal_to_index(type)] != NULL)
 	{
-		printf("Error: Duplicated texture\n");
+		printf(DUP_TEXT"\n");
 		return ;
 	}
 	fd = open_rdonly_file(&line[i]);

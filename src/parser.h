@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 20:34:20 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:28:40 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,33 @@
 # define PARSER_H
 
 # include <stdio.h>
+# include <errno.h>
+# include <string.h>
 # include "../libft/libft.h"
 
 # define WIN_W 640
 # define WIN_H 480
 # define MAP_W 24
 # define MAP_H 7
+
+# define INV_ARG "Invalid argument. Usage: <filename>.cub"
+# define EMPTY "Error: Empty file"
+# define INV_MAP_EXT "Error: Only .cub files are supported"
+# define INV_TEXT_EXT "Error: Only .png texture files are supported"
+# define MISS_DATA "Error: Missing data"
+# define MISS_MAP "Error: Missing map"
+# define DUP_DATA "Error: Duplicated data"
+# define DUP_TEXT "Error: Duplicated texture"
+# define INV_LIN "Error: Invalid line"
+# define MISS_TEXT "Error: Missing texture file"
+# define INV_COL "Error: Missing or invalid color"
+# define OOR_COL "Error: Out of range color"
+# define INV_TOP_LIN "Error: Invalid map top line"
+# define INV_MAP_LIN "Error: Invalid map line"
+# define INV_BOT_LIN "Error: Invalid map bottom line"
+# define UNEX_LIN "Error: Unexpected line"
+# define MISS_PLYR "Error: Missing player position"
+# define MULT_PLYR "Error: No more than one player position allowed"
 
 typedef struct s_img
 {
