@@ -6,74 +6,77 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 12:32:35 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 13:51:05 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/* If line starts with `N`, `S`, `W`, or `E` :
-- Validate file extension
-- Open texture file
+/* Iterate through cub file and parse paths to textures */
+void	parse_textures(t_game *g, char **lines)
+{
+	int	i;
+	int	count;
 
-TODO: WHAT ARE THE ALLOWED EXTENSIONS?????? */
-int	parse_texture(char *line, int textures[4])
+	i = 0;
+	count = 0;
+	while (lines[i] && count < 4)
+	{
+		if (is_texture(lines[i]))
+		{
+			get_texture_path(g->textures, lines[i]);
+			count++;
+		}
+		i++;
+	}
+}
+
+/* Save a valid path to a texture file into array of textures */
+void	get_texture_path(char *textures[4], char *line)
 {
 	int		i;
-	char	*path;
+	int		fd;
+	char	type;
 
+	trim_whitespace(line);
+	if (!is_valid_extension(line, ".png"))
+		return ;
+	type = line[0];
 	i = 2;
 	while (ft_isspace(line[i]))
 		i++;
-	path = &line[i];
-	if (!is_valid_extension(path, ".png"))
+	if (textures[cardinal_to_index(type)] != NULL)
 	{
-		printf("Invalid or missing file extension: "
-			"only .png [o lo que sea!] files are supported\n");
-		return (0);
+		printf("Error: Duplicated texture\n");
+		return ;
 	}
-	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
-	{
-		if (!open_texture(cardinal_to_index(line[0]), textures, path))
-			return (close_fd_arr(textures, 4), 0);
-	}
-	return (1);
-}
-
-/* Open a texture file indicated by `path` and
-assign it to corresponding texture array index */
-int	open_texture(int i, int textures[4], char *path)
-{
-	int	fd;
-
-	if (textures[i] != -1)
-	{
-		printf("Error: Duplicated '%c' texture\n", index_to_cardinal(i));
-		return (0);
-	}
-	fd = open_rdonly_file(path);
-	textures[i] = fd;
+	fd = open_rdonly_file(&line[i]);
 	if (fd < 0)
-		return (0);
-	return (1);
+		return ;
+	textures[cardinal_to_index(type)] = ft_strdup(&line[i]);
+	close(fd);
+	return ;
 }
 
-/* Check if all 4 file descriptor textures have been assigned */
-int	check_textures(int textures[4])
+/* Check if line is a texture line */
+int	is_texture(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (i < 4)
-	{
-		if (textures[i] == -1)
-		{
-			close_fd_arr(textures, 4);
-			return (0);
-		}
+	while (ft_isspace(str[i]))
 		i++;
-	}
-	return (1);
+	if (!ft_isspace(str[i + 2]))
+		return (0);
+	if (ft_strncmp(&str[i], "NO", 2) == 0)
+		return (1);
+	else if (ft_strncmp(&str[i], "SO", 2) == 0)
+		return (1);
+	else if (ft_strncmp(&str[i], "WE", 2) == 0)
+		return (1);
+	else if (ft_strncmp(&str[i], "EA", 2) == 0)
+		return (1);
+	return (0);
 }
 
 // TODO Mejor usar enum?
