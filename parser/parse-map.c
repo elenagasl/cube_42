@@ -6,12 +6,52 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/05 16:57:23 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:56:03 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/*
+TODO: Normalizar mapa (todas las líneas de la misma longitud)
+TODO: Medir dimensiones 
+TODO: Validar posición player
+TODO: Obtener coordenadas player */
+void	parse_map(t_game *g, char **arr)
+{
+	(void)g;
+	(void)arr;
+
+/*
+	int	i;
+	int	end;
+	i = 0;
+	if (!is_valid_top_bottom_line(arr[start]))
+		return (printf("Error: Invalid map top line\n"), 0);
+	i++;
+	while (arr[i] && !is_empty_line(arr[i]))
+	{
+		ft_trim_ws_right(arr[i]);
+		if (!is_valid_middle_line(arr[i]))
+			return (printf("Invalid map middle line\n"), 0);
+		i++;
+	}
+	if (i - 1 == start || !is_valid_top_bottom_line(arr[i - 1]))
+		return (printf("Invalid map bottom line\n"), 0);
+	end = i;
+	while (arr[i])
+	{
+		if (!is_empty_line(arr[i]))
+			return (printf("Unexpected line\n"), 0);
+		i++;
+	}
+	if (!validate_player(arr, start, end))
+		return (0);
+	if (!flood_fill(arr, start, end))
+		return (printf("Error: Space not surrounded by wall\n"), 0); */
+}
+
+/* 
 int	is_char_in_set(char c, char const *set)
 {
 	while (*set)
@@ -95,7 +135,7 @@ int	validate_player(char **arr, int start, int end)
 	return (1);
 }
 
-/* A '0' can't be surrounded by space OR NEW LINE, OR '\0', OR TAB, etc */
+// A '0' can't be surrounded by space OR NEW LINE, OR '\0', OR TAB, etc
 // TODO: ¡Cuidado! Al hacer trim los espacios han desaparecido
 int	is_surrounded(char **arr, int x, int y)
 {
@@ -130,41 +170,4 @@ int	flood_fill(char **arr, int start, int end)
 	}
 	return (1);
 }
-
-/*
-TODO: Normalizar mapa (todas las líneas de la misma longitud)
-TODO: Medir dimensiones 
-TODO: Validar posición player
-TODO: Obtener coordenadas player */
-int	parse_map(char **arr, t_map *map, int start)
-{
-	int	i;
-	int	end;
-
-	i = start;
-	if (!is_valid_top_bottom_line(arr[start]))
-		return (printf("Error: Invalid map top line\n"), 0);
-	i++;
-	while (arr[i] && !is_empty_line(arr[i]))
-	{
-		ft_trim_ws_right(arr[i]);
-		if (!is_valid_middle_line(arr[i]))
-			return (printf("Invalid map middle line\n"), 0);
-		i++;
-	}
-	if (i - 1 == start || !is_valid_top_bottom_line(arr[i - 1]))
-		return (printf("Invalid map bottom line\n"), 0);
-	end = i;
-	while (arr[i])
-	{
-		if (!is_empty_line(arr[i]))
-			return (printf("Unexpected line\n"), 0);
-		i++;
-	}
-	if (!validate_player(arr, start, end))
-		return (0);
-	if (!flood_fill(arr, start, end))
-		return (printf("Error: Space not surrounded by wall\n"), 0);
-	(void)map;
-	return (1);
-}
+ */
