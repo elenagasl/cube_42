@@ -1,0 +1,18 @@
+NO ./textures/test1.png                  
+SO                       ./textures/test2.png
+WE ./textures/test3.png
+EA           ./textures/test4.png
+
+C                       12,12,12
+F 12,12,12                      
+
+
+111110
+100101
+101001
+1100N1
+111111
+
+
+
+
