@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:33:27 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/06 22:59:03 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	parse_map(t_game *g, char **arr)
 		i++;
 	player = get_player(&arr[i]);
 	if (player && is_valid_map(&arr[i], player))
-		printf("Map is valid!\n");
+		printf("\033[1;32mMap is valid!\033[0m\n");
 	(void)g;
 /*
 	if (!flood_fill(arr, start, end))
