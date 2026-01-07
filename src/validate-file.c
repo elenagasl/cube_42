@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 16:32:16 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:24:38 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ int	validate_parsed_data(t_game *g)
 			return (printf(COLOR_RANGE"\n"), 0);
 		i++;
 	}
+	if (!g->map)
+		return (0);
 	return (1);
 }

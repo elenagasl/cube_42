@@ -6,17 +6,15 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 16:25:47 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:11:36 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /* Open .cub file, parse textures, colors and map.
-On error exit program.
-TODO: Free allocated memory on error ???
-TODO: ON ERROR SHOULD RETURN -1 OR 0 */
-void	parse_file(t_game *g, char *path)
+Return result of validate_parsed_data (`0` or `1`) */
+int	parser(t_game *g, char *path)
 {
 	int		fd;
 	char	**arr;
@@ -25,17 +23,14 @@ void	parse_file(t_game *g, char *path)
 	arr = arr_string_from_fd(fd);
 	if (!arr || !is_valid_file(arr))
 	{
-		printf(FILE_EMPTY"\n");
-		free_parsed_data(g, arr);
-		return ;
+		free_arr_str(arr);
+		return (printf(FILE_EMPTY"\n"), 0);
 	}
 	parse_textures(g, arr);
 	parse_colors(g, arr);
-	if (validate_parsed_data(g))
-	{
-		parse_map(g, arr);
-	}
-	free_parsed_data(g, arr);
+	parse_map(g, arr);
+	free_arr_str(arr);
+	return (validate_parsed_data(g));
 }
 
 /* Open .cub file indicated in `path` and return file descriptor */
@@ -53,20 +48,18 @@ int	open_cub_file(char *path)
 	return (fd);
 }
 
-// TODO: Free map (array of integers)
-void	free_parsed_data(t_game *g, char **arr)
+void	free_textures(char **arr)
 {
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
-		if (g->textures[i] != NULL)
-			free(g->textures[i]);
-		g->textures[i] = NULL;
+		if (arr[i] != NULL)
+			free(arr[i]);
+		arr[i] = NULL;
 		i++;
 	}
-	free_arr_str(arr);
 }
 
 /* For debug purposes only */
@@ -75,7 +68,7 @@ void	print_parsed_data(t_game *g)
 	int	i;
 	int	j;
 
-	printf("----------------------------------\n");
+	printf("-------------------------------------\n");
 	printf("North texture: %s\n", g->textures[0]);
 	printf("South texture: %s\n", g->textures[1]);
 	printf(" West texture: %s\n", g->textures[2]);
@@ -99,11 +92,10 @@ void	print_parsed_data(t_game *g)
 				printf("\033[41m🧱\033[0m");
 			if ((g->map[i][j]) == 2)
 				printf("😃");
-				//printf("\033[1;33m\033[0m");
 			j++;
 		}
 		printf("\n");
 		i++;
 	}
-	printf("----------------------------------\n");
+	printf("-------------------------------------\n");
 }

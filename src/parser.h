@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 16:37:14 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:46:11 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define MAP_TOP_INVAL "Error: Invalid map top line"
 # define MAP_BOT_INVAL "Error: Invalid map bottom line"
 # define MAP_LINE_INVAL "Error: Invalid map line"
-# define MAP_SIZE "Error: Invalid map size"
+# define MAP_SIZE_INVAL "Error: Invalid map size"
 # define LINE_INVAL "Error: Invalid line"
 # define LINE_UNEXP "Error: Unexpected line"
 # define PLYR_MISS "Error: Missing player position"
@@ -79,9 +79,9 @@ typedef struct s_game
 
 // Parser
 
-void	parse_file(t_game *g, char *path);
+int		parser(t_game *g, char *path);
 int		open_cub_file(char *path);
-void	free_parsed_data(t_game *g, char **arr);
+void	free_cub3d(t_game *g);
 int		is_valid_file(char **arr);
 int		is_empty_line(char *str);
 int		is_first_map_line(char *str);
@@ -111,6 +111,8 @@ int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
 int		is_valid_extension(char *path, char *ext);
 void	free_arr_str(char **arr);
+void	free_arr_int(int **arr, int size);
+void	free_textures(char **arr);
 void	init_int_arr(int *arr, int size, int value);
 void	trim_left_ws(char *str);
 void	trim_right_ws(char *str);

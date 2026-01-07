@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 14:58:34 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 19:59:28 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	map_to_int_arr(t_game *g, char **arr, char p)
 	while (i < g->map_h)
 	{
 		j = 0;
-		while (j < g->map_w)
+		while (arr[i][j])
 		{
 			if (arr[i][j] == '1' || arr[i][j] == '0')
 				map[i][j] = arr[i][j] - '0';
@@ -80,14 +80,19 @@ int	**allocate_map(int w, int h)
 	{
 		map[i] = malloc(w * sizeof(int));
 		if (!map[i])
-		{
-			while (i > 0)
-				free(map[--i]);
-			free(map);
-			return (NULL);
-		}
+			return (free_arr_int(map, i), NULL);
 		init_int_arr(map[i], w, -1);
 		i++;
 	}
 	return (map);
+}
+
+void	free_arr_int(int **arr, int size)
+{
+	if (!arr)
+		return ;
+	while (size)
+		free(arr[--size]);
+	free(arr);
+	arr = NULL;
 }

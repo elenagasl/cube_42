@@ -6,15 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 16:36:11 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 20:08:16 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /*
-TODO: Medir dimensiones 
-TODO: Obtener coordenadas player */
+TODO: Obtener coordenadas y orientación player */
 void	parse_map(t_game *g, char **arr)
 {
 	int		i;
@@ -29,7 +28,7 @@ void	parse_map(t_game *g, char **arr)
 	get_map_size(g, &arr[i]);
 	if (g->map_w < 3 || g->map_h < 3)
 	{
-		printf(MAP_SIZE"\n");
+		printf(MAP_SIZE_INVAL"\n");
 		return ;
 	}
 	if (!is_valid_map(&arr[i], player))
@@ -39,7 +38,7 @@ void	parse_map(t_game *g, char **arr)
 	if (!map_to_int_arr(g, &arr[i], player))
 		return ;
 	printf("\033[1;32mMap is valid!\033[0m\n");
-	//print_parsed_data(g);
+	print_parsed_data(g);
 }
 
 char	get_player(char **arr)
