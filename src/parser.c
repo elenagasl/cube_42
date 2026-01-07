@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 10:46:01 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:17:20 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,16 @@ int	open_cub_file(char *path)
 
 void	free_parsed_data(t_game *g, char **arr)
 {
+	int	i;
 
-	if (g->textures[0] != NULL)
-		free(g->textures[0]);
-	if (g->textures[1] != NULL)
-		free(g->textures[1]);
-	if (g->textures[2] != NULL)
-		free(g->textures[2]);
-	if (g->textures[3] != NULL)
-		free(g->textures[3]);
-	g->textures[0] = NULL;
-	g->textures[1] = NULL;
-	g->textures[2] = NULL;
-	g->textures[3] = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		if (g->textures[i] != NULL)
+			free(g->textures[i]);
+		g->textures[i] = NULL;
+		i++;
+	}
 	free_arr_str(arr);
 }
 

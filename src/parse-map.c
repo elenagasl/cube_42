@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 10:18:28 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:20:44 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,67 +33,6 @@ void	parse_map(t_game *g, char **arr)
 	printf("\033[1;32mMap is valid!\033[0m\n");
 	print_parsed_data(g);
 	(void)g;
-}
-
-int	is_valid_map(char **arr, char player)
-{
-	int	i;
-
-	i = 0;
-	if (!is_valid_top_bottom_line(arr[i]))
-		return (printf(INV_TOP_LIN"\n"), 0);
-	i++;
-	while (arr[i] && !is_empty_line(arr[i]))
-	{
-		if (!is_valid_map_line(arr[i], player))
-			return (printf(INV_MAP_LIN"\n"), 0);
-		i++;
-	}
-	if (!is_valid_top_bottom_line(arr[i - 1]))
-		return (printf(INV_BOT_LIN"\n"), 0);
-	while (arr[i])
-	{
-		if (!is_empty_line(arr[i]))
-			return (printf(UNEX_LIN"\n"), 0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_valid_top_bottom_line(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '1' && !ft_isspace(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_valid_map_line(char *str, char p)
-{
-	int	i;
-	int	len;
-
-	len = ft_strlen(str) - 1;
-	while (ft_isspace(str[len]))
-		len--;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (i == len || str[i] != '1' || str[len] != '1')
-		return (0);
-	while (str[i])
-	{
-		if (!is_char_in_set(str[i], "01") && str[i] != p && !ft_isspace(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 char	get_player(char **arr)
@@ -142,7 +81,7 @@ int	is_surrounded(char **arr, int x, int y)
 	int	j;
 
 	i = -1;
-	while(i < 2)
+	while (i < 2)
 	{
 		j = -1;
 		while (j < 2)

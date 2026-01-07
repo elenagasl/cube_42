@@ -3,7 +3,7 @@ CC			= cc
 CFLAGS		= -Wall -Werror -Wextra
 SRC_PATH	= src
 BUILD		= build
-SRC			= main.c parser.c parse-colors.c parse-map.c parse-textures.c trim.c utils.c validate-file.c
+SRC			= main.c parser.c parse-colors.c parse-map.c parse-textures.c trim.c utils.c validate-file.c validate-map.c
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJS		= $(addprefix $(BUILD)/, $(SRC:.c=.o))
 INCLUDE		= -I./include -I./libft
