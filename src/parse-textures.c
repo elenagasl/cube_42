@@ -6,25 +6,25 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:26:25 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:07:07 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /* Iterate through cub file and parse paths to textures */
-void	parse_textures(t_game *g, char **lines)
+void	parse_textures(t_game *g, char **arr)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (lines[i] && count < 4)
+	while (arr[i] && count < 4)
 	{
-		if (is_texture(lines[i]))
+		if (is_texture(arr[i]))
 		{
-			get_texture_path(g->textures, lines[i]);
+			get_texture_path(g->textures, arr[i]);
 			count++;
 		}
 		i++;
@@ -69,8 +69,6 @@ int	is_texture(char *str)
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
-	if (!ft_isspace(str[i + 2]))
-		return (0);
 	if (ft_strncmp(&str[i], "NO", 2) == 0)
 		return (1);
 	else if (ft_strncmp(&str[i], "SO", 2) == 0)

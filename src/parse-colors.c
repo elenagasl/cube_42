@@ -6,29 +6,29 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 15:21:16 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:06:58 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /* Iterate through cub file and parse floor and ceiling colors */
-void	parse_colors(t_game *g, char **lines)
+void	parse_colors(t_game *g, char **arr)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (lines[i] && count < 2)
+	while (arr[i] && count < 2)
 	{
-		if (is_color(lines[i]))
+		if (is_color(arr[i]))
 		{
-			trim_whitespace(lines[i]);
-			if (lines[i][0] == 'F')
-				parse_rgb(&lines[i][1], g->floor_color);
-			else if (lines[i][0] == 'C')
-				parse_rgb(&lines[i][1], g->ceiling_color);
+			trim_whitespace(arr[i]);
+			if (arr[i][0] == 'F')
+				parse_rgb(&arr[i][1], g->floor_color);
+			else if (arr[i][0] == 'C')
+				parse_rgb(&arr[i][1], g->ceiling_color);
 			count++;
 		}
 		i++;
@@ -105,8 +105,6 @@ int	is_color(char *str)
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
-	if (!ft_isspace(str[i + 1]))
-		return (0);
 	if (str[i] == 'F' || str[i] == 'C')
 		return (1);
 	return (0);
