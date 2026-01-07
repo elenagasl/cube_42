@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:35:27 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 10:46:01 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,29 @@
 On error exit program.
 TODO: Free allocated memory on error ???
 TODO: ON ERROR SHOULD RETURN -1 OR 0 */
-void	parse_file(char *path, t_game *g)
+void	parse_file(t_game *g, char *path)
 {
 	int		fd;
-	char	**file;
+	char	**arr;
 
 	fd = open_cub_file(path);
-	file = arr_string_from_fd(fd);
-	if (!file)
-		return (printf(EMPTY"\n"), exit(1));
-	if (!is_valid_file(file))
-		exit(1);
-	parse_textures(g, file);
-	parse_colors(g, file);
+	arr = arr_string_from_fd(fd);
+	if (!arr || !is_valid_file(arr))
+	{
+		printf(EMPTY"\n");
+		free_parsed_data(g, arr);
+		return ;
+	}
+	parse_textures(g, arr);
+	parse_colors(g, arr);
 	if (validate_parsed_data(g))
-		print_parsed_data(g);
-	else
-		exit(1);
-	parse_map(g, file);
+	{
+		parse_map(g, arr);
+	}
+	free_parsed_data(g, arr);
 }
 
-/* Open .cub file indicated in `path`. On error exit program */
+/* Open .cub file indicated in `path` and return file descriptor */
 int	open_cub_file(char *path)
 {
 	int	fd;
@@ -45,12 +47,28 @@ int	open_cub_file(char *path)
 	if (!is_valid_extension(path, ".cub"))
 	{
 		printf(INV_MAP_EXT"\n");
-		exit(1);
+		return (-1);
 	}
 	fd = open_rdonly_file(path);
-	if (fd < 0)
-		exit(1);
 	return (fd);
+}
+
+void	free_parsed_data(t_game *g, char **arr)
+{
+
+	if (g->textures[0] != NULL)
+		free(g->textures[0]);
+	if (g->textures[1] != NULL)
+		free(g->textures[1]);
+	if (g->textures[2] != NULL)
+		free(g->textures[2]);
+	if (g->textures[3] != NULL)
+		free(g->textures[3]);
+	g->textures[0] = NULL;
+	g->textures[1] = NULL;
+	g->textures[2] = NULL;
+	g->textures[3] = NULL;
+	free_arr_str(arr);
 }
 
 /* For debug purposes only */

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:28:40 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 10:43:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,18 @@ typedef struct s_game
 
 // Parser
 
-void	parse_file(char *path, t_game *g);
+void	parse_file(t_game *g, char *path);
 int		open_cub_file(char *path);
-int		is_valid_file(char **file);
+void	free_parsed_data(t_game *g, char **arr);
+int		is_valid_file(char **arr);
 int		is_empty_line(char *str);
 int		is_first_map_line(char *str);
-void	parse_textures(t_game *g, char **lines);
+void	parse_textures(t_game *g, char **arr);
 int		is_texture(char *str);
 void	get_texture_path(char *textures[4], char *line);
 int		cardinal_to_index(char c);
 int		index_to_cardinal(int i);
-void	parse_colors(t_game *g, char **lines);
+void	parse_colors(t_game *g, char **arr);
 int		is_color(char *str);
 int		is_valid_color(char *str);
 void	parse_rgb(char *line, int color[3]);
@@ -99,6 +100,8 @@ int		is_valid_top_bottom_line(char *str);
 char	get_player(char **arr);
 int		is_valid_map_line(char *str, char p);
 int		is_char_in_set(char c, char const *set);
+int		is_surrounded(char **arr, int x, int y);
+int		flood_fill(char **arr);
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
 int		is_valid_extension(char *path, char *ext);
