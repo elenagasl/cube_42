@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 11:20:44 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 12:09:39 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,20 @@ void	parse_map(t_game *g, char **arr)
 	player = get_player(&arr[i]);
 	if (!player)
 		return ;
+	get_map_size(g, &arr[i]);
+	if (g->map_w < 3 || g->map_h < 3)
+	{
+		printf("Error: Invalid map size\n");
+		return ;
+	}
 	if (!is_valid_map(&arr[i], player))
 		return ;
 	if (!flood_fill(&arr[i]))
 		return ;
+	if (!map_to_int_arr(g, &arr[i], player))
+		return ;
 	printf("\033[1;32mMap is valid!\033[0m\n");
 	print_parsed_data(g);
-	(void)g;
 }
 
 char	get_player(char **arr)

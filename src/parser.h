@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 10:43:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 12:23:58 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_game
 	t_player	player;
 	int			map_w;
 	int			map_h;
-	int			(*map)[MAP_W];
+	int			**map;
+	//int			(*map)[MAP_W];
 	char		*textures[4];
 	int			floor_color[3];
 	int			ceiling_color[3];
@@ -99,6 +100,9 @@ int		is_valid_map(char **arr, char player);
 int		is_valid_top_bottom_line(char *str);
 char	get_player(char **arr);
 int		is_valid_map_line(char *str, char p);
+void	get_map_size(t_game *g, char **arr);
+int		map_to_int_arr(t_game *g, char **arr, char p);
+int		**allocate_map(int w, int h);
 int		is_char_in_set(char c, char const *set);
 int		is_surrounded(char **arr, int x, int y);
 int		flood_fill(char **arr);

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 11:17:20 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 12:32:59 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	open_cub_file(char *path)
 	return (fd);
 }
 
+// TODO: Free map (array of integers)
 void	free_parsed_data(t_game *g, char **arr)
 {
 	int	i;
@@ -71,6 +72,9 @@ void	free_parsed_data(t_game *g, char **arr)
 /* For debug purposes only */
 void	print_parsed_data(t_game *g)
 {
+	int	i;
+	int	j;
+
 	printf("----------------------------------\n");
 	printf("North texture: %s\n", g->textures[0]);
 	printf("South texture: %s\n", g->textures[1]);
@@ -80,5 +84,25 @@ void	print_parsed_data(t_game *g)
 		g->floor_color[0], g->floor_color[1], g->floor_color[2]);
 	printf("Ceiling color: %d,%d,%d\n",
 		g->ceiling_color[0], g->ceiling_color[1], g->ceiling_color[2]);
+	printf("     Map size: %d x %d (width x height)\n\n", g->map_w, g->map_h);
+
+	// PRINT ARRAY OF INTS
+	i = 0;
+	while (i < g->map_h)
+	{
+		j = 0;
+		while (j < g->map_w)
+		{
+			if ((g->map[i][j]) <= 0)
+				printf(" ");
+			if ((g->map[i][j]) == 1)
+				printf("\033[45m \033[0m");
+			if ((g->map[i][j]) == 2)
+				printf("\033[1;33mX\033[0m");
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 	printf("----------------------------------\n");
 }
