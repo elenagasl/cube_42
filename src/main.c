@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 10:44:19 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:30:29 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	t_game	g;
 
 	if (argc != 2)
-		return (printf(INV_ARG"\n"), 1);
+		return (printf(ARG_INVAL"\n"), 1);
 	init_parse_data(&g);
 	parse_file(&g, argv[1]);
 	//init_game(&g);

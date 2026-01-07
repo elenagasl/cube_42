@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 11:03:56 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:32:16 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int	is_valid_file(char **arr)
 		else if (is_first_map_line(arr[i]))
 		{
 			if (count < 6)
-				printf(MISS_DATA"\n");
+				printf(DATA_MISS"\n");
 			else if (count > 6)
-				printf(DUP_DATA"\n");
+				printf(DATA_DUP"\n");
 			return (count == 6);
 		}
 		else if (!is_empty_line(arr[i]))
-			return (printf(INV_LIN"\n"), 0);
+			return (printf(LINE_INVAL"\n"), 0);
 		i++;
 	}
-	return (printf(MISS_MAP"\n"), 0);
+	return (printf(MAP_MISS"\n"), 0);
 }
 
 /* Check if a line is composed of whitespace only */
@@ -76,7 +76,7 @@ int	validate_parsed_data(t_game *g)
 	{
 		if (!g->textures[i])
 		{
-			printf(MISS_TEXT"\n");
+			printf(TEXT_MISS"\n");
 			return (0);
 		}
 		i++;
@@ -85,9 +85,9 @@ int	validate_parsed_data(t_game *g)
 	while (i < 3)
 	{
 		if (g->floor_color[i] < 0 || g->ceiling_color[i] < 0)
-			return (printf(INV_COL"\n"), 0);
+			return (printf(COLOR_INVAL"\n"), 0);
 		if (g->floor_color[i] > 255 || g->ceiling_color[i] > 255)
-			return (printf(OOR_COL"\n"), 0);
+			return (printf(COLOR_RANGE"\n"), 0);
 		i++;
 	}
 	return (1);

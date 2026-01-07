@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 11:07:07 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:27:00 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_texture_path(char *textures[4], char *line)
 	trim_whitespace(line);
 	if (!is_valid_extension(line, ".png"))
 	{
-		printf(INV_TEXT_EXT"\n");
+		printf(TEXT_EXT"\n");
 		return ;
 	}
 	type = line[0];
@@ -50,7 +50,7 @@ void	get_texture_path(char *textures[4], char *line)
 		i++;
 	if (textures[cardinal_to_index(type)] != NULL)
 	{
-		printf(DUP_TEXT"\n");
+		printf(TEXT_DUP"\n");
 		return ;
 	}
 	fd = open_rdonly_file(&line[i]);

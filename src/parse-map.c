@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 15:18:29 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:36:11 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	parse_map(t_game *g, char **arr)
 	get_map_size(g, &arr[i]);
 	if (g->map_w < 3 || g->map_h < 3)
 	{
-		printf("Error: Invalid map size\n");
+		printf(MAP_SIZE"\n");
 		return ;
 	}
 	if (!is_valid_map(&arr[i], player))
@@ -58,7 +58,7 @@ char	get_player(char **arr)
 			if (is_char_in_set(arr[i][j], "NSWE"))
 			{
 				if (player)
-					return (printf(MULT_PLYR"\n"), 0);
+					return (printf(PLYR_MULTI"\n"), 0);
 				player = arr[i][j];
 			}
 			j++;
@@ -66,7 +66,7 @@ char	get_player(char **arr)
 		i++;
 	}
 	if (!player)
-		return (printf(MISS_PLYR"\n"), 0);
+		return (printf(PLYR_MISS"\n"), 0);
 	return (player);
 }
 

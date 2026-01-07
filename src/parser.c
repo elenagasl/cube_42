@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 12:58:47 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:25:47 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_file(t_game *g, char *path)
 	arr = arr_string_from_fd(fd);
 	if (!arr || !is_valid_file(arr))
 	{
-		printf(EMPTY"\n");
+		printf(FILE_EMPTY"\n");
 		free_parsed_data(g, arr);
 		return ;
 	}
@@ -46,7 +46,7 @@ int	open_cub_file(char *path)
 	trim_whitespace(path);
 	if (!is_valid_extension(path, ".cub"))
 	{
-		printf(INV_MAP_EXT"\n");
+		printf(FILE_EXT"\n");
 		return (-1);
 	}
 	fd = open_rdonly_file(path);

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 12:23:58 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 16:37:14 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,25 @@
 # define MAP_W 24
 # define MAP_H 7
 
-# define INV_ARG "Invalid argument. Usage: <filename>.cub"
-# define EMPTY "Error: Empty file"
-# define INV_MAP_EXT "Error: Only .cub files are supported"
-# define INV_TEXT_EXT "Error: Only .png texture files are supported"
-# define MISS_DATA "Error: Missing data"
-# define MISS_MAP "Error: Missing map"
-# define DUP_DATA "Error: Duplicated data"
-# define DUP_TEXT "Error: Duplicated texture"
-# define INV_LIN "Error: Invalid line"
-# define MISS_TEXT "Error: Missing texture file"
-# define INV_COL "Error: Missing or invalid color"
-# define OOR_COL "Error: Out of range color"
-# define INV_TOP_LIN "Error: Invalid map top line"
-# define INV_MAP_LIN "Error: Invalid map line"
-# define INV_BOT_LIN "Error: Invalid map bottom line"
-# define UNEX_LIN "Error: Unexpected line"
-# define MISS_PLYR "Error: Missing player position"
-# define MULT_PLYR "Error: No more than one player position allowed"
+# define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
+# define FILE_EMPTY "Error: Empty file"
+# define FILE_EXT "Error: Only .cub files are supported"
+# define DATA_MISS "Error: Missing data"
+# define DATA_DUP "Error: Duplicated data"
+# define TEXT_EXT "Error: Only .png texture files are supported"
+# define TEXT_DUP "Error: Duplicated texture"
+# define TEXT_MISS "Error: Missing texture file"
+# define COLOR_INVAL "Error: Missing or invalid color"
+# define COLOR_RANGE "Error: Out of range color"
+# define MAP_MISS "Error: Missing map"
+# define MAP_TOP_INVAL "Error: Invalid map top line"
+# define MAP_BOT_INVAL "Error: Invalid map bottom line"
+# define MAP_LINE_INVAL "Error: Invalid map line"
+# define MAP_SIZE "Error: Invalid map size"
+# define LINE_INVAL "Error: Invalid line"
+# define LINE_UNEXP "Error: Unexpected line"
+# define PLYR_MISS "Error: Missing player position"
+# define PLYR_MULTI "Error: No more than one player position allowed"
 
 typedef struct s_img
 {
