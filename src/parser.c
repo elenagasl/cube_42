@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 12:32:59 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 12:58:47 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,12 @@ void	print_parsed_data(t_game *g)
 		while (j < g->map_w)
 		{
 			if ((g->map[i][j]) <= 0)
-				printf(" ");
+				printf("  ");
 			if ((g->map[i][j]) == 1)
-				printf("\033[45m \033[0m");
+				printf("\033[41m🧱\033[0m");
 			if ((g->map[i][j]) == 2)
-				printf("\033[1;33mX\033[0m");
+				printf("😃");
+				//printf("\033[1;33m\033[0m");
 			j++;
 		}
 		printf("\n");
