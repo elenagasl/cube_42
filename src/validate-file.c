@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:16:05 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:03:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 /* Iterate through cub file until first line of map is reached.
 Check for incomplete data or invalid lines */
-int	is_valid_file(char **lines)
+int	is_valid_file(char **arr)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 
 	i = 0;
 	count = 0;
-	while (lines[i])
+	while (arr[i])
 	{
-		if (is_texture(lines[i]) || is_color(lines[i]))
+		if (is_texture(arr[i]) || is_color(arr[i]))
 			count++;
-		else if (is_first_map_line(lines[i]))
+		else if (is_first_map_line(arr[i]))
 		{
 			if (count < 6)
 				printf(MISS_DATA"\n");
@@ -33,7 +33,7 @@ int	is_valid_file(char **lines)
 				printf(DUP_DATA"\n");
 			return (count == 6);
 		}
-		else if (!is_empty_line(lines[i]))
+		else if (!is_empty_line(arr[i]))
 			return (printf(INV_LIN"\n"), 0);
 		i++;
 	}
