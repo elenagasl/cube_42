@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 12:34:41 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 14:58:34 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_map_size(t_game *g, char **arr)
 	g->map_h = i;
 }
 
-/* Parse map as an array of strings into an array of integers */
+/* Parse an array of strings into an array of integers */
 int	map_to_int_arr(t_game *g, char **arr, char p)
 {
 	int	i;
@@ -64,7 +64,9 @@ int	map_to_int_arr(t_game *g, char **arr, char p)
 	return (1);
 }
 
-// TODO: Free int arrays if allocation fails
+/* Allocate memory for an array of arrays of integers.
+Initialize every integer to `-1`.
+If any allocation fails frree every array and return `NULL` */
 int	**allocate_map(int w, int h)
 {
 	int	i;
@@ -78,7 +80,12 @@ int	**allocate_map(int w, int h)
 	{
 		map[i] = malloc(w * sizeof(int));
 		if (!map[i])
+		{
+			while (i > 0)
+				free(map[--i]);
+			free(map);
 			return (NULL);
+		}
 		init_int_arr(map[i], w, -1);
 		i++;
 	}
