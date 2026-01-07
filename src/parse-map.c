@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 12:09:39 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/07 15:18:29 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_map(t_game *g, char **arr)
 	if (!map_to_int_arr(g, &arr[i], player))
 		return ;
 	printf("\033[1;32mMap is valid!\033[0m\n");
-	print_parsed_data(g);
+	//print_parsed_data(g);
 }
 
 char	get_player(char **arr)

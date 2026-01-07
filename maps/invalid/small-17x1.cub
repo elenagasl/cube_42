@@ -1,0 +1,9 @@
+NO ./textures/test1.png
+SO ./textures/test2.png
+WE ./textures/test3.png
+EA ./textures/test4.png
+
+F 100,100,50
+C 150,190,180
+
+ 1111111111E11111

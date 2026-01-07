@@ -1,0 +1,18 @@
+NO ./textures/test1.png
+SO ./textures/test2.png
+WE ./textures/test3.png
+EA ./textures/test4.png
+
+F 24,20,37
+C 77,45,51
+
+111
+1S1
+101
+101
+101
+101
+101
+101
+101
+111
