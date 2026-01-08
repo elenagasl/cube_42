@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 13:29:19 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 17:40:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		map_to_int_arr(t_game *g, char **arr, char p);
 int		**allocate_map(int w, int h);
 int		is_char_in_set(char c, char const *set);
 int		is_surrounded(char **arr, int x, int y);
-int		flood_fill(char **arr);
+int		flood_fill(char **arr, char p, int h);
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
 int		is_valid_extension(char *path, char *ext);

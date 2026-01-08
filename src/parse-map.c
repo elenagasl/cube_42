@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 12:25:28 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 16:55:50 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	parse_map(t_game *g, char **arr)
 		printf(MAP_SIZE_INVAL"\n");
 		return ;
 	}
-	if (!is_valid_map(&arr[i], player))
+	if (!is_valid_map(&arr[i], player, g->map_h))
 		return ;
-	if (!flood_fill(&arr[i]))
+	if (!flood_fill(&arr[i], player, g->map_h))
 		return ;
 	if (!map_to_int_arr(g, &arr[i], player))
 		return ;
@@ -113,18 +113,18 @@ int	is_surrounded(char **arr, int x, int y)
 	return (1);
 } */
 
-int	flood_fill(char **arr)
+int	flood_fill(char **arr, char p, int h)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (arr[i])
+	while (i < h)
 	{
 		j = 0;
 		while (arr[i][j])
 		{
-			if (arr[i][j] == '0' && !is_surrounded(arr, i, j))
+			if ((arr[i][j] == '0' || arr[i][j] == p) && !is_surrounded(arr, i, j))
 				return (printf("Error: Space not surrounded by wall\n"), 0);
 			j++;
 		}
