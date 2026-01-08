@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 16:33:41 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:49:53 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@ int	is_valid_map(char **arr, char player)
 		if (!is_empty_line(arr[i]))
 			return (printf(LINE_UNEXP"\n"), 0);
 		i++;
-	}
+		}
+	//! Trying to validate split map
+	/* 	while (arr[i])
+	{
+		if (!is_empty_line(arr[i]))
+			return (is_valid_map(&arr[i], player));
+		//else
+		//	return (printf(LINE_UNEXP"\n"), 0);
+		i++;
+	} */
 	return (1);
 }
 
