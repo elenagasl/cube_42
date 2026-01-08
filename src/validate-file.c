@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 11:49:15 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:29:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	validate_parsed_data(t_game *g)
 	i = 0;
 	while (i < 3)
 	{
-		if (g->floor_color[i] < 0 || g->ceiling_color[i] < 0)
+		if (g->floor_arr[i] < 0 || g->ceiling_arr[i] < 0)
 			return (printf(COLOR_INVAL"\n"), 0);
-		if (g->floor_color[i] > 255 || g->ceiling_color[i] > 255)
+		if (g->floor_arr[i] > 255 || g->ceiling_arr[i] > 255)
 			return (printf(COLOR_RANGE"\n"), 0);
 		i++;
 	}

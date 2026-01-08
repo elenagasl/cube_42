@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 11:41:17 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:29:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_parse_data(t_game *g)
 	g->textures[1] = NULL;
 	g->textures[2] = NULL;
 	g->textures[3] = NULL;
-	init_int_arr(g->floor_color, 3, -1);
-	init_int_arr(g->ceiling_color, 3, -1);
+	init_int_arr(g->floor_arr, 3, -1);
+	init_int_arr(g->ceiling_arr, 3, -1);
 }
 
 void	free_cub3d(t_game *g)

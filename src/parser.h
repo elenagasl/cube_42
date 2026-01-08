@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 19:46:11 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:29:19 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ typedef struct s_game
 	int			**map;
 	//int			(*map)[MAP_W];
 	char		*textures[4];
-	int			floor_color[3];
-	int			ceiling_color[3];
+	int			floor_arr[3];
+	int			floor;
+	int			ceiling_arr[3];
+	int			ceiling;
 }	t_game;
 
 // Parser
@@ -117,5 +119,7 @@ void	init_int_arr(int *arr, int size, int value);
 void	trim_left_ws(char *str);
 void	trim_right_ws(char *str);
 void	trim_whitespace(char *str);
+
+int		rgb(int color[3]);
 
 #endif

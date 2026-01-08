@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 12:02:07 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:29:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@ void	parse_colors(t_game *g, char **arr)
 		{
 			trim_whitespace(arr[i]);
 			if (arr[i][0] == 'F')
-				parse_rgb(&arr[i][1], g->floor_color);
+				parse_rgb(&arr[i][1], g->floor_arr);
 			else if (arr[i][0] == 'C')
-				parse_rgb(&arr[i][1], g->ceiling_color);
+				parse_rgb(&arr[i][1], g->ceiling_arr);
 			count++;
 		}
 		i++;
 	}
+	g->floor = rgb(g->floor_arr);
+	g->ceiling = rgb(g->ceiling_arr);
 }
 
 /* Parse an RGB color-coded string into an array of integers */
