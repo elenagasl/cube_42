@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 13:11:43 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 13:26:55 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 13:32:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 int	rgb(int color[3])
 {
-	int	r;
-	int	g;
-	int	b;
-
-	r = color[0];
-	g = color[1];
-	b = color[2];
-	return ((r << 16) | (g << 8) | b);
+	return ((color[0] << 16) | (color[1] << 8) | color[2]);
 }
