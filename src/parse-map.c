@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 11:39:39 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:25:28 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	parse_map(t_game *g, char **arr)
 		return ;
 }
 
+/* Return the `N`, `S`, `W`, or `E`  character that
+represents the player's position and orientation */
 char	get_player(char **arr)
 {
 	int		i;
@@ -78,8 +80,20 @@ int	is_char_in_set(char c, char const *set)
 	return (0);
 }
 
-/* A '0' can't be surrounded by space */
+/* A `0` can't be orthogonally surrounded by space */
 int	is_surrounded(char **arr, int x, int y)
+{
+	if (ft_isspace(arr[x + 1][y]) ||
+		ft_isspace(arr[x - 1][y]) ||
+		ft_isspace(arr[x][y + 1]) ||
+		ft_isspace(arr[x][y - 1]))
+		return (0);
+	return (1);
+}
+
+/* STRICT VERSION */
+/* A `0` can't be orthogonally or diagonally surrounded by space */
+/* int	is_surrounded(char **arr, int x, int y)
 {
 	int	i;
 	int	j;
@@ -97,7 +111,7 @@ int	is_surrounded(char **arr, int x, int y)
 		i++;
 	}
 	return (1);
-}
+} */
 
 int	flood_fill(char **arr)
 {
