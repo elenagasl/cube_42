@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 19:59:42 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:41:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (printf(ARG_INVAL"\n"), 1);
 	init_parse_data(&g);
-	if (!parser(&g, argv[1]))
+	if (parser(&g, argv[1]))
+		print_parsed_data(&g);
+	else
 		return (free_cub3d(&g), 1);
 	//init_game(&g);
 	//render_frame(&g);
