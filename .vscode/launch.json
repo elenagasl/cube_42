@@ -5,7 +5,7 @@
             "name": "Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/parser-exe",
+            "program": "${workspaceFolder}/cub3d",
             "args": ["${input:programArgs}"],
             "cwd": "${workspaceFolder}",
             "MIMode": "gdb",
@@ -18,7 +18,7 @@
             "id": "programArgs",
             "type": "pickString",
             "description": "Select program arguments",
-            "options": ["./maps/test1.cub"],
+            "options": ["./maps/test.cub"],
         }
     ]
 }
