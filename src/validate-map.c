@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 12:49:53 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:53:10 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	is_valid_map_line(char *str, char p)
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
-	if (i == len || str[i] != '1' || str[len] != '1')
+	if (str[i] != '1' || str[len] != '1')
 		return (0);
 	while (str[i])
 	{
