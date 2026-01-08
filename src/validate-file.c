@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/07 19:24:38 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/08 11:49:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 Check for incomplete data or invalid lines */
 int	is_valid_file(char **arr)
 {
-	int		i;
-	int		count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -27,7 +27,9 @@ int	is_valid_file(char **arr)
 			count++;
 		else if (is_first_map_line(arr[i]))
 		{
-			if (count < 6)
+			if (count == 0)
+				printf(FILE_EMPTY"\n");
+			else if (count < 6)
 				printf(DATA_MISS"\n");
 			else if (count > 6)
 				printf(DATA_DUP"\n");
