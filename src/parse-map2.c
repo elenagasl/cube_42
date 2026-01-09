@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 16:14:19 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 10:05:45 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	get_map_size(t_game *g, char **arr)
 {
 	g->map_h = get_map_height(arr);
 	g->map_w = get_map_width(arr, g->map_h);
-	printf("Size: %d x %d\n", g->map_w, g->map_h);
 }
 
 /* Parse an array of strings into an array of integers */

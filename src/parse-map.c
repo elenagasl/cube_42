@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 16:55:50 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 11:18:23 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ int	is_char_in_set(char c, char const *set)
 }
 
 /* A `0` can't be orthogonally surrounded by space */
-int	is_surrounded(char **arr, int x, int y)
+int	is_surrounded(char **arr, int r, int c)
 {
-	if (ft_isspace(arr[x + 1][y]) ||
-		ft_isspace(arr[x - 1][y]) ||
-		ft_isspace(arr[x][y + 1]) ||
-		ft_isspace(arr[x][y - 1]))
+	if (ft_isspace(arr[r + 1][c]) ||
+		ft_isspace(arr[r - 1][c]) ||
+		ft_isspace(arr[r][c + 1]) ||
+		ft_isspace(arr[r][c - 1]))
 		return (0);
 	return (1);
 }
