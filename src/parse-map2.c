@@ -6,13 +6,19 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:23:38 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:39:41 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// TODO: Save player position and orientation
+/* Save map width and height into `t_game g`.
+Spaces are taken into account, except for `\n` */
+void	get_map_size(t_game *g, char **arr)
+{
+	g->map_h = get_map_height(arr);
+	g->map_w = get_map_width(arr, g->map_h);
+}
 
 int	get_map_height(char **arr)
 {
@@ -44,14 +50,6 @@ int	get_map_width(char **arr, int h)
 		i++;
 	}
 	return (max_width);
-}
-
-/* Save map width and height into `t_game g`.
-Spaces are taken into account, except for `\n` */
-void	get_map_size(t_game *g, char **arr)
-{
-	g->map_h = get_map_height(arr);
-	g->map_w = get_map_width(arr, g->map_h);
 }
 
 // TODO: Should we call exit() after malloc fail?

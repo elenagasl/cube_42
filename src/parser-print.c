@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:22:27 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:22:49 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:40:36 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_parsed_data(t_game *g)
 		g->floor_arr[0], g->floor_arr[1], g->floor_arr[2], g->floor);
 	printf("Ceiling color: %d,%d,%d (%d)\n",
 		g->ceiling_arr[0], g->ceiling_arr[1], g->ceiling_arr[2], g->ceiling);
-	printf("     Map size: %d x %d (width x height)\n\n", g->map_w, g->map_h);
+	printf("     Map size: %d x %d \n\n", g->map_w, g->map_h);
 	if (g->map_w <= 50)
 		print_mini_map(g);
 	printf("-------------------------------------\n");

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:21:51 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:39:02 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,6 @@ char	get_player(t_game *g, char **arr)
 		r++;
 	}
 	return (player);
-}
-
-int	is_char_in_set(char c, char const *set)
-{
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
 }
 
 /* A `0` can't be orthogonally surrounded by space */
