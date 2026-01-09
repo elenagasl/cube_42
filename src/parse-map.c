@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 12:51:56 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 16:58:25 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	normalize_map_spaces(char **arr, int h, int w)
 	i = 0;
 	while (i < h)
 	{
-		if (ft_strlen(arr[i]) < (size_t)w)
+		if ((int)ft_strlen(arr[i]) < w + 1)
 		{
-			temp = malloc(sizeof(char) * w + 2);
+			temp = ft_calloc(w + 2, 1);
 			if (!temp)
 			{
 				// TODO
 			}
-			ft_memset(temp, ' ', w);
-			ft_memcpy(temp, arr[i], w);
+			ft_memset(temp, ' ', (size_t)w);
+			ft_memcpy(temp, arr[i], ft_strlen(arr[i]));
 			temp[w]  = '\n';
-			temp[w + 1]  = '\0';
 			free(arr[i]);
 			arr[i] = temp;
 		}
 		i++;
 	}
+	i = 0;
 }
 
 /*
@@ -143,20 +143,20 @@ int	is_surrounded(char **arr, int r, int c)
 
 int	flood_fill(char **arr, char p, int h)
 {
-	int	i;
-	int	j;
+	int	r;
+	int	c;
 
-	i = 0;
-	while (i < h)
+	r = 0;
+	while (r < h)
 	{
-		j = 0;
-		while (arr[i][j])
+		c = 0;
+		while (arr[r][c])
 		{
-			if ((arr[i][j] == '0' || arr[i][j] == p) && !is_surrounded(arr, i, j))
+			if ((arr[r][c] == '0' || arr[r][c] == p) && !is_surrounded(arr, r, c))
 				return (printf("Error: Space not surrounded by wall\n"), 0);
-			j++;
+			c++;
 		}
-		i++;
+		r++;
 	}
 	return (1);
 }

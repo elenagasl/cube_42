@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 13:02:06 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:06:09 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	is_valid_map(char **arr, char player, int h)
 	int	i;
 
 	i = 0;
+	if (!is_valid_top_bottom_line(arr[0]))
+		return (printf(MAP_TOP_INVAL": %s", arr[0]), 0);
+	if (!is_valid_top_bottom_line(arr[h - 1]))
+		return (printf(MAP_BOT_INVAL": %s", arr[h - 1]), 0);
 	while (i < h)
 	{
 		if (!is_empty_line(arr[i]) && !is_valid_map_line(arr[i], player))
-		{
 			return (printf(MAP_LINE_INVAL": %s", arr[i]), 0);
-		}
 		i++;
 	}
 	return (1);
