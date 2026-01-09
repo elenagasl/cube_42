@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 12:32:34 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:23:38 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_map_width(char **arr, int h)
 	max_width = 0;
 	while (i < h)
 	{
-		width = ft_strlen(arr[i]) - 1;
+		width = ft_strlen(arr[i]);
 		if (width > max_width)
 			max_width = width;
 		i++;
@@ -54,63 +54,28 @@ void	get_map_size(t_game *g, char **arr)
 	g->map_w = get_map_width(arr, g->map_h);
 }
 
-/* Parse an array of strings into an array of integers */
-int	map_to_int_arr(t_game *g, char **arr, char p)
+// TODO: Should we call exit() after malloc fail?
+void	normalize_map_spaces(char **arr, int h, int w)
 {
-	int	i;
-	int	j;
-	int	**map;
+	int		i;
+	char	*temp;
 
-	map = allocate_map(g->map_w, g->map_h);
-	if (!map)
-		return (0);
 	i = 0;
-	while (i < g->map_h)
+	while (i < h)
 	{
-		j = 0;
-		while (arr[i][j])
+		if ((int)ft_strlen(arr[i]) < w)
 		{
-			if (arr[i][j] == '1' || arr[i][j] == '0')
-				map[i][j] = arr[i][j] - '0';
-			else if (arr[i][j] == p)
-				map[i][j] = 2;
-			j++;
+			temp = ft_calloc(w + 1, 1);
+			if (!temp)
+			{
+				perror("Error");
+				return ;
+			}
+			ft_memset(temp, ' ', (size_t)w);
+			ft_memcpy(temp, arr[i], ft_strlen(arr[i]));
+			free(arr[i]);
+			arr[i] = temp;
 		}
 		i++;
 	}
-	g->map = map;
-	return (1);
-}
-
-/* Allocate memory for an array of arrays of integers.
-Initialize every integer to `-1`.
-If any allocation fails free every array and return `NULL` */
-int	**allocate_map(int w, int h)
-{
-	int	i;
-	int	**map;
-
-	i = 0;
-	map = malloc(h * sizeof(int *));
-	if (!map)
-		return (NULL);
-	while (i < h)
-	{
-		map[i] = malloc(w * sizeof(int));
-		if (!map[i])
-			return (free_arr_int(map, i), NULL);
-		init_int_arr(map[i], w, -1);
-		i++;
-	}
-	return (map);
-}
-
-void	free_arr_int(int **arr, int size)
-{
-	if (!arr)
-		return ;
-	while (size)
-		free(arr[--size]);
-	free(arr);
-	arr = NULL;
 }

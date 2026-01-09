@@ -6,42 +6,13 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 16:58:25 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:21:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// TODO: Handle malloc fail
-void	normalize_map_spaces(char **arr, int h, int w)
-{
-	int		i;
-	char	*temp;
-
-	i = 0;
-	while (i < h)
-	{
-		if ((int)ft_strlen(arr[i]) < w + 1)
-		{
-			temp = ft_calloc(w + 2, 1);
-			if (!temp)
-			{
-				// TODO
-			}
-			ft_memset(temp, ' ', (size_t)w);
-			ft_memcpy(temp, arr[i], ft_strlen(arr[i]));
-			temp[w]  = '\n';
-			free(arr[i]);
-			arr[i] = temp;
-		}
-		i++;
-	}
-	i = 0;
-}
-
-/*
-TODO: Obtener coordenadas y orientación player */
-void	parse_map(t_game *g, char **arr)
+int	parse_map(t_game *g, char **arr)
 {
 	int		i;
 	char	player;
@@ -49,51 +20,50 @@ void	parse_map(t_game *g, char **arr)
 	i = 0;
 	while (!is_first_map_line(arr[i]))
 		i++;
-	player = get_player(&arr[i]);
-	if (!player)
-		return ;
 	get_map_size(g, &arr[i]);
 	if (g->map_w < 3 || g->map_h < 3)
-	{
-		printf(MAP_SIZE_INVAL"\n");
-		return ;
-	}
+		return (printf(MAP_SIZE_INVAL"\n"), 0);
+	player = get_player(g, &arr[i]);
+	if (!player)
+		return (printf(PLYR_MISS"\n"), 0);
 	normalize_map_spaces(&arr[i], g->map_h, g->map_w);
 	if (!is_valid_map(&arr[i], player, g->map_h))
-		return ;
+		return (0);
 	if (!flood_fill(&arr[i], player, g->map_h))
-		return ;
+		return (0);
 	if (!map_to_int_arr(g, &arr[i], player))
-		return ;
+		return (0);
+	return (1);
 }
 
+// TODO Obtener orientación player
 /* Return the `N`, `S`, `W`, or `E`  character that
 represents the player's position and orientation */
-char	get_player(char **arr)
+char	get_player(t_game *g, char **arr)
 {
-	int		i;
-	int		j;
+	int		r;
+	int		c;
 	char	player;
 
-	i = 0;
+	r = 0;
 	player = 0;
-	while (arr[i])
+	while (arr[r])
 	{
-		j = 0;
-		while (arr[i][j])
+		c = 0;
+		while (arr[r][c])
 		{
-			if (is_char_in_set(arr[i][j], "NSWE"))
+			if (is_char_in_set(arr[r][c], "NSWE"))
 			{
 				if (player)
 					return (printf(PLYR_MULTI"\n"), 0);
-				player = arr[i][j];
+				player = arr[r][c];
+				g->player.pos_x = (double)c;
+				g->player.pos_y = (double)r;
 			}
-			j++;
+			c++;
 		}
-		i++;
+		r++;
 	}
-	if (!player)
-		return (printf(PLYR_MISS"\n"), 0);
 	return (player);
 }
 
@@ -152,8 +122,11 @@ int	flood_fill(char **arr, char p, int h)
 		c = 0;
 		while (arr[r][c])
 		{
-			if ((arr[r][c] == '0' || arr[r][c] == p) && !is_surrounded(arr, r, c))
-				return (printf("Error: Space not surrounded by wall\n"), 0);
+			if ((arr[r][c] == '0' || arr[r][c] == p))
+			{
+				if (!is_surrounded(arr, r, c))
+					return (printf(MAP_OPEN" at %s\n", arr[r]), 0);
+			}
 			c++;
 		}
 		r++;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parser-utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/06 22:31:59 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 17:58:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ char	**arr_string_from_fd(int fd)
 	{
 		arr = ft_push_str_to_arr(arr, line);
 		if (!arr)
-		{
-			free(line);
-			return (NULL);
-		}
+			return (free(line), NULL);
 		line = get_next_line(fd);
 	}
 	close(fd);

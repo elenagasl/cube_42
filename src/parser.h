@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 11:17:47 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 18:33:36 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define MAP_TOP_INVAL "Error: Invalid map top line"
 # define MAP_BOT_INVAL "Error: Invalid map bottom line"
 # define MAP_LINE_INVAL "Error: Invalid map line"
+# define MAP_OPEN "Error: Space not surrounded by wall"
 # define MAP_SIZE_INVAL "Error: Invalid map size"
 # define LINE_INVAL "Error: Invalid line"
 # define LINE_UNEXP "Error: Unexpected line"
@@ -98,12 +99,13 @@ int		is_valid_color(char *str);
 void	parse_rgb(char *line, int color[3]);
 void	print_parsed_data(t_game *g);
 int		validate_parsed_data(t_game *g);
-void	parse_map(t_game *g, char **arr);
+int		parse_map(t_game *g, char **arr);
 int		is_valid_map(char **arr, char player, int h);
 int		is_valid_top_bottom_line(char *str);
-char	get_player(char **arr);
+char	get_player(t_game *g, char **arr);
 int		is_valid_map_line(char *str, char p);
 void	get_map_size(t_game *g, char **arr);
+void	normalize_map_spaces(char **arr, int h, int w);
 int		map_to_int_arr(t_game *g, char **arr, char p);
 int		**allocate_map(int w, int h);
 int		is_char_in_set(char c, char const *set);
@@ -119,6 +121,8 @@ void	init_int_arr(int *arr, int size, int value);
 void	trim_left_ws(char *str);
 void	trim_right_ws(char *str);
 void	trim_whitespace(char *str);
+void	print_mini_map(t_game *g);
+void	print_parsed_data(t_game *g);
 
 int		rgb(int color[3]);
 
