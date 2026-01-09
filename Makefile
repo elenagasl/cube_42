@@ -5,7 +5,7 @@ CFLAGS		= -Wall -Wextra -Werror -I$(MLX_DIR)
 MLX_DIR		= ./minilibx
 MLX_LIB		= $(MLX_DIR)/libmlx.a
 
-SRC			= main.c init.c raycasting.c raycasting1.c render.c utils.c map.c 
+SRC			= main.c init.c raycasting.c raycasting1.c render.c utils.c map.c exit.c hooks.c draw.c
 OBJ			= $(SRC:.c=.o)
 
 all: $(NAME)

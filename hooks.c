@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 13:16:25 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/04 13:16:26 by elengarc         ###   ########.fr       */
+/*   Created: 2026/01/05 17:24:27 by elengarc          #+#    #+#             */
+/*   Updated: 2026/01/05 17:24:31 by elengarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	render_frame(t_game *g)
+int	key_press(int keycode, t_game *g)
 {
-	int	x;
-
-	x = 0;
-	while (x < WIN_W) //Recorremos pixeles por columnas
-	{
-		cast_column(g, x);
-		x++;
-	}
-	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
+	if (keycode == KEY_ESC)
+		exit_game(g);
+	return (0);
 }
 
-void	put_pixel(t_img *img, int x, int y, int color)
+int	close_window(t_game *g)
 {
-	char	*dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
+	exit_game(g);
+	return (0);
 }

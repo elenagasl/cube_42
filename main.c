@@ -18,6 +18,8 @@ int	main(void)
 
 	init_game(&g);
 	render_frame(&g);
+	mlx_hook(g.win, 2, 1L << 0, key_press, &g);
+	mlx_hook(g.win, 17, 0, close_window, &g);
 	mlx_loop(g.mlx);
 	return (0);
 }

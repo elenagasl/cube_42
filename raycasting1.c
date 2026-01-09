@@ -63,5 +63,5 @@ void	cast_column(t_game *g, int x)
 	if (!perform_dda(g, &r))
 		return ;
 	dist = get_perp_dist(g, &r);
-	draw_wall(g, x, dist, r.side);
+	draw_wall(g, x, dist, &r);
 }

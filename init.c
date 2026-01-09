@@ -30,6 +30,7 @@ static void	init_image(t_game *g)
 			&g->img.line_len, &g->img.endian);
 }
 
+
 void	init_game(t_game *g)
 {
 	g->mlx = mlx_init();
@@ -38,6 +39,11 @@ void	init_game(t_game *g)
 	g->map = get_map();
 	g->map_w = MAP_W;
 	g->map_h = MAP_H;
+	g->floor_color = rgb(80, 80, 80);
+	g->ceiling_color = rgb(120, 120, 200);
+	g->color_north = rgb(200, 0, 0);
+	g->color_south = rgb(0, 200, 0);
+	g->color_west = rgb(0, 0, 200);
+	g->color_east = rgb(200, 200, 0);
 	init_player(g);
 }
-
