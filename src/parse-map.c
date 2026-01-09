@@ -6,11 +6,38 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 11:18:23 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:51:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+// TODO: Handle malloc fail
+void	normalize_map_spaces(char **arr, int h, int w)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (i < h)
+	{
+		if (ft_strlen(arr[i]) < (size_t)w)
+		{
+			temp = malloc(sizeof(char) * w + 2);
+			if (!temp)
+			{
+				// TODO
+			}
+			ft_memset(temp, ' ', w);
+			ft_memcpy(temp, arr[i], w);
+			temp[w]  = '\n';
+			temp[w + 1]  = '\0';
+			free(arr[i]);
+			arr[i] = temp;
+		}
+		i++;
+	}
+}
 
 /*
 TODO: Obtener coordenadas y orientación player */
@@ -31,6 +58,7 @@ void	parse_map(t_game *g, char **arr)
 		printf(MAP_SIZE_INVAL"\n");
 		return ;
 	}
+	normalize_map_spaces(&arr[i], g->map_h, g->map_w);
 	if (!is_valid_map(&arr[i], player, g->map_h))
 		return ;
 	if (!flood_fill(&arr[i], player, g->map_h))

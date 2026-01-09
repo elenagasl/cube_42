@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 10:05:45 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/09 12:32:34 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	map_to_int_arr(t_game *g, char **arr, char p)
 
 /* Allocate memory for an array of arrays of integers.
 Initialize every integer to `-1`.
-If any allocation fails frree every array and return `NULL` */
+If any allocation fails free every array and return `NULL` */
 int	**allocate_map(int w, int h)
 {
 	int	i;
