@@ -28,16 +28,14 @@ static int	get_wall_color(t_game *g, t_ray *r)
 	}
 }
 
-
-static void	draw_colored_wall(t_game *g, int x,
-				int start, int end, t_ray *r)
+static void	draw_colored_wall(t_game *g, int x, t_ray *r)
 {
 	int	color;
 	int	y;
 
 	color = get_wall_color(g, r);
-	y = start;
-	while (y <= end)
+	y = r->draw_start;
+	while (y <= r->draw_end)
 	{
 		put_pixel(&g->img, x, y, color);
 		y++;
@@ -65,18 +63,16 @@ void	draw_ceiling_floor(t_game *g, int x, int start, int end)
 void	draw_wall(t_game *g, int x, double dist, t_ray *r)
 {
 	int	height;
-	int	start;
-	int	end;
 
 	if (dist <= 0.0001)
 		return ;
 	height = (int)(WIN_H / dist);
-	start = -height / 2 + WIN_H / 2;
-	end = height / 2 + WIN_H / 2;
-	if (start < 0)
-		start = 0;
-	if (end >= WIN_H)
-		end = WIN_H - 1;
-	draw_ceiling_floor(g, x, start, end);
-	draw_colored_wall(g, x, start, end, r);
+	r->draw_start = -height / 2 + WIN_H / 2;
+	r->draw_end = height / 2 + WIN_H / 2;
+	if (r->draw_start < 0)
+		r->draw_start = 0;
+	if (r->draw_end >= WIN_H)
+		r->draw_end = WIN_H - 1;
+	draw_ceiling_floor(g, x, r->draw_start, r->draw_end);
+	draw_colored_wall(g, x, r);
 }

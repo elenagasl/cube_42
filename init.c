@@ -30,7 +30,6 @@ static void	init_image(t_game *g)
 			&g->img.line_len, &g->img.endian);
 }
 
-
 void	init_game(t_game *g)
 {
 	g->mlx = mlx_init();
@@ -45,5 +44,14 @@ void	init_game(t_game *g)
 	g->color_south = rgb(0, 200, 0);
 	g->color_west = rgb(0, 0, 200);
 	g->color_east = rgb(200, 200, 0);
+	g->key_w = 0;
+	g->key_a = 0;
+	g->key_s = 0;
+	g->key_d = 0;
+	g->key_left = 0;
+	g->key_right = 0;
+	g->time = get_time_in_seconds();
+	g->old_time = g->time;
+	g->frame_time = 0.0;
 	init_player(g);
 }

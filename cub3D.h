@@ -16,24 +16,20 @@
 # include <math.h>
 # include <stdlib.h>
 # include "minilibx/mlx.h"
+# include <sys/time.h>
 
 # define WIN_W 640
 # define WIN_H 480
 # define MAP_W 24
 # define MAP_H 7
 
-# define KEY_ESC 53
-
-typedef struct s_tex
-{
-	void	*img;
-	char	*addr;
-	int		width;
-	int		height;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_tex;
+# define KEY_ESC	53
+# define KEY_LEFT	123
+# define KEY_RIGHT	124
+# define KEY_W		13
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
 
 typedef struct s_img
 {
@@ -72,8 +68,18 @@ typedef struct s_game
 	int			color_south;
 	int			color_west;
 	int			color_east;
-}	t_game;
 
+	double		time;
+	double		old_time;
+	double		frame_time;
+
+	int			key_w;
+	int			key_a;
+	int			key_s;
+	int			key_d;
+	int			key_left;
+	int			key_right;
+}	t_game;
 
 typedef struct s_ray
 {
@@ -88,6 +94,8 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	int		side;
+	int		draw_start;
+	int		draw_end;
 }	t_ray;
 
 /* map */
@@ -108,12 +116,21 @@ void	cast_column(t_game *g, int x);
 void	draw_wall(t_game *g, int x, double dist, t_ray *r);
 void	put_pixel(t_img *img, int x, int y, int color);
 
+/* move */
+void	update_player(t_game *g);
+void	move_forward(t_game *g, double speed);
+void	move_backward(t_game *g, double speed);
+void	move_left(t_game *g, double speed);
+void	move_right(t_game *g, double speed);
+
 /* utils */
 int		rgb(int r, int g, int b);
+double	get_time_in_seconds(void);
 
-/* exit */
+/* exit and hooks */
 int		exit_game(t_game *g);
 int		key_press(int keycode, t_game *g);
+int		key_release(int keycode, t_game *g);
 int		close_window(t_game *g);
 
 #endif
