@@ -3,34 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
+/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:15:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/04 13:15:14 by elengarc         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:01:31 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_parser(t_game *g)
-{
-	g->map = NULL;
-	g->textures[0] = NULL;
-	g->textures[1] = NULL;
-	g->textures[2] = NULL;
-	g->textures[3] = NULL;
-	g->floor_color = 0;
-	g->ceiling_color = 0;
-	//init_int_arr(g->floor_arr, 3, -1);
-	//init_int_arr(g->ceiling_arr, 3, -1);
-}
-
 static void	init_player(t_game *g)
 {
-	g->player.pos_x = 12.5;
-	g->player.pos_y = 3.5;
-	g->player.dir_x = -1.0;
+	g->player.pos_x = 0.0;
+	g->player.pos_y = 0.0;
+	g->player.dir_x = 0.0;
 	g->player.dir_y = 0.0;
+	//g->player.pos_x = 12.5;
+	//g->player.pos_y = 3.5;
+	//g->player.dir_x = -1.0;
+	//g->player.dir_y = 0.0;
 	g->player.plane_x = 0.0;
 	g->player.plane_y = 0.66;
 }
@@ -66,5 +57,19 @@ void	init_game(t_game *g)
 	g->time = get_time_in_seconds();
 	g->old_time = g->time;
 	g->frame_time = 0.0;
+//	init_player(g);
+}
+
+void	init_parser(t_game *g)
+{
+	g->map = NULL;
+	g->textures[0] = NULL;
+	g->textures[1] = NULL;
+	g->textures[2] = NULL;
+	g->textures[3] = NULL;
+	g->floor_color = -1;
+	g->ceiling_color = -1;
+	//init_int_arr(g->floor_arr, 3, -1);
+	//init_int_arr(g->ceiling_arr, 3, -1);
 	init_player(g);
 }

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:39:02 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:03:04 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,43 @@ int	parse_map(t_game *g, char **arr)
 represents the player's position and orientation */
 char	get_player(t_game *g, char **arr)
 {
-	int		r;
-	int		c;
+	int		y;
+	int		x;
 	char	player;
 
-	r = 0;
+	y = 0;
 	player = 0;
-	while (arr[r])
+	while (arr[y])
 	{
-		c = 0;
-		while (arr[r][c])
+		x = 0;
+		while (arr[y][x])
 		{
-			if (is_char_in_set(arr[r][c], "NSWE"))
+			if (is_char_in_set(arr[y][x], "NSWE"))
 			{
 				if (player)
 					return (printf(PLYR_MULTI"\n"), 0);
-				player = arr[r][c];
-				g->player.pos_x = (double)c;
-				g->player.pos_y = (double)r;
+				player = arr[y][x];
+				set_player(g, y, x, player);
 			}
-			c++;
+			x++;
 		}
-		r++;
+		y++;
 	}
 	return (player);
+}
+
+void	set_player(t_game *g, int y, int x, char p)
+{
+	g->player.pos_x = (double)x + 0.5;
+	g->player.pos_y = (double)y + 0.5;
+	if (p == 'N')
+		g->player.dir_y = -1.0;
+	else if (p == 'S')
+		g->player.dir_y = 1.0;
+	else if (p == 'E')
+		g->player.dir_x = 1.0;
+	else if (p == 'W')
+		g->player.dir_x = -1.0;
 }
 
 /* A `0` can't be orthogonally surrounded by space */

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/11 15:16:51 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:09:22 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ typedef struct s_ray
 }	t_ray;
 
 /* map */
-int		(*get_map(void))[MAP_W];
+//int		(*get_map(void))[MAP_W];
 
 /* init */
 void	init_game(t_game *g);
@@ -165,7 +165,7 @@ int		close_window(t_game *g);
 
 /* Parser */
 
-int		parser(t_game *g, int argc, char *path);
+void	parser(t_game *g, int argc, char *path);
 void	parse_textures(t_game *g, char **arr);
 void	parse_colors(t_game *g, char **arr);
 int		parse_rgb(char *line);
@@ -186,6 +186,7 @@ int		validate_parsed_data(t_game *g);
 int		is_valid_map(char **arr, char player, int h);
 int		is_valid_top_bottom_line(char *str);
 char	get_player(t_game *g, char **arr);
+void	set_player(t_game *g, int y, int x, char p);
 int		is_valid_map_line(char *str, char p);
 void	get_map_size(t_game *g, char **arr);
 void	normalize_map_spaces(char **arr, int h, int w);

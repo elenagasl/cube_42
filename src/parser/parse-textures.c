@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 18:23:10 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:04:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,12 @@
 void	parse_textures(t_game *g, char **arr)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (arr[i] && count < 4)
+	while (arr[i])
 	{
 		if (is_texture(arr[i]))
-		{
 			get_texture_path(g->textures, arr[i]);
-			count++;
-		}
 		i++;
 	}
 }

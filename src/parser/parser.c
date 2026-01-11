@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:22:49 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:10:30 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Open .cub file, parse textures, colors and map.
 Return result of validate_parsed_data (`0` or `1`) */
-int	parser(t_game *g, int argc, char *path)
+void	parser(t_game *g, int argc, char *path)
 {
 	int		fd;
 	char	**arr;
@@ -25,21 +25,16 @@ int	parser(t_game *g, int argc, char *path)
 	fd = open_cub_file(path);
 	arr = arr_string_from_fd(fd);
 	if (!arr)
-		return (printf(FILE_EMPTY"\n"), 0);
+		return (printf(FILE_EMPTY"\n"), free_parser(g), exit(1));
 	replace_char(arr, '\n', '\0');
 	if (!is_valid_file(arr))
-		return (free_arr_str(arr), 0);
+		return (free_arr_str(arr), free_parser(g), exit(1));
 	parse_textures(g, arr);
 	parse_colors(g, arr);
 	parse_map(g, arr);
 	free_arr_str(arr);
 	if (!validate_parsed_data(g))
-	{
-		// free stuff
-		exit(1);
-		return (0);
-	}
-	return (1);
+		return (free_parser(g), exit(1));
 }
 
 /* Open .cub file indicated in `path` and return file descriptor */
