@@ -1,20 +1,42 @@
 NAME		= cub3d
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra
+UNAME_S		= $(shell uname -s)
+
+SRC			= main.c init.c exit.c utils.c\
+				game/draw.c game/hooks.c game/map.c game/movement2.c\
+				game/movement.c game/raycasting1.c game/raycasting.c\
+				game/render.c parser/parse-colors.c parser/map-size.c\
+				parser/parse-map3.c parser/parse-map.c parser/parser.c\
+				parser/parser-print.c parser/parser-utils.c\
+				parser/parse-textures.c parser/trim.c parser/validate-file.c\
+				parser/validate-map.c
+
 SRC_PATH	= src
 BUILD		= build
-SRC			= main.c parser.c parse-colors.c parse-map.c parse-map2.c\
-			parse-map3.c parser-print.c parse-textures.c trim.c\
-			parser-utils.c utils.c validate-file.c validate-map.c
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJS		= $(addprefix $(BUILD)/, $(SRC:.c=.o))
-INCLUDE		= -I./include -I./libft
-LDFLAGS		= libft/libft.a
+
+ifeq ($(UNAME_S),Linux)
+	MLX_DIR = ./minilibx-linux
+	MLX_LIB = $(MLX_DIR)/libmlx.a
+	MLX_LDFLAGS = -lm -lXext -lX11
+endif
+
+ifeq ($(UNAME_S),Darwin)
+	MLX_DIR = ./minilibx
+	MLX_LIB = $(MLX_DIR)/libmlx.a
+	MLX_LDFLAGS = -framework OpenGL -framework AppKit
+endif
+
+INCLUDE		= -I./libft -I$(MLX_DIR)
+LDFLAGS		= libft/libft.a $(MLX_LIB) $(MLX_LDFLAGS)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(MAKE) -sC libft libft.a
+	$(MAKE) -sC $(MLX_DIR)
+	$(MAKE) -sC libft
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(BUILD)/%.o: $(SRC_PATH)/%.c
@@ -24,6 +46,7 @@ $(BUILD)/%.o: $(SRC_PATH)/%.c
 clean :
 	rm -rf $(BUILD)
 	$(MAKE) -sC libft clean
+	$(MAKE) -sC $(MLX_DIR) clean
 
 fclean : clean
 	rm -f $(NAME)
@@ -34,34 +57,4 @@ re : fclean all
 debug: CFLAGS = -Wall -Wextra -g3 -O0 -fno-omit-frame-pointer
 debug: fclean all
 
-.PHONY : all clean fclean re
-
-#NAME		= cub3D
-#CC			= cc
-#CFLAGS		= -Wall -Wextra -Werror -I$(MLX_DIR)
-#
-#MLX_DIR		= ./minilibx
-#MLX_LIB		= $(MLX_DIR)/libmlx.a
-#
-#SRC			= main.c init.c raycasting.c raycasting1.c render.c utils.c map.c exit.c hooks.c draw.c movement2.c movement.c
-#OBJ			= $(SRC:.c=.o)
-#
-#all: $(NAME)
-#
-#$(NAME): $(OBJ) $(MLX_LIB)
-#	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX_LIB) \
-#		-L$(MLX_DIR) -framework OpenGL -framework AppKit
-#
-#$(MLX_LIB):
-#	$(MAKE) -C $(MLX_DIR)
-#
-#clean:
-#	$(MAKE) -C $(MLX_DIR) clean
-#	rm -f $(OBJ)
-#
-#fclean: clean
-#	rm -f $(NAME)
-#
-#re: fclean all
-#
-#.PHONY: all clean fclean re
+.PHONY : all clean fclean re debug
