@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 19:10:30 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:26:41 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parser(t_game *g, int argc, char *path)
 	char	**arr;
 
 	if (argc != 2)
-		return (printf(ARG_INVAL"\n"), 1);
+		return (printf(ARG_INVAL"\n"), exit(1));
 	init_parser(g);
 	fd = open_cub_file(path);
 	arr = arr_string_from_fd(fd);
