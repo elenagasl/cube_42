@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 12:07:26 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 18:23:10 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,10 @@ int	is_texture(char *str)
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
-	if (ft_strncmp(&str[i], "NO", 2) == 0)
-		return (str[i + 2] && ft_isspace(str[i + 2]));
-	else if (ft_strncmp(&str[i], "SO", 2) == 0)
-		return (str[i + 2] && ft_isspace(str[i + 2]));
-	else if (ft_strncmp(&str[i], "WE", 2) == 0)
-		return (str[i + 2] && ft_isspace(str[i + 2]));
-	else if (ft_strncmp(&str[i], "EA", 2) == 0)
+	if (ft_strncmp(&str[i], "NO", 2) == 0
+		|| ft_strncmp(&str[i], "SO", 2) == 0
+		|| ft_strncmp(&str[i], "WE", 2) == 0
+		|| ft_strncmp(&str[i], "EA", 2) == 0)
 		return (str[i + 2] && ft_isspace(str[i + 2]));
 	return (0);
 }
