@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
+/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:20:03 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/04 13:20:04 by elengarc         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:11:20 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-static int	g_map[MAP_H][MAP_W] = {
+/* static int	g_map[MAP_H][MAP_W] = {
 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
 	{1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1},
@@ -25,4 +25,4 @@ static int	g_map[MAP_H][MAP_W] = {
 int	(*get_map(void))[MAP_W]
 {
 	return (g_map);
-}
+} */

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/11 19:09:22 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:23:06 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/time.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
+# include <X11/keysym.h>
 
 # define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
 # define FILE_EMPTY "Error: Empty file"
@@ -45,16 +46,25 @@
 
 # define WIN_W 640
 # define WIN_H 480
-# define MAP_W 24
-# define MAP_H 7
+//# define MAP_W 24
+//# define MAP_H 7
 
-# define KEY_ESC	53
-# define KEY_LEFT	123
-# define KEY_RIGHT	124
-# define KEY_W		13
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
+// MacOS
+//# define KEY_ESC	53
+//# define KEY_LEFT	123
+//# define KEY_RIGHT	124
+//# define KEY_W		13
+//# define KEY_A		0
+//# define KEY_S		1
+//# define KEY_D		2
+
+# define KEY_ESC	XK_Escape
+# define KEY_LEFT	XK_Left
+# define KEY_RIGHT	XK_Right
+# define KEY_W		XK_w
+# define KEY_A		XK_a
+# define KEY_S		XK_s
+# define KEY_D		XK_d
 
 typedef struct s_img
 {
