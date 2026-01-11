@@ -6,11 +6,23 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:22:27 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 18:56:16 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:40:05 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+static void	print_direction(t_game *g)
+{
+	if (g->player.dir_x > 0)
+		printf("➡️ ");
+	else if (g->player.dir_x < 0)
+		printf("⬅️ ");
+	else if (g->player.dir_y > 0)
+		printf("⬇️ ");
+	else if (g->player.dir_y < 0)
+		printf("⬆️ ");
+}
 
 void	print_mini_map(t_game *g)
 {
@@ -29,7 +41,7 @@ void	print_mini_map(t_game *g)
 				printf("\033[41m🧱\033[0m");
 			else if ((g->map[i][j]) == 2)
 			{
-				printf("😃");
+				print_direction(g);
 				g->map[i][j] = 0;
 			}
 			j++;
