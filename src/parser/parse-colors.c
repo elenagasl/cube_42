@@ -6,64 +6,67 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 13:29:15 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 17:31:29 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 /* Iterate through cub file and parse floor and ceiling colors */
 void	parse_colors(t_game *g, char **arr)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
-	while (arr[i] && count < 2)
+	while (arr[i])
 	{
 		if (is_color(arr[i]))
 		{
 			trim_whitespace(arr[i]);
 			if (arr[i][0] == 'F')
-				parse_rgb(&arr[i][1], g->floor_arr);
+				g->floor_color = parse_rgb(&arr[i][1]);
 			else if (arr[i][0] == 'C')
-				parse_rgb(&arr[i][1], g->ceiling_arr);
-			count++;
+				g->ceiling_color = parse_rgb(&arr[i][1]);
 		}
 		i++;
 	}
-	g->floor = rgb(g->floor_arr);
-	g->ceiling = rgb(g->ceiling_arr);
 }
 
+/* Previous version:
+	while (ft_isdigit(line[i]))
+	{
+		value *= 10;
+		value += line[i] - '0';
+		i++;
+	}
+ */
 /* Parse an RGB color-coded string into an array of integers */
-void	parse_rgb(char *line, int color[3])
+int	parse_rgb(char *line)
 {
 	int	i;
 	int	value;
 	int	color_index;
+	int	color[3];
 
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
 	if (!is_valid_color(&line[i]))
-		return ;
+		return (printf(COLOR_INVAL"\n"), -1);
 	color_index = 0;
 	while (line[i] && color_index < 3)
 	{
 		value = 0;
 		while (ft_isdigit(line[i]))
-		{
-			value *= 10;
-			value += line[i] - '0';
-			i++;
-		}
-		if (value >= 0 && value <= 255)
+			value = (10 * value) + line[i++] - '0';
+		if (value > 255)
+			return (printf(COLOR_RANGE"\n"), -1);
+		else
 			color[color_index] = value;
 		color_index++;
 		i++;
 	}
+	return (rgb(color[0], color[1], color[2]));
 }
 
 /* Check if `str` is a valid color format:

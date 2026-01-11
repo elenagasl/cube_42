@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 /* Iterate through cub file until first line of map is reached.
 Check for incomplete data or invalid lines */
@@ -81,15 +81,6 @@ int	validate_parsed_data(t_game *g)
 			printf(TEXT_MISS"\n");
 			return (0);
 		}
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		if (g->floor_arr[i] < 0 || g->ceiling_arr[i] < 0)
-			return (printf(COLOR_INVAL"\n"), 0);
-		if (g->floor_arr[i] > 255 || g->ceiling_arr[i] > 255)
-			return (printf(COLOR_RANGE"\n"), 0);
 		i++;
 	}
 	if (!g->map)

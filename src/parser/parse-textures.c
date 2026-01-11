@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 /* Iterate through cub file and parse paths to textures */
 void	parse_textures(t_game *g, char **arr)

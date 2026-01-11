@@ -10,34 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-void	replace_char(char **arr, char c1, char c2)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (arr[i])
-	{
-		j = 0;
-		while (arr[i][j])
-		{
-			if (arr[i][j] == c1)
-				arr[i][j] = c2;
-			j++;
-		}
-		i++;
-	}
-}
+#include "../cub3D.h"
 
 /* Open .cub file, parse textures, colors and map.
 Return result of validate_parsed_data (`0` or `1`) */
-int	parser(t_game *g, char *path)
+int	parser(t_game *g, int argc, char *path)
 {
 	int		fd;
 	char	**arr;
 
+	if (argc != 2)
+		return (printf(ARG_INVAL"\n"), 1);
+	init_parser(g);
 	fd = open_cub_file(path);
 	arr = arr_string_from_fd(fd);
 	if (!arr)
@@ -49,7 +33,13 @@ int	parser(t_game *g, char *path)
 	parse_colors(g, arr);
 	parse_map(g, arr);
 	free_arr_str(arr);
-	return (validate_parsed_data(g));
+	if (!validate_parsed_data(g))
+	{
+		// free stuff
+		exit(1);
+		return (0);
+	}
+	return (1);
 }
 
 /* Open .cub file indicated in `path` and return file descriptor */

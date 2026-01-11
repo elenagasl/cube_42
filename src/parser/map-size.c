@@ -10,15 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-
-/* Save map width and height into `t_game g`.
-Spaces are taken into account, except for `\n` */
-void	get_map_size(t_game *g, char **arr)
-{
-	g->map_h = get_map_height(arr);
-	g->map_w = get_map_width(arr, g->map_h);
-}
+#include "../cub3D.h"
 
 int	get_map_height(char **arr)
 {
@@ -76,4 +68,12 @@ void	normalize_map_spaces(char **arr, int h, int w)
 		}
 		i++;
 	}
+}
+
+/* Save map width and height into `t_game g`.
+Spaces are taken into account, except for `\n` */
+void	get_map_size(t_game *g, char **arr)
+{
+	g->map_h = get_map_height(arr);
+	g->map_w = get_map_width(arr, g->map_h);
 }

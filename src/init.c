@@ -12,6 +12,19 @@
 
 #include "cub3D.h"
 
+void	init_parser(t_game *g)
+{
+	g->map = NULL;
+	g->textures[0] = NULL;
+	g->textures[1] = NULL;
+	g->textures[2] = NULL;
+	g->textures[3] = NULL;
+	g->floor_color = 0;
+	g->ceiling_color = 0;
+	//init_int_arr(g->floor_arr, 3, -1);
+	//init_int_arr(g->ceiling_arr, 3, -1);
+}
+
 static void	init_player(t_game *g)
 {
 	g->player.pos_x = 12.5;
@@ -35,11 +48,11 @@ void	init_game(t_game *g)
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, WIN_W, WIN_H, "cub3D");
 	init_image(g);
-	g->map = get_map();
-	g->map_w = MAP_W;
-	g->map_h = MAP_H;
-	g->floor_color = rgb(80, 80, 80);
-	g->ceiling_color = rgb(120, 120, 200);
+	//g->map = get_map();
+	//g->map_w = MAP_W;
+	//g->map_h = MAP_H;
+	//g->floor_color = rgb(80, 80, 80);
+	//g->ceiling_color = rgb(120, 120, 200);
 	g->color_north = rgb(200, 0, 0);
 	g->color_south = rgb(0, 200, 0);
 	g->color_west = rgb(0, 0, 200);

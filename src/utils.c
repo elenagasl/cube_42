@@ -10,20 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3D.h"
 
-int	is_char_in_set(char c, char const *set)
-{
-	while (*set)
-	{
-		if (*set == c)
-			return (1);
-		set++;
-	}
-	return (0);
-}
-
-int	rgb(int color[3])
+int	rgb_arr(int color[3])
 {
 	return ((color[0] << 16) | (color[1] << 8) | color[2]);
+}
+
+int	rgb(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | b);
+}
+
+double	get_time_in_seconds(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec + tv.tv_usec / 1000000.0);
 }

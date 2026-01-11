@@ -3,46 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/08 13:29:15 by danielji         ###   ########.fr       */
+/*   Created: 2026/01/03 13:01:11 by elengarc          #+#    #+#             */
+/*   Updated: 2026/01/03 13:01:12 by elengarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3D.h"
 
-void	init_parse_data(t_game *g)
+int	game_loop(t_game *g)
 {
-	g->map = NULL;
-	g->textures[0] = NULL;
-	g->textures[1] = NULL;
-	g->textures[2] = NULL;
-	g->textures[3] = NULL;
-	init_int_arr(g->floor_arr, 3, -1);
-	init_int_arr(g->ceiling_arr, 3, -1);
-}
-
-void	free_cub3d(t_game *g)
-{
-	free_textures(g->textures);
-	free_arr_int(g->map, g->map_h);
+	g->old_time = g->time;
+	g->time = get_time_in_seconds();
+	g->frame_time = g->time - g->old_time;
+	update_player(g);
+	render_frame(g);
+	return (0);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_game	g;
 
-	if (argc != 2)
-		return (printf(ARG_INVAL"\n"), 1);
-	init_parse_data(&g);
-	if (parser(&g, argv[1]))
-		print_parsed_data(&g);
-	else
-		return (free_cub3d(&g), 1);
-	//init_game(&g);
-	//render_frame(&g);
-	//mlx_loop(g.mlx);
-	free_cub3d(&g);
+	parser(&g, argc, argv[1]);
+	print_parsed_data(&g);
+	init_game(&g);
+	render_frame(&g);
+	mlx_hook(g.win, 2, 1L << 0, key_press, &g);
+	mlx_hook(g.win, 3, 1L << 1, key_release, &g);
+	mlx_hook(g.win, 17, 0, close_window, &g);
+	mlx_loop_hook(g.mlx, game_loop, &g);
+	mlx_loop(g.mlx);
+	free_parser(&g);
 	return (0);
 }

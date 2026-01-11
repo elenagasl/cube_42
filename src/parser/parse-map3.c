@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 /* Parse an array of strings into an array of integers */
 int	map_to_int_arr(t_game *g, char **arr, char p)

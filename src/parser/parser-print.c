@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 void	print_mini_map(t_game *g)
 {
@@ -45,10 +45,8 @@ void	print_parsed_data(t_game *g)
 	printf("South texture: %s\n", g->textures[1]);
 	printf(" West texture: %s\n", g->textures[2]);
 	printf(" East texture: %s\n", g->textures[3]);
-	printf("  Floor color: %d,%d,%d (%d)\n",
-		g->floor_arr[0], g->floor_arr[1], g->floor_arr[2], g->floor);
-	printf("Ceiling color: %d,%d,%d (%d)\n",
-		g->ceiling_arr[0], g->ceiling_arr[1], g->ceiling_arr[2], g->ceiling);
+	printf("  Floor color: %d\n", g->floor_color);
+	printf("Ceiling color: %d\n", g->ceiling_color);
 	printf("     Map size: %d x %d \n\n", g->map_w, g->map_h);
 	if (g->map_w <= 50)
 		print_mini_map(g);

@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/05 17:23:12 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/05 17:23:14 by elengarc         ###   ########.fr       */
+/*   Created: 2026/01/04 13:16:25 by elengarc          #+#    #+#             */
+/*   Updated: 2026/01/04 13:16:26 by elengarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
-void	destroy_image(t_game *g)
+void	render_frame(t_game *g)
 {
-	if (g->img.img)
-		mlx_destroy_image(g->mlx, g->img.img);
+	int	x;
+
+	x = 0;
+	while (x < WIN_W) //Recorremos pixeles por columnas
+	{
+		cast_column(g, x);
+		x++;
+	}
+	mlx_put_image_to_window(g->mlx, g->win, g->img.img, 0, 0);
 }
 
-void	destroy_window(t_game *g)
+void	put_pixel(t_img *img, int x, int y, int color)
 {
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
-}
+	char	*dst;
 
-int	exit_game(t_game *g)
-{
-	destroy_image(g);
-	destroy_window(g);
-	if (g->mlx)
-		free(g->mlx);
-	exit(0);
-	return (0);
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }

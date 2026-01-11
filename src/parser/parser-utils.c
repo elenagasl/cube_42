@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "../cub3D.h"
 
 /* Open a read-only file specified by `path` and return its file descriptor.
 On error print message and return `-1`.*/
@@ -98,6 +98,36 @@ void	init_int_arr(int *arr, int size, int value)
 	while (i < size)
 	{
 		arr[i] = value;
+		i++;
+	}
+}
+
+int	is_char_in_set(char c, char const *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
+
+void	replace_char(char **arr, char c1, char c2)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j])
+		{
+			if (arr[i][j] == c1)
+				arr[i][j] = c2;
+			j++;
+		}
 		i++;
 	}
 }

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/04 14:28:42 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:33:36 by danielji         ###   ########.fr       */
+/*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
+/*   Updated: 2026/01/11 15:16:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
+# include <math.h>
+# include <stdlib.h>
 # include <stdio.h>
 # include <errno.h>
 # include <string.h>
+# include <sys/time.h>
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
-
-# define WIN_W 640
-# define WIN_H 480
-# define MAP_W 24
-# define MAP_H 7
 
 # define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
 # define FILE_EMPTY "Error: Empty file"
@@ -43,6 +42,19 @@
 # define LINE_UNEXP "Error: Unexpected line"
 # define PLYR_MISS "Error: Missing player position"
 # define PLYR_MULTI "Error: No more than one player position allowed"
+
+# define WIN_W 640
+# define WIN_H 480
+# define MAP_W 24
+# define MAP_H 7
+
+# define KEY_ESC	53
+# define KEY_LEFT	123
+# define KEY_RIGHT	124
+# define KEY_W		13
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
 
 typedef struct s_img
 {
@@ -69,37 +81,108 @@ typedef struct s_game
 	void		*win;
 	t_img		img;
 	t_player	player;
+
 	int			map_w;
 	int			map_h;
 	int			**map;
 	//int			(*map)[MAP_W];
+
+	int			floor_color;
+	int			ceiling_color;
+
 	char		*textures[4];
-	int			floor_arr[3];
-	int			floor;
-	int			ceiling_arr[3];
-	int			ceiling;
+	int			color_north;
+	int			color_south;
+	int			color_west;
+	int			color_east;
+
+	double		time;
+	double		old_time;
+	double		frame_time;
+
+	int			key_w;
+	int			key_a;
+	int			key_s;
+	int			key_d;
+	int			key_left;
+	int			key_right;
 }	t_game;
 
-// Parser
+typedef struct s_ray
+{
+	double	ray_dx;
+	double	ray_dy;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
 
-int		parser(t_game *g, char *path);
+/* map */
+int		(*get_map(void))[MAP_W];
+
+/* init */
+void	init_game(t_game *g);
+void	init_parser(t_game *g);
+
+/* raycast */
+void	init_ray(t_game *g, t_ray *r, int x);
+void	init_dda(t_game *g, t_ray *r);
+
+/* render */
+void	render_frame(t_game *g);
+void	cast_column(t_game *g, int x);
+
+/* draw */
+void	draw_wall(t_game *g, int x, double dist, t_ray *r);
+void	put_pixel(t_img *img, int x, int y, int color);
+
+/* move */
+void	update_player(t_game *g);
+void	move_forward(t_game *g, double speed);
+void	move_backward(t_game *g, double speed);
+void	move_left(t_game *g, double speed);
+void	move_right(t_game *g, double speed);
+
+/* utils */
+int		rgb(int r, int g, int b);
+int		rgb_arr(int color[3]);
+double	get_time_in_seconds(void);
+
+/* exit and hooks */
+void	free_parser(t_game *g);
+int		exit_game(t_game *g);
+int		key_press(int keycode, t_game *g);
+int		key_release(int keycode, t_game *g);
+int		close_window(t_game *g);
+
+/* Parser */
+
+int		parser(t_game *g, int argc, char *path);
+void	parse_textures(t_game *g, char **arr);
+void	parse_colors(t_game *g, char **arr);
+int		parse_rgb(char *line);
+int		parse_map(t_game *g, char **arr);
+
 int		open_cub_file(char *path);
-void	free_cub3d(t_game *g);
 int		is_valid_file(char **arr);
 int		is_empty_line(char *str);
 int		is_first_map_line(char *str);
-void	parse_textures(t_game *g, char **arr);
 int		is_texture(char *str);
 void	get_texture_path(char *textures[4], char *line);
 int		cardinal_to_index(char c);
 int		index_to_cardinal(int i);
-void	parse_colors(t_game *g, char **arr);
 int		is_color(char *str);
 int		is_valid_color(char *str);
-void	parse_rgb(char *line, int color[3]);
 void	print_parsed_data(t_game *g);
 int		validate_parsed_data(t_game *g);
-int		parse_map(t_game *g, char **arr);
 int		is_valid_map(char **arr, char player, int h);
 int		is_valid_top_bottom_line(char *str);
 char	get_player(t_game *g, char **arr);
@@ -123,7 +206,6 @@ void	trim_right_ws(char *str);
 void	trim_whitespace(char *str);
 void	print_mini_map(t_game *g);
 void	print_parsed_data(t_game *g);
-
-int		rgb(int color[3]);
+void	replace_char(char **arr, char c1, char c2);
 
 #endif
