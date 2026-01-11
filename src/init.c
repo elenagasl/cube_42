@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:15:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/11 19:01:31 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/11 19:29:11 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	init_parser(t_game *g)
 	g->textures[1] = NULL;
 	g->textures[2] = NULL;
 	g->textures[3] = NULL;
-	g->floor_color = -1;
-	g->ceiling_color = -1;
+	g->floor_color = -1.0;
+	g->ceiling_color = -1.0;
 	//init_int_arr(g->floor_arr, 3, -1);
 	//init_int_arr(g->ceiling_arr, 3, -1);
 	init_player(g);
