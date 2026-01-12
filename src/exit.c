@@ -6,11 +6,35 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:12 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 10:47:48 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:08:28 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	free_textures(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (arr[i] != NULL)
+			free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+}
+
+void	free_arr_int(int **arr, int size)
+{
+	if (!arr)
+		return ;
+	while (size)
+		free(arr[--size]);
+	free(arr);
+	arr = NULL;
+}
 
 void	destroy_image(t_game *g)
 {

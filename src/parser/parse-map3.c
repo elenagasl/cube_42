@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:20:57 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 18:21:51 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:08:15 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,4 @@ int	**allocate_map(int w, int h)
 		i++;
 	}
 	return (map);
-}
-
-void	free_arr_int(int **arr, int size)
-{
-	if (!arr)
-		return ;
-	while (size)
-		free(arr[--size]);
-	free(arr);
-	arr = NULL;
 }

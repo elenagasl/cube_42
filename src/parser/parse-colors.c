@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 10:26:29 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:03:31 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ int	is_valid_color(char *str)
 			return (0);
 		i++;
 	}
-	if (comma < 2)
-		return (0);
-	return (1);
+	return (comma == 2);
 }
 
 /* Check if line is a floor or ceiling color line */

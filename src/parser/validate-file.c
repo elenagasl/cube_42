@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 19:07:00 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:06:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ int	validate_parsed_data(t_game *g)
 	while (i < 4)
 	{
 		if (!g->textures[i])
-		{
-			printf(TEXT_MISS"\n");
-			return (0);
-		}
+			return (printf(TEXT_MISS"\n"), 0);
 		i++;
 	}
 	if (g->floor_color == -1 || g->ceiling_color == -1)

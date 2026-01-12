@@ -6,49 +6,11 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/09 17:58:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:05:26 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-
-/* Open a read-only file specified by `path` and return its file descriptor.
-On error print message and return `-1`.*/
-int	open_rdonly_file(char *path)
-{
-	int	fd;
-	int	err;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		err = errno;
-		printf("Error: %s: %s\n", strerror(err), path);
-		return (-1);
-	}
-	return (fd);
-}
-
-/* Read file `fd` line by line an return an array
-of the read strings or `NULL` in case of error
-TODO: Free GNL static ???*/
-char	**arr_string_from_fd(int fd)
-{
-	char	**arr;
-	char	*line;
-
-	arr = NULL;
-	line = get_next_line(fd);
-	while (line)
-	{
-		arr = ft_push_str_to_arr(arr, line);
-		if (!arr)
-			return (free(line), NULL);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (arr);
-}
 
 /* Check if `path` ends with indicated extension `ext`.
 Extension must begin with dot: `.cub`, `.png`, etc. */

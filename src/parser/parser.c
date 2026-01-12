@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 10:54:13 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 11:05:43 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,40 @@ int	open_cub_file(char *path)
 	return (fd);
 }
 
-void	free_textures(char **arr)
+/* Open a read-only file specified by `path` and return its file descriptor.
+On error print message and return `-1`.*/
+int	open_rdonly_file(char *path)
 {
-	int	i;
+	int	fd;
+	int	err;
 
-	i = 0;
-	while (i < 4)
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
 	{
-		if (arr[i] != NULL)
-			free(arr[i]);
-		arr[i] = NULL;
-		i++;
+		err = errno;
+		printf("Error: %s: %s\n", strerror(err), path);
+		return (-1);
 	}
+	return (fd);
+}
+
+/* Read file `fd` line by line an return an array
+of the read strings or `NULL` in case of error
+TODO: Free GNL static ???*/
+char	**arr_string_from_fd(int fd)
+{
+	char	**arr;
+	char	*line;
+
+	arr = NULL;
+	line = get_next_line(fd);
+	while (line)
+	{
+		arr = ft_push_str_to_arr(arr, line);
+		if (!arr)
+			return (free(line), NULL);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (arr);
 }
