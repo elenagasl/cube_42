@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 17:31:29 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:26:29 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	parse_rgb(char *line)
 	if (!is_valid_color(&line[i]))
 		return (printf(COLOR_INVAL"\n"), -1);
 	color_index = 0;
+	init_int_arr(color, 3, -1);
 	while (line[i] && color_index < 3)
 	{
 		value = 0;
@@ -99,6 +100,8 @@ int	is_valid_color(char *str)
 			return (0);
 		i++;
 	}
+	if (comma < 2)
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 19:03:04 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:38:40 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	get_player(t_game *g, char **arr)
 			if (is_char_in_set(arr[y][x], "NSWE"))
 			{
 				if (player)
-					return (printf(PLYR_MULTI"\n"), 0);
+					return (printf(PLYR_MULTI"\n"), player);
 				player = arr[y][x];
 				set_player(g, y, x, player);
 			}
@@ -127,7 +127,7 @@ int	flood_fill(char **arr, char p, int h)
 			if ((arr[r][c] == '0' || arr[r][c] == p))
 			{
 				if (!is_surrounded(arr, r, c))
-					return (printf(MAP_OPEN" at %s\n", arr[r]), 0);
+					return (printf(MAP_OPEN"\n"), 0);
 			}
 			c++;
 		}

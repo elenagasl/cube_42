@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/11 20:23:06 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:43:06 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ void	move_right(t_game *g, double speed);
 
 /* utils */
 int		rgb(int r, int g, int b);
-int		rgb_arr(int color[3]);
 double	get_time_in_seconds(void);
 
 /* exit and hooks */
