@@ -17,8 +17,8 @@ static int	get_wall_color(t_game *g, t_ray *r)
 	if (r->side == 0) // pared vertical (E / W)
 	{
 		if (r->ray_dx > 0)
-			return (g->color_west);
-		return (g->color_east);
+			return (g->color_east);
+		return (g->color_west);
 	}
 	else // pared horizontal (N / S)
 	{

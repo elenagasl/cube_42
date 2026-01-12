@@ -19,9 +19,10 @@
 # include <errno.h>
 # include <string.h>
 # include <sys/time.h>
-# include "../minilibx-linux/mlx.h"
+//m# include "../minilibx-linux/mlx.h"
+# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
-# include <X11/keysym.h>
+//# include <X11/keysym.h>
 
 # define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
 # define FILE_EMPTY "Error: Empty file"
@@ -50,14 +51,15 @@
 //# define MAP_H 7
 
 // MacOS
-//# define KEY_ESC	53
-//# define KEY_LEFT	123
-//# define KEY_RIGHT	124
-//# define KEY_W		13
-//# define KEY_A		0
-//# define KEY_S		1
-//# define KEY_D		2
+# define KEY_ESC	53
+# define KEY_LEFT	123
+# define KEY_RIGHT	124
+# define KEY_W		13
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
 
+/*
 # define KEY_ESC	XK_Escape
 # define KEY_LEFT	XK_Left
 # define KEY_RIGHT	XK_Right
@@ -65,6 +67,7 @@
 # define KEY_A		XK_a
 # define KEY_S		XK_s
 # define KEY_D		XK_d
+*/
 
 typedef struct s_img
 {
@@ -96,7 +99,6 @@ typedef struct s_game
 	int			map_h;
 	int			**map;
 	//int			(*map)[MAP_W];
-
 	int			floor_color;
 	int			ceiling_color;
 

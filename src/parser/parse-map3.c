@@ -31,7 +31,7 @@ int	map_to_int_arr(t_game *g, char **arr, char p)
 			if (arr[i][j] == '1' || arr[i][j] == '0')
 				map[i][j] = arr[i][j] - '0';
 			else if (arr[i][j] == p)
-				map[i][j] = 2;
+				map[i][j] = 0;
 			j++;
 		}
 		i++;
