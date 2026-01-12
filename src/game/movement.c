@@ -62,7 +62,7 @@ void	update_player(t_game *g)
 	if (g->key_d)
 		move_right(g, move_speed);
 	if (g->key_left)
-		rotate_left(g, rot_speed);
-	if (g->key_right)
 		rotate_right(g, rot_speed);
+	if (g->key_right)
+		rotate_left(g, rot_speed);
 }

@@ -28,22 +28,23 @@ void	print_mini_map(t_game *g)
 {
 	int	i;
 	int	j;
+	int	px;
+	int	py;
 
+	px = (int)g->player.pos_x;
+	py = (int)g->player.pos_y;
 	i = 0;
 	while (i < g->map_h)
 	{
 		j = 0;
 		while (j < g->map_w)
 		{
-			if ((g->map[i][j]) <= 0)
-				printf("  ");
-			else if ((g->map[i][j]) == 1)
-				printf("\033[41m🧱\033[0m");
-			else if ((g->map[i][j]) == 2)
-			{
+			if (i == py && j == px)
 				print_direction(g);
-				g->map[i][j] = 0;
-			}
+			else if (g->map[i][j] == 1)
+				printf("\033[41m🧱\033[0m");
+			else
+				printf("  ");
 			j++;
 		}
 		printf("\n");

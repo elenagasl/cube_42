@@ -69,14 +69,30 @@ void	set_player(t_game *g, int y, int x, char p)
 {
 	g->player.pos_x = (double)x + 0.5;
 	g->player.pos_y = (double)y + 0.5;
+	g->player.dir_x = 0.0;
+	g->player.dir_y = 0.0;
+	g->player.plane_x = 0.0;
+	g->player.plane_y = 0.0;
 	if (p == 'N')
+	{
 		g->player.dir_y = -1.0;
+		g->player.plane_x = 0.66;
+	}
 	else if (p == 'S')
+	{
 		g->player.dir_y = 1.0;
+		g->player.plane_x = -0.66;
+	}
 	else if (p == 'E')
+	{
 		g->player.dir_x = 1.0;
+		g->player.plane_y = 0.66;
+	}
 	else if (p == 'W')
+	{
 		g->player.dir_x = -1.0;
+		g->player.plane_y = -0.66;
+	}
 }
 
 /* A `0` can't be orthogonally surrounded by space */
