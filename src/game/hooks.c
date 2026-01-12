@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
+/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:24:27 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/05 17:24:31 by elengarc         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:53:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_release(int keycode, t_game *g)
 int	key_press(int keycode, t_game *g)
 {
 	if (keycode == KEY_ESC)
-		exit_game(g);
+		exit_game(g, 0);
 	if (keycode == KEY_W)
 		g->key_w = 1;
 	if (keycode == KEY_S)
@@ -50,6 +50,6 @@ int	key_press(int keycode, t_game *g)
 
 int	close_window(t_game *g)
 {
-	exit_game(g);
+	exit_game(g, 0);
 	return (0);
 }

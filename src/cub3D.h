@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 10:43:06 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:52:50 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,7 @@ int		rgb(int r, int g, int b);
 double	get_time_in_seconds(void);
 
 /* exit and hooks */
-void	free_parser(t_game *g);
-int		exit_game(t_game *g);
+void	exit_game(t_game *g, int status);
 int		key_press(int keycode, t_game *g);
 int		key_release(int keycode, t_game *g);
 int		close_window(t_game *g);

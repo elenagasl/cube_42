@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 10:38:40 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:49:33 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	parse_map(t_game *g, char **arr)
 	return (1);
 }
 
-// TODO Obtener orientación player
 /* Return the `N`, `S`, `W`, or `E`  character that
 represents the player's position and orientation */
 char	get_player(t_game *g, char **arr)

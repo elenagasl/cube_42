@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
+/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:01:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/03 13:01:12 by elengarc         ###   ########.fr       */
+/*   Updated: 2026/01/12 10:50:36 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(g.win, 17, 0, close_window, &g);
 	mlx_loop_hook(g.mlx, game_loop, &g);
 	mlx_loop(g.mlx);
-	free_parser(&g);
+	exit_game(&g, 0);
 	return (0);
 }
