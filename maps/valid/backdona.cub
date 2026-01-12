@@ -1,9 +1,9 @@
-SO ./textures/test2.png
+SO ./textures/test2.xpm
 F 129,110,30
 C 236,212,133
-EA ./textures/test4.png
-NO ./textures/test1.png
-WE ./textures/test3.png
+EA ./textures/test4.xpm
+NO ./textures/test1.xpm
+WE ./textures/test3.xpm
 
 1111111111111111111111111111111111111111111111111
 1000000000000000000000000000000000000000000000001

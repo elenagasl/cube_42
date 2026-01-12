@@ -1,10 +1,10 @@
 C 155,96,4
 F 200,200,200
 
-NO ./textures/test1.png
-SO ./textures/test2.png
-WE ./textures/test3.png
-EA ./textures/test4.png
+NO ./textures/test1.xpm
+SO ./textures/test2.xpm
+WE ./textures/test3.xpm
+EA ./textures/test4.xpm
 
 1111
 1E01

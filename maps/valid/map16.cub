@@ -1,8 +1,8 @@
-NO ./textures/test1.png
+NO ./textures/test1.xpm
 
-SO ./textures/test2.png
-WE ./textures/test3.png
-EA ./textures/test4.png
+SO ./textures/test2.xpm
+WE ./textures/test3.xpm
+EA ./textures/test4.xpm
 F             220,100,0
 C 225,30,255
 

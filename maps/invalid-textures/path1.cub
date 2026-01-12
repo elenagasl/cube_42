@@ -1,7 +1,7 @@
-NO ./textures/test1.png
-SO ./textures/test2.png
-WE ./tAxtures/test3.png
-EA ./textures/test4.png
+NO ./textures/test1.xpm
+SO ./textures/test2.xpm
+WE ./tAxtures/test3.xpm
+EA ./textures/test4.xpm
 
 F 176,11,105
 C 105,176,11

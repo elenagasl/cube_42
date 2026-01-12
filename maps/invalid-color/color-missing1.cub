@@ -1,7 +1,7 @@
-NO ./textures/test1.png
-SO ./textures/test2.png
-WE ./textures/test3.png
-EA ./textures/test4.png
+NO ./textures/test1.xpm
+SO ./textures/test2.xpm
+WE ./textures/test3.xpm
+EA ./textures/test4.xpm
 
 F
 C 225,30,255

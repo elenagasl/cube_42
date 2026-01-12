@@ -1,18 +1,18 @@
 
 
 
-   NO    ./textures/test1.png   
+   NO    ./textures/test1.xpm   
 
-NO    ./textures/test1.png   
+NO    ./textures/test1.xpm   
     
 
-			NO    ./textures/test1.png   
+			NO    ./textures/test1.xpm   
 
-   NO    ./textures/test1.png   
+   NO    ./textures/test1.xpm   
 
 NO       
 
-SO ./textures/test2.png
+SO ./textures/test2.xpm
 
-   NO    ./textures/test1.png   
+   NO    ./textures/test1.xpm   
 

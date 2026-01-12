@@ -1,8 +1,8 @@
-NO ./textures/test1.png
-SO ./textures/test2.png
-WE ./textures/test3.png
+NO ./textures/test1.xpm
+SO ./textures/test2.xpm
+WE ./textures/test3.xpm
 F 20,1,0
-EA ./textures/test4.png
+EA ./textures/test4.xpm
 C 0,0,0
 
 11111111111111111111111111
