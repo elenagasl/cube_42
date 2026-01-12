@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 10:52:50 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:44:53 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define FILE_EXT "Error: Only .cub files are supported"
 # define DATA_MISS "Error: Missing data"
 # define DATA_DUP "Error: Duplicated data"
-# define TEXT_EXT "Error: Only .png texture files are supported"
+# define TEXT_EXT "Error: Only XPM texture files are supported"
 # define TEXT_DUP "Error: Duplicated texture"
 # define TEXT_MISS "Error: Missing texture file"
 # define COLOR_INVAL "Error: Missing or invalid color"

@@ -6,14 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 11:05:26 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:44:53 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
 /* Check if `path` ends with indicated extension `ext`.
-Extension must begin with dot: `.cub`, `.png`, etc. */
+Extension must begin with dot: `.cub`, `.xpm`, etc. */
 int	is_valid_extension(char *path, char *ext)
 {
 	char	*path_ext;

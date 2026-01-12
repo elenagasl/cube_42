@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 19:04:51 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/12 12:44:53 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	get_texture_path(char *textures[4], char *line)
 	char	type;
 
 	trim_whitespace(line);
-	if (!is_valid_extension(line, ".png"))
+	if (!is_valid_extension(line, ".xpm"))
 	{
 		printf(TEXT_EXT"\n");
 		return ;
