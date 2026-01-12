@@ -21,7 +21,7 @@ void	parse_textures(t_game *g, char **arr)
 	while (arr[i])
 	{
 		if (is_texture(arr[i]))
-			get_texture_path(g->textures, arr[i]);
+			get_texture_path(g->text_paths, arr[i]);
 		i++;
 	}
 }
@@ -76,26 +76,26 @@ int	is_texture(char *str)
 int	cardinal_to_index(char c)
 {
 	if (c == 'N')
-		return (0);
+		return (NO);
 	else if (c == 'S')
-		return (1);
+		return (SO);
 	else if (c == 'W')
-		return (2);
+		return (WE);
 	else if (c == 'E')
-		return (3);
+		return (EA);
 	return (-1);
 }
 
 // TODO Mejor usar enum?
 int	index_to_cardinal(int i)
 {
-	if (i == 0)
+	if (i == NO)
 		return ('N');
-	else if (i == 1)
+	else if (i == SO)
 		return ('S');
-	else if (i == 2)
+	else if (i == WE)
 		return ('W');
-	else if (i == 3)
+	else if (i == EA)
 		return ('E');
 	return ('0');
 }

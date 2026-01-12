@@ -76,7 +76,7 @@ int	validate_parsed_data(t_game *g)
 	i = 0;
 	while (i < 4)
 	{
-		if (!g->textures[i])
+		if (!g->text_paths[i])
 			return (printf(TEXT_MISS"\n"), 0);
 		i++;
 	}

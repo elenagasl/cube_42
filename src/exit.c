@@ -50,7 +50,7 @@ void	destroy_window(t_game *g)
 
 void	exit_game(t_game *g, int status)
 {
-	free_textures(g->textures);
+	free_textures(g->text_paths);
 	free_arr_int(g->map, g->map_h);
 	destroy_image(g);
 	destroy_window(g);
