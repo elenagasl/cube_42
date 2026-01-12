@@ -30,8 +30,16 @@ static void	init_image(t_game *g)
 {
 	g->img.img = mlx_new_image(g->mlx, WIN_W, WIN_H);
 	g->img.addr = mlx_get_data_addr(
-			g->img.img, &g->img.bpp,
-			&g->img.line_len, &g->img.endian);
+		g->img.img, &g->img.bpp,
+		&g->img.line_len, &g->img.endian);
+		
+	int i = 0;
+	while (i < 4)
+	{
+		g->textures[i].img = mlx_xpm_file_to_image(g->mlx, g->text_paths[i], &g->textures[i].w, &g->textures[i].h);
+		g->textures[i].addr = mlx_get_data_addr(g->textures[i].img, &g->textures[i].bpp, &g->textures[i].line_len, &g->textures[i].endian);
+		i++;
+	}
 }
 
 void	init_game(t_game *g)
@@ -63,10 +71,10 @@ void	init_game(t_game *g)
 void	init_parser(t_game *g)
 {
 	g->map = NULL;
-	g->textures[0] = NULL;
-	g->textures[1] = NULL;
-	g->textures[2] = NULL;
-	g->textures[3] = NULL;
+	g->text_paths[NO] = NULL;
+	g->text_paths[SO] = NULL;
+	g->text_paths[WE] = NULL;
+	g->text_paths[EA] = NULL;
 	g->floor_color = -1.0;
 	g->ceiling_color = -1.0;
 	//init_int_arr(g->floor_arr, 3, -1);
@@ -74,7 +82,6 @@ void	init_parser(t_game *g)
 	g->img.img = NULL;
 	g->img.addr = NULL;
 	g->mlx = NULL;
-	//g->win = NULL;
+	g->win = NULL;
 	init_player(g);
-	// Conditional jump or move depends on uninitialised value(s)
 }
