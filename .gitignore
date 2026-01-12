@@ -3,3 +3,4 @@ build
 *.a
 *.DS_Store
 cub3d
+minilibx
