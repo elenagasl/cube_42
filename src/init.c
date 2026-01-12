@@ -71,5 +71,10 @@ void	init_parser(t_game *g)
 	g->ceiling_color = -1.0;
 	//init_int_arr(g->floor_arr, 3, -1);
 	//init_int_arr(g->ceiling_arr, 3, -1);
+	g->img.img = NULL;
+	g->img.addr = NULL;
+	g->mlx = NULL;
+	//g->win = NULL;
 	init_player(g);
+	// Conditional jump or move depends on uninitialised value(s)
 }
