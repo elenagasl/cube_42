@@ -16,9 +16,9 @@
     "inputs": [
         {
             "id": "programArgs",
-            "type": "pickString",
-            "description": "Select program arguments",
-            "options": ["./maps/test.cub"],
+            "type": "promptString",
+            "description": "Enter program arguments",
+            "default": "./maps/test.cub",
         }
     ]
 }
