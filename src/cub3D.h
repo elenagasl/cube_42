@@ -143,6 +143,7 @@ typedef struct s_ray
 	int		side;
 	int		draw_start;
 	int		draw_end;
+	int		line_height;
 }	t_ray;
 
 /* map */

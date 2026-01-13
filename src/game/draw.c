@@ -53,8 +53,8 @@ static t_img	*get_wall_texture(t_game *g, t_ray *r)
 	else // pared horizontal (N / S)
 	{
 		if (r->ray_dy < 0)
-			return (&g->textures[NO]);
-		return (&g->textures[SO]);
+			return (&g->textures[SO]);
+		return (&g->textures[NO]);
 	}
 }
 
@@ -95,14 +95,14 @@ static void	draw_texture_column(t_game *g, int x, double dist, t_ray *r)
 	int		tex_y;
 	double	step;
 	double	tex_pos;
-	double	wall_h;
+	//double	wall_h;
 	double	wall_x;
-	
+
 	t = get_wall_texture(g, r);
-	
-	wall_h = r->draw_end - r->draw_start;
-	step = 1.0 * t->h / wall_h;
-	tex_pos = (r->draw_start - WIN_H / 2 + wall_h / 2) * step;
+
+	//wall_h = r->draw_end - r->draw_start;
+	step = 1.0 * t->h / r->line_height;
+	tex_pos = (r->draw_start - WIN_H / 2 + r->line_height / 2) * step;
 	y = r->draw_start;
 
 	// clip top
@@ -155,6 +155,7 @@ void	draw_wall(t_game *g, int x, double dist, t_ray *r)
 		r->draw_start = 0;
 	if (r->draw_end > WIN_H)
 		r->draw_end = WIN_H - 1;
+	r->line_height = height;
 	draw_ceiling_floor(g, x, r->draw_start, r->draw_end);
 	//draw_colored_wall(g, x, r);
 	draw_texture_column(g, x, dist, r);

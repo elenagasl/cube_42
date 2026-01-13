@@ -23,7 +23,9 @@ void	move_forward(t_game *g, double speed)
 {
 	double	new_x;
 	double	new_y;
+	double	margin;
 
+	margin = 0.1;
 	new_x = g->player.pos_x + g->player.dir_x * speed;
 	new_y = g->player.pos_y + g->player.dir_y * speed;
 	if (is_walkable(g, (int)new_x, (int)g->player.pos_y))
