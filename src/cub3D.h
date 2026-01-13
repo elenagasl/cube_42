@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 12:44:53 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 00:07:43 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <string.h>
 # include <sys/time.h>
 # include "../minilibx-linux/mlx.h"
-//# include "../minilibx/mlx.h"
 # include "../libft/libft.h"
 # include <X11/keysym.h>
+//# include "../minilibx/mlx.h"
 
 # define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
 # define FILE_EMPTY "Error: Empty file"
@@ -51,8 +51,6 @@
 # define SO 1
 # define WE 2
 # define EA 3
-//# define MAP_W 24
-//# define MAP_H 7
 
 // MacOS
 /* # define KEY_ESC	53
@@ -63,7 +61,6 @@
 # define KEY_S		1
 # define KEY_D		2 */
 
-
 # define KEY_ESC	XK_Escape
 # define KEY_LEFT	XK_Left
 # define KEY_RIGHT	XK_Right
@@ -71,7 +68,6 @@
 # define KEY_A		XK_a
 # define KEY_S		XK_s
 # define KEY_D		XK_d
-
 
 typedef struct s_img
 {
@@ -100,26 +96,20 @@ typedef struct s_game
 	void		*win;
 	t_img		img;
 	t_player	player;
-
 	int			map_w;
 	int			map_h;
 	int			**map;
-	//int			(*map)[MAP_W];
 	int			floor_color;
 	int			ceiling_color;
-
 	char		*text_paths[4];
 	t_img		textures[4];
-
 	int			color_north;
 	int			color_south;
 	int			color_west;
 	int			color_east;
-
 	double		time;
 	double		old_time;
 	double		frame_time;
-
 	int			key_w;
 	int			key_a;
 	int			key_s;
@@ -145,9 +135,6 @@ typedef struct s_ray
 	int		draw_end;
 	int		line_height;
 }	t_ray;
-
-/* map */
-//int		(*get_map(void))[MAP_W];
 
 /* init */
 void	init_game(t_game *g);
@@ -177,42 +164,38 @@ int		rgb(int r, int g, int b);
 double	get_time_in_seconds(void);
 
 /* exit and hooks */
+void	free_parser(t_game *g);
 void	exit_game(t_game *g, int status);
 int		key_press(int keycode, t_game *g);
 int		key_release(int keycode, t_game *g);
 int		close_window(t_game *g);
 
 /* Parser */
+// TODO: Remove static functions
 
 void	parser(t_game *g, int argc, char *path);
 void	parse_textures(t_game *g, char **arr);
 void	parse_colors(t_game *g, char **arr);
-int		parse_rgb(char *line);
 int		parse_map(t_game *g, char **arr);
 
-int		open_cub_file(char *path);
-int		is_valid_file(char **arr);
-int		is_empty_line(char *str);
-int		is_first_map_line(char *str);
 int		is_texture(char *str);
-void	get_texture_path(char *textures[4], char *line);
-int		cardinal_to_index(char c);
-int		index_to_cardinal(int i);
 int		is_color(char *str);
-int		is_valid_color(char *str);
+int		is_first_map_line(char *str);
+int		is_empty_line(char *str);
+int		is_valid_file(char **arr);
+int		open_cub_file(char *path);
+
 void	print_parsed_data(t_game *g);
 int		validate_parsed_data(t_game *g);
 int		is_valid_map(char **arr, char player, int h);
 int		is_valid_top_bottom_line(char *str);
 char	get_player(t_game *g, char **arr);
-void	set_player(t_game *g, int y, int x, char p);
 int		is_valid_map_line(char *str, char p);
 void	get_map_size(t_game *g, char **arr);
 void	normalize_map_spaces(char **arr, int h, int w);
 int		map_to_int_arr(t_game *g, char **arr, char p);
-int		**allocate_map(int w, int h);
 int		is_char_in_set(char c, char const *set);
-int		is_surrounded(char **arr, int r, int c);
+int		is_surrounded(char **arr, int y, int x);
 int		flood_fill(char **arr, char p, int h);
 int		open_rdonly_file(char *path);
 char	**arr_string_from_fd(int fd);
