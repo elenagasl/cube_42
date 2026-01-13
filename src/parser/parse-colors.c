@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 11:03:31 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 22:48:13 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int	is_color(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
