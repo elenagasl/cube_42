@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:12 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 11:08:28 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 23:32:22 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_textures(char **arr)
 		arr[i] = NULL;
 		i++;
 	}
+	arr = NULL;
 }
 
 void	free_arr_int(int **arr, int size)
@@ -36,10 +37,24 @@ void	free_arr_int(int **arr, int size)
 	arr = NULL;
 }
 
-void	destroy_image(t_game *g)
+void	free_parser(t_game *g)
+{
+	free_textures(g->text_paths);
+	free_arr_int(g->map, g->map_h);
+}
+
+void	destroy_images(t_game *g)
 {
 	if (g->img.img)
 		mlx_destroy_image(g->mlx, g->img.img);
+	if (g->textures[NO].img)
+		mlx_destroy_image(g->mlx, g->textures[NO].img);
+	if (g->textures[SO].img)
+		mlx_destroy_image(g->mlx, g->textures[SO].img);
+	if (g->textures[WE].img)
+		mlx_destroy_image(g->mlx, g->textures[WE].img);
+	if (g->textures[EA].img)
+		mlx_destroy_image(g->mlx, g->textures[EA].img);
 }
 
 void	destroy_window(t_game *g)
@@ -50,9 +65,8 @@ void	destroy_window(t_game *g)
 
 void	exit_game(t_game *g, int status)
 {
-	free_textures(g->text_paths);
-	free_arr_int(g->map, g->map_h);
-	destroy_image(g);
+	free_parser(g);
+	destroy_images(g);
 	destroy_window(g);
 	if (g->mlx)
 		free(g->mlx);
