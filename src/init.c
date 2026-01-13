@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:15:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/11 19:29:11 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 11:40:43 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ static void	init_image(t_game *g)
 	while (i < 4)
 	{
 		g->textures[i].img = mlx_xpm_file_to_image(g->mlx, g->text_paths[i], &g->textures[i].w, &g->textures[i].h);
-		g->textures[i].addr = mlx_get_data_addr(g->textures[i].img, &g->textures[i].bpp, &g->textures[i].line_len, &g->textures[i].endian);
+		if (g->textures[i].img == NULL)
+		{
+			// free and exit
+			return ;
+		}
+		g->textures[i].addr = (char *)mlx_get_data_addr(g->textures[i].img, &g->textures[i].bpp, &g->textures[i].line_len, &g->textures[i].endian);
+		printf("addr: %s\n", g->textures[i].addr);
 		i++;
 	}
 }
