@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:11:38 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/04 09:46:08 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 23:24:44 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
 # include <stdarg.h>
 # include <stdint.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -79,14 +72,5 @@ ssize_t	ft_putnbr_r(int n);
 ssize_t	ft_putnbr_u_r(unsigned int n);
 ssize_t	ft_puthex_int_r(unsigned int num, char *base);
 ssize_t	ft_putptr_r(void *ptr);
-
-// ft_dprintf
-int		ft_dprintf(int fd, char const *str, ...);
-ssize_t	ft_dputchar_r(int fd, char c);
-ssize_t	ft_dputstr_r(int fd, char *s);
-ssize_t	ft_dputnbr_r(int fd, int n);
-ssize_t	ft_dputnbr_u_r(int fd, unsigned int n);
-ssize_t	ft_dputhex_ir(int fd, unsigned int num, char *base);
-ssize_t	ft_dputptr_r(int fd, void *ptr);
 
 #endif
