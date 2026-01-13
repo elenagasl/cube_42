@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:15:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/13 12:03:18 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:51:13 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	init_image(t_game *g)
 			return ;
 		}
 		g->textures[i].addr = mlx_get_data_addr(g->textures[i].img, &g->textures[i].bpp, &g->textures[i].line_len, &g->textures[i].endian);
-		printf("bpp=%d line=%d\n", g->textures[i].bpp, g->textures[i].line_len);
-		//printf("addr: %x\n", g->textures[i].addr);
 		i++;
 	}
 }
