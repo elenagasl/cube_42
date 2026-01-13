@@ -1,16 +1,66 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate-map.c                                     :+:      :+:    :+:   */
+/*   parse-map1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 10:36:30 by danielji         ###   ########.fr       */
+/*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
+/*   Updated: 2026/01/14 00:01:08 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+int	parse_map(t_game *g, char **arr)
+{
+	int		i;
+	char	player;
+
+	i = 0;
+	while (!is_first_map_line(arr[i]))
+		i++;
+	get_map_size(g, &arr[i]);
+	if (g->map_w < 3 || g->map_h < 3)
+		return (printf(MAP_SIZE_INVAL"\n"), 0);
+	player = get_player(g, &arr[i]);
+	if (!player)
+		return (0);
+	normalize_map_spaces(&arr[i], g->map_h, g->map_w);
+	if (!is_valid_map(&arr[i], player, g->map_h))
+		return (0);
+	if (!flood_fill(&arr[i], player, g->map_h))
+		return (0);
+	if (!map_to_int_arr(g, &arr[i], player))
+		return (0);
+	return (1);
+}
+
+// TODO: Should we call exit() after malloc fail?
+void	normalize_map_spaces(char **arr, int h, int w)
+{
+	int		i;
+	char	*temp;
+
+	i = 0;
+	while (i < h)
+	{
+		if ((int)ft_strlen(arr[i]) < w)
+		{
+			temp = ft_calloc(w + 1, 1);
+			if (!temp)
+			{
+				perror("Error");
+				return ;
+			}
+			ft_memset(temp, ' ', (size_t)w);
+			ft_memcpy(temp, arr[i], ft_strlen(arr[i]));
+			free(arr[i]);
+			arr[i] = temp;
+		}
+		i++;
+	}
+}
 
 int	is_valid_map(char **arr, char player, int h)
 {
