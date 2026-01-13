@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 14:17:49 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 11:06:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 22:49:14 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	is_valid_file(char **arr)
 			count++;
 		else if (is_first_map_line(arr[i]))
 		{
-			if (count == 0)
-				printf(FILE_EMPTY"\n");
-			else if (count < 6)
+			if (count < 6)
 				printf(DATA_MISS"\n");
 			else if (count > 6)
 				printf(DATA_DUP"\n");
@@ -39,6 +37,8 @@ int	is_valid_file(char **arr)
 			return (printf(LINE_INVAL"\n"), 0);
 		i++;
 	}
+	if (count == 0)
+		return (printf(FILE_EMPTY"\n"), 0);
 	return (printf(MAP_MISS"\n"), 0);
 }
 
@@ -47,6 +47,8 @@ int	is_empty_line(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] && ft_isspace(str[i]))
 		i++;
@@ -60,10 +62,12 @@ int	is_first_map_line(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
-	while (ft_isspace(str[i]))
+	while (str[i] && ft_isspace(str[i]))
 		i++;
-	if (str[i] == '1')
+	if (str[i] && str[i] == '1')
 		return (1);
 	return (0);
 }
