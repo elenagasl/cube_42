@@ -7,9 +7,10 @@ SRC			= main.c init.c exit.c utils.c\
 				game/draw.c game/hooks.c game/map.c game/movement2.c\
 				game/movement.c game/raycasting1.c game/raycasting.c\
 				game/render.c parser/parse-colors.c parser/map-size.c\
-				parser/parse-map1.c parser/parse-map2.c parser/parse-map3.c\
-				parser/parser.c parser/parser-print.c parser/parser-utils.c\
-				parser/parse-textures.c parser/trim.c parser/validate-file.c
+				parser/parse-map1.c parser/parse-map2.c parser/parse-player.c\
+				parser/map_to_int_arr.c parser/parser.c parser/print-map.c\
+				parser/parser-utils.c parser/parse-textures.c parser/trim.c\
+				parser/validate-file.c
 
 SRC_PATH	= src
 BUILD		= build
