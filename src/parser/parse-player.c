@@ -6,20 +6,18 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 23:47:26 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 00:34:04 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
+/* Set game's player initial position and orientation according to the
+passed coordinates `y` and `x`, and orientation indicated by `p` */
 static void	set_player(t_game *g, int y, int x, char p)
 {
 	g->player.pos_x = (double)x + 0.5;
 	g->player.pos_y = (double)y + 0.5;
-	g->player.dir_x = 0.0;
-	g->player.dir_y = 0.0;
-	g->player.plane_x = 0.0;
-	g->player.plane_y = 0.0;
 	if (p == 'N')
 	{
 		g->player.dir_y = -1.0;
@@ -43,7 +41,8 @@ static void	set_player(t_game *g, int y, int x, char p)
 }
 
 /* Return the `N`, `S`, `W`, or `E`  character that
-represents the player's position and orientation */
+represents the player's position and orientation.
+Return `0` if multiple or no player found. */
 char	get_player(t_game *g, char **arr)
 {
 	int		y;
