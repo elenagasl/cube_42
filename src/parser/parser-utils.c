@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 12:44:53 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/13 23:43:44 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	is_char_in_set(char c, char const *set)
 	return (0);
 }
 
+/* Iterate through an array of strings and
+replace every occurrence of `c1` by `c2` */
 void	replace_char(char **arr, char c1, char c2)
 {
 	int	i;
