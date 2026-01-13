@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser-print.c                                     :+:      :+:    :+:   */
+/*   print-map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:22:27 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/11 19:40:05 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 00:12:57 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,29 @@ static void	print_direction(t_game *g)
 
 void	print_mini_map(t_game *g)
 {
-	int	i;
-	int	j;
+	int	y;
+	int	x;
 	int	px;
 	int	py;
 
 	px = (int)g->player.pos_x;
 	py = (int)g->player.pos_y;
-	i = 0;
-	while (i < g->map_h)
+	y = 0;
+	while (y < g->map_h)
 	{
-		j = 0;
-		while (j < g->map_w)
+		x = 0;
+		while (x < g->map_w)
 		{
-			if (i == py && j == px)
+			if (y == py && x == px)
 				print_direction(g);
-			else if (g->map[i][j] == 1)
+			else if (g->map[y][x] == 1)
 				printf("\033[41m🧱\033[0m");
 			else
 				printf("  ");
-			j++;
+			x++;
 		}
 		printf("\n");
-		i++;
+		y++;
 	}
 }
 

@@ -1,49 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse-map3.c                                       :+:      :+:    :+:   */
+/*   map_to_int_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:20:57 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/12 11:08:15 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 00:09:55 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-/* Parse an array of strings into an array of integers */
-int	map_to_int_arr(t_game *g, char **arr, char p)
-{
-	int	i;
-	int	j;
-	int	**map;
-
-	map = allocate_map(g->map_w, g->map_h);
-	if (!map)
-		return (0);
-	i = 0;
-	while (i < g->map_h)
-	{
-		j = 0;
-		while (arr[i][j])
-		{
-			if (arr[i][j] == '1' || arr[i][j] == '0')
-				map[i][j] = arr[i][j] - '0';
-			else if (arr[i][j] == p)
-				map[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	g->map = map;
-	return (1);
-}
-
 /* Allocate memory for an array of arrays of integers.
 Initialize every integer to `-1`.
 If any allocation fails free every array and return `NULL` */
-int	**allocate_map(int w, int h)
+static int	**allocate_map(int w, int h)
 {
 	int	i;
 	int	**map;
@@ -61,4 +33,32 @@ int	**allocate_map(int w, int h)
 		i++;
 	}
 	return (map);
+}
+
+/* Parse an array of strings into an array of integers */
+int	map_to_int_arr(t_game *g, char **arr, char p)
+{
+	int	y;
+	int	x;
+	int	**map;
+
+	map = allocate_map(g->map_w, g->map_h);
+	if (!map)
+		return (0);
+	y = 0;
+	while (y < g->map_h)
+	{
+		x = 0;
+		while (arr[y][x])
+		{
+			if (arr[y][x] == '1' || arr[y][x] == '0')
+				map[y][x] = arr[y][x] - '0';
+			else if (arr[y][x] == p)
+				map[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	g->map = map;
+	return (1);
 }
