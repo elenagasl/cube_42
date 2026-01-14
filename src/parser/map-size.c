@@ -6,13 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:23:59 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 23:48:38 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 09:56:25 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-int	get_map_height(char **arr)
+/* Get map height */
+static int	get_map_height(char **arr)
 {
 	int	i;
 
@@ -25,7 +26,8 @@ int	get_map_height(char **arr)
 	return (i + 1);
 }
 
-int	get_map_width(char **arr, int h)
+/* Get length of the longest line */
+static int	get_map_width(char **arr, int h)
 {
 	int	i;
 	int	width;
@@ -44,8 +46,7 @@ int	get_map_width(char **arr, int h)
 	return (max_width);
 }
 
-/* Save map width and height into `t_game g`.
-Spaces are taken into account, except for `\n` */
+/* Save map width and height into `t_game g` */
 void	get_map_size(t_game *g, char **arr)
 {
 	g->map_h = get_map_height(arr);

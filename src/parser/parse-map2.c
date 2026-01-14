@@ -6,14 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 00:07:24 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 10:03:43 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
 /* Not exactly a flood fill algorithm, this function checks
-whether a '0' is surrounded by a whitespace character */
+whether a `0` is surrounded by a whitespace character */
 int	flood_fill(char **arr, char p, int h)
 {
 	int	y;

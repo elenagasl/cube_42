@@ -6,13 +6,13 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 00:34:04 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 10:04:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-/* Set game's player initial position and orientation according to the
+/* Set game player's initial position and orientation according to the
 passed coordinates `y` and `x`, and orientation indicated by `p` */
 static void	set_player(t_game *g, int y, int x, char p)
 {

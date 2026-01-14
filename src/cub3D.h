@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 00:07:43 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:17:39 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,9 @@
 # include <sys/time.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
+# include "errors.h"
 # include <X11/keysym.h>
 //# include "../minilibx/mlx.h"
-
-# define ARG_INVAL "Invalid argument. Usage: .cub3d <filename>.cub"
-# define FILE_EMPTY "Error: Empty file"
-# define FILE_EXT "Error: Only .cub files are supported"
-# define DATA_MISS "Error: Missing data"
-# define DATA_DUP "Error: Duplicated data"
-# define TEXT_EXT "Error: Only XPM texture files are supported"
-# define TEXT_DUP "Error: Duplicated texture"
-# define TEXT_MISS "Error: Missing texture file"
-# define COLOR_INVAL "Error: Missing or invalid color"
-# define COLOR_RANGE "Error: Out of range color"
-# define MAP_MISS "Error: Missing map"
-# define MAP_TOP_INVAL "Error: Invalid map top line"
-# define MAP_BOT_INVAL "Error: Invalid map bottom line"
-# define MAP_LINE_INVAL "Error: Invalid map line"
-# define MAP_OPEN "Error: Space not surrounded by wall"
-# define MAP_SIZE_INVAL "Error: Invalid map size"
-# define LINE_INVAL "Error: Invalid line"
-# define LINE_UNEXP "Error: Unexpected line"
-# define PLYR_MISS "Error: Missing player position"
-# define PLYR_MULTI "Error: No more than one player position allowed"
 
 # define WIN_W 640
 # define WIN_H 480
@@ -103,10 +83,6 @@ typedef struct s_game
 	int			ceiling_color;
 	char		*text_paths[4];
 	t_img		textures[4];
-	int			color_north;
-	int			color_south;
-	int			color_west;
-	int			color_east;
 	double		time;
 	double		old_time;
 	double		frame_time;
@@ -165,50 +141,50 @@ double	get_time_in_seconds(void);
 
 /* exit and hooks */
 void	free_parser(t_game *g);
+void	free_textures(char **arr);
 void	exit_game(t_game *g, int status);
 int		key_press(int keycode, t_game *g);
 int		key_release(int keycode, t_game *g);
 int		close_window(t_game *g);
 
 /* Parser */
-// TODO: Remove static functions
 
 void	parser(t_game *g, int argc, char *path);
-void	parse_textures(t_game *g, char **arr);
-void	parse_colors(t_game *g, char **arr);
-int		parse_map(t_game *g, char **arr);
-
-int		is_texture(char *str);
-int		is_color(char *str);
+int		open_rdonly_file(char *path);
+int		validate_parsed_data(t_game *g);
 int		is_first_map_line(char *str);
 int		is_empty_line(char *str);
 int		is_valid_file(char **arr);
-int		open_cub_file(char *path);
 
-void	print_parsed_data(t_game *g);
-int		validate_parsed_data(t_game *g);
-int		is_valid_map(char **arr, char player, int h);
-int		is_valid_top_bottom_line(char *str);
-char	get_player(t_game *g, char **arr);
-int		is_valid_map_line(char *str, char p);
+/* Parse textures & colors */
+
+void	parse_textures(t_game *g, char **arr);
+void	parse_colors(t_game *g, char **arr);
+int		is_texture(char *str);
+int		is_color(char *str);
+
+/* Parse map */
+
+int		parse_map(t_game *g, char **arr);
 void	get_map_size(t_game *g, char **arr);
 void	normalize_map_spaces(char **arr, int h, int w);
-int		map_to_int_arr(t_game *g, char **arr, char p);
-int		is_char_in_set(char c, char const *set);
-int		is_surrounded(char **arr, int y, int x);
+int		is_valid_map(char **arr, char player, int h);
 int		flood_fill(char **arr, char p, int h);
-int		open_rdonly_file(char *path);
-char	**arr_string_from_fd(int fd);
+int		is_surrounded(char **arr, int y, int x);
+char	get_player(t_game *g, char **arr);
+int		map_to_int_arr(t_game *g, char **arr, char p);
+
+/* Parser utils */
+
+void	print_parsed_data(t_game *g);
 int		is_valid_extension(char *path, char *ext);
 void	free_arr_str(char **arr);
 void	free_arr_int(int **arr, int size);
-void	free_textures(char **arr);
 void	init_int_arr(int *arr, int size, int value);
+int		is_char_in_set(char c, char const *set);
+void	replace_char(char **arr, char c1, char c2);
 void	trim_left_ws(char *str);
 void	trim_right_ws(char *str);
 void	trim_whitespace(char *str);
-void	print_mini_map(t_game *g);
-void	print_parsed_data(t_game *g);
-void	replace_char(char **arr, char c1, char c2);
 
 #endif

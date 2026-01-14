@@ -6,12 +6,14 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 00:01:08 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 10:03:11 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
+/* Iterate through an array of strings, get map size, get player and
+check whether it's a valid map surrounded by walls. On error return `0`. */
 int	parse_map(t_game *g, char **arr)
 {
 	int		i;
@@ -37,6 +39,7 @@ int	parse_map(t_game *g, char **arr)
 }
 
 // TODO: Should we call exit() after malloc fail?
+/* Fill in with spaces every string shorter than the longest string */
 void	normalize_map_spaces(char **arr, int h, int w)
 {
 	int		i;
@@ -62,25 +65,8 @@ void	normalize_map_spaces(char **arr, int h, int w)
 	}
 }
 
-int	is_valid_map(char **arr, char player, int h)
-{
-	int	i;
-
-	i = 0;
-	if (!is_valid_top_bottom_line(arr[0]))
-		return (printf(MAP_TOP_INVAL"\n"), 0);
-	if (!is_valid_top_bottom_line(arr[h - 1]))
-		return (printf(MAP_BOT_INVAL"\n"), 0);
-	while (i < h)
-	{
-		if (!is_empty_line(arr[i]) && !is_valid_map_line(arr[i], player))
-			return (printf(MAP_LINE_INVAL"\n"), 0);
-		i++;
-	}
-	return (1);
-}
-
-int	is_valid_top_bottom_line(char *str)
+/* A top or bottom map line can contain `1` or spaces only */
+static int	is_valid_top_bottom_line(char *str)
 {
 	int	i;
 
@@ -94,7 +80,8 @@ int	is_valid_top_bottom_line(char *str)
 	return (1);
 }
 
-int	is_valid_map_line(char *str, char p)
+/* An in-between map line can contain `0`, `1`, player character or spaces */
+static int	is_valid_map_line(char *str, char p)
 {
 	int	i;
 	int	len;
@@ -111,6 +98,26 @@ int	is_valid_map_line(char *str, char p)
 	{
 		if (!is_char_in_set(str[i], "01") && str[i] != p && !ft_isspace(str[i]))
 			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/* - Check if top and bottom map lines are valid
+- Check if other map lines are valid  */
+int	is_valid_map(char **arr, char player, int h)
+{
+	int	i;
+
+	i = 0;
+	if (!is_valid_top_bottom_line(arr[0]))
+		return (printf(MAP_TOP_INVAL"\n"), 0);
+	if (!is_valid_top_bottom_line(arr[h - 1]))
+		return (printf(MAP_BOT_INVAL"\n"), 0);
+	while (i < h)
+	{
+		if (!is_empty_line(arr[i]) && !is_valid_map_line(arr[i], player))
+			return (printf(MAP_LINE_INVAL"\n"), 0);
 		i++;
 	}
 	return (1);

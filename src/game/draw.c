@@ -6,51 +6,21 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:43:41 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/13 16:59:30 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:02:00 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-/* static int	get_wall_color(t_game *g, t_ray *r)
-{
-	if (r->side == 0) // pared vertical (E / W)
-	{
-		if (r->ray_dx > 0)
-			return (g->color_east);
-		return (g->color_west);
-	}
-	else // pared horizontal (N / S)
-	{
-		if (r->ray_dy < 0)
-			return (g->color_north);
-		return (g->color_south);
-	}
-} */
-
-/* static void	draw_colored_wall(t_game *g, int x, t_ray *r)
-{
-	int	color;
-	int	y;
-
-	color = get_wall_color(g, r);
-	y = r->draw_start;
-	while (y <= r->draw_end)
-	{
-		put_pixel(&g->img, x, y, color);
-		y++;
-	}
-} */
-
 static t_img	*get_wall_texture(t_game *g, t_ray *r)
 {
-	if (r->side == 0) // pared vertical (E / W)
+	if (r->side == 0)
 	{
 		if (r->ray_dx > 0)
 			return (&g->textures[WE]);
 		return (&g->textures[EA]);
 	}
-	else // pared horizontal (N / S)
+	else
 	{
 		if (r->ray_dy < 0)
 			return (&g->textures[SO]);
@@ -82,7 +52,6 @@ static int	get_tex_color(t_img *t, int x, int y)
 	int		color;
 
 	pixel = t->addr + (y * t->line_len + x * (t->bpp / 8));
-
 	color = *(unsigned int *)pixel;
 	return (color);
 }
@@ -95,12 +64,10 @@ static void	draw_texture_column(t_game *g, int x, double dist, t_ray *r)
 	int		tex_y;
 	double	step;
 	double	tex_pos;
-	//double	wall_h;
 	double	wall_x;
 
 	t = get_wall_texture(g, r);
 
-	//wall_h = r->draw_end - r->draw_start;
 	step = 1.0 * t->h / r->line_height;
 	tex_pos = (r->draw_start - WIN_H / 2 + r->line_height / 2) * step;
 	y = r->draw_start;
@@ -157,6 +124,5 @@ void	draw_wall(t_game *g, int x, double dist, t_ray *r)
 		r->draw_end = WIN_H - 1;
 	r->line_height = height;
 	draw_ceiling_floor(g, x, r->draw_start, r->draw_end);
-	//draw_colored_wall(g, x, r);
 	draw_texture_column(g, x, dist, r);
 }

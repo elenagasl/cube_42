@@ -6,14 +6,70 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 22:45:25 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 09:54:02 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
+/* Open a read-only file specified by `path` and return its file descriptor.
+On error print message and return `-1`.*/
+int	open_rdonly_file(char *path)
+{
+	int	fd;
+	int	err;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		err = errno;
+		printf("Error: %s: %s\n", strerror(err), path);
+		return (-1);
+	}
+	return (fd);
+}
+
+/* Open .cub file indicated by `path` and return file descriptor.
+On error exit program */
+static int	open_cub_file(char *path)
+{
+	int	fd;
+
+	trim_whitespace(path);
+	if (!is_valid_extension(path, ".cub"))
+	{
+		printf(FILE_EXT"\n");
+		exit(1);
+	}
+	fd = open_rdonly_file(path);
+	if (fd < 0)
+		exit(1);
+	return (fd);
+}
+
+/* Read file `fd` line by line an return an array
+of the read strings or `NULL` in case of error
+TODO: Free GNL static ???*/
+static char	**arr_string_from_fd(int fd)
+{
+	char	**arr;
+	char	*line;
+
+	arr = NULL;
+	line = get_next_line(fd);
+	while (line)
+	{
+		arr = ft_push_str_to_arr(arr, line);
+		if (!arr)
+			return (free(line), NULL);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (arr);
+}
+
 /* Open .cub file, parse textures, colors and map.
-Return result of validate_parsed_data (`0` or `1`) */
+On error free allocated memory and exit program */
 void	parser(t_game *g, int argc, char *path)
 {
 	int		fd;
@@ -38,59 +94,4 @@ void	parser(t_game *g, int argc, char *path)
 		free_parser(g);
 		exit(1);
 	}
-}
-
-/* Open .cub file indicated by `path` and return file descriptor */
-int	open_cub_file(char *path)
-{
-	int	fd;
-
-	trim_whitespace(path);
-	if (!is_valid_extension(path, ".cub"))
-	{
-		printf(FILE_EXT"\n");
-		exit(1);
-	}
-	fd = open_rdonly_file(path);
-	if (fd < 0)
-		exit(1);
-	return (fd);
-}
-
-/* Open a read-only file specified by `path` and return its file descriptor.
-On error print message and return `-1`.*/
-int	open_rdonly_file(char *path)
-{
-	int	fd;
-	int	err;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		err = errno;
-		printf("Error: %s: %s\n", strerror(err), path);
-		return (-1);
-	}
-	return (fd);
-}
-
-/* Read file `fd` line by line an return an array
-of the read strings or `NULL` in case of error
-TODO: Free GNL static ???*/
-char	**arr_string_from_fd(int fd)
-{
-	char	**arr;
-	char	*line;
-
-	arr = NULL;
-	line = get_next_line(fd);
-	while (line)
-	{
-		arr = ft_push_str_to_arr(arr, line);
-		if (!arr)
-			return (free(line), NULL);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (arr);
 }

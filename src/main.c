@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:01:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/12 10:50:36 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:07:28 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char *argv[])
 	t_game	g;
 
 	parser(&g, argc, argv[1]);
-	print_parsed_data(&g);
 	init_game(&g);
+	print_parsed_data(&g);
 	render_frame(&g);
 	mlx_hook(g.win, 2, 1L << 0, key_press, &g);
 	mlx_hook(g.win, 3, 1L << 1, key_release, &g);

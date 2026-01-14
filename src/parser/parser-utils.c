@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 20:28:18 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 23:43:44 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 10:16:38 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	init_int_arr(int *arr, int size, int value)
 	}
 }
 
+/* Checks if char `c` is contained within string `set`*/
 int	is_char_in_set(char c, char const *set)
 {
 	while (*set)

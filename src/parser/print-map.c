@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/09 18:22:27 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 00:12:57 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:08:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print_direction(t_game *g)
 		printf("⬆️ ");
 }
 
-void	print_mini_map(t_game *g)
+static void	print_mini_map(t_game *g)
 {
 	int	y;
 	int	x;
@@ -50,13 +50,13 @@ void	print_mini_map(t_game *g)
 		printf("\n");
 		y++;
 	}
+	printf("\n");
 }
 
-/* For debug purposes only */
+/* Print summary and mini map in terminal.
+Print maps only smaller than 50 units wide */
 void	print_parsed_data(t_game *g)
 {
-	printf("\033[1;32mMap is valid!\033[0m\n");
-	printf("-------------------------------------\n");
 	printf("North texture: %s\n", g->text_paths[NO]);
 	printf("South texture: %s\n", g->text_paths[SO]);
 	printf(" West texture: %s\n", g->text_paths[WE]);
@@ -66,5 +66,4 @@ void	print_parsed_data(t_game *g)
 	printf("     Map size: %d x %d \n\n", g->map_w, g->map_h);
 	if (g->map_w <= 50)
 		print_mini_map(g);
-	printf("-------------------------------------\n");
 }

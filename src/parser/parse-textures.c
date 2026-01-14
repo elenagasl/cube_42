@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:05:32 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 23:53:48 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 10:06:20 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_texture(char *str)
 	return (0);
 }
 
+/* Get a cardinal point's corresponding integer 
+(`N`, `S`, `W`, `E` to `0`, `1`, `2`, `3`)*/
 static int	cardinal_to_index(char c)
 {
 	if (c == 'N')

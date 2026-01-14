@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:15:11 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 00:30:47 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 11:18:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	init_images(t_game *g)
 				&g->textures[i].w, &g->textures[i].h);
 		if (g->textures[i].img == NULL)
 		{
-			// free and exit
-			return ;
+			printf(XPM_INVAL"\n");
+			exit_game(g, 1);
 		}
 		g->textures[i].addr = mlx_get_data_addr(
 				g->textures[i].img, &g->textures[i].bpp,
@@ -53,15 +53,6 @@ void	init_game(t_game *g)
 	g->mlx = mlx_init();
 	g->win = mlx_new_window(g->mlx, WIN_W, WIN_H, "cub3D");
 	init_images(g);
-	//g->map = get_map();
-	//g->map_w = MAP_W;
-	//g->map_h = MAP_H;
-	//g->floor_color = rgb(80, 80, 80);
-	//g->ceiling_color = rgb(120, 120, 200);
-	//g->color_north = rgb(200, 0, 0);
-	//g->color_south = rgb(0, 200, 0);
-	//g->color_west = rgb(0, 0, 200);
-	//g->color_east = rgb(200, 200, 0);
 	g->key_w = 0;
 	g->key_a = 0;
 	g->key_s = 0;
@@ -71,23 +62,26 @@ void	init_game(t_game *g)
 	g->time = get_time_in_seconds();
 	g->old_time = g->time;
 	g->frame_time = 0.0;
-//	init_player(g);
 }
 
 void	init_parser(t_game *g)
 {
+	int	i;
+
 	g->map = NULL;
-	g->text_paths[NO] = NULL;
-	g->text_paths[SO] = NULL;
-	g->text_paths[WE] = NULL;
-	g->text_paths[EA] = NULL;
 	g->floor_color = -1.0;
 	g->ceiling_color = -1.0;
-	//init_int_arr(g->floor_arr, 3, -1);
-	//init_int_arr(g->ceiling_arr, 3, -1);
 	g->img.img = NULL;
 	g->img.addr = NULL;
 	g->mlx = NULL;
 	g->win = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		g->text_paths[i] = NULL;
+		g->textures[i].img = NULL;
+		g->textures[i].addr = NULL;
+		i++;
+	}
 	init_player(g);
 }
