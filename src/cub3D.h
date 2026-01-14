@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 11:17:39 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:34:52 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	cast_column(t_game *g, int x);
 /* draw */
 void	draw_wall(t_game *g, int x, double dist, t_ray *r);
 void	put_pixel(t_img *img, int x, int y, int color);
+void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r);
 
 /* move */
 void	update_player(t_game *g);

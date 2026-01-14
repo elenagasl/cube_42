@@ -4,9 +4,9 @@ CFLAGS		= -Wall -Werror -Wextra
 UNAME_S		= $(shell uname -s)
 
 SRC			= main.c init.c exit.c utils.c\
-				game/draw.c game/hooks.c game/movement.c game/movement2.c\
-				game/raycasting.c game/raycasting1.c game/render.c\
-				parser/parse-colors.c parser/map-size.c\
+				game/draw.c game/draw-texture.c game/hooks.c game/movement.c\
+				game/movement2.c game/raycasting.c game/raycasting1.c\
+				game/render.c parser/parse-colors.c parser/map-size.c\
 				parser/parse-map1.c parser/parse-map2.c parser/parse-player.c\
 				parser/map_to_int_arr.c parser/parser.c parser/print-map.c\
 				parser/parser-utils.c parser/parse-textures.c parser/trim.c\
