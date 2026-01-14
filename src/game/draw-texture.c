@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:48:10 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 12:29:37 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 12:59:24 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,7 @@ static int	get_tex_color(t_img *t, int x, int y)
 	return (color);
 }
 
-double	get_wall_x(t_game *g, t_ray *r, double dist)
-{
-	double	wall_x;
-
-	if (r->side == 0)
-		wall_x = g->player.pos_y + dist * r->ray_dy;
-	else
-		wall_x = g->player.pos_x + dist * r->ray_dx;
-	wall_x -= floor(wall_x);
-	return (wall_x);
-}
-
-int	get_tex_y(double tex_pos, int tex_h)
+static int	get_tex_y(double tex_pos, int tex_h)
 {
 	int	tex_y;
 
@@ -47,16 +35,27 @@ int	get_tex_y(double tex_pos, int tex_h)
 }
 
 // Voltear horizontalmente
-int	flip_tex_x(int tex_x, t_ray *r, int tex_width)
+static void	flip_tex_x(int *tex_x, t_ray *r, int tex_width)
 {
-	int	f_tex_x;
-
-	f_tex_x = tex_x;
 	if (r->side == 0 && r->ray_dx < 0)
-		f_tex_x = tex_width - tex_x - 1;
+		*tex_x = tex_width - *tex_x - 1;
 	if (r->side == 1 && r->ray_dy > 0)
-		f_tex_x = tex_width - tex_x - 1;
-	return (f_tex_x);
+		*tex_x = tex_width - *tex_x - 1;
+}
+
+static int	get_tex_x(t_game *g, t_ray *r, double dist, int tex_width)
+{
+	int		tex_x;
+	double	wall_x;
+
+	if (r->side == 0)
+		wall_x = g->player.pos_y + dist * r->ray_dy;
+	else
+		wall_x = g->player.pos_x + dist * r->ray_dx;
+	wall_x -= floor(wall_x);
+	tex_x = (int)(wall_x * tex_width);
+	flip_tex_x(&tex_x, r, tex_width);
+	return (tex_x);
 }
 
 void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r)
@@ -69,17 +68,13 @@ void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r)
 
 	step = 1.0 * t->h / r->line_height;
 	tex_pos = (r->draw_start - WIN_H / 2 + r->line_height / 2) * step;
-
 	y = r->draw_start;
-	// clip top
-	if (y < 0)
+	if (y < 0) // clip top
 	{
 		tex_pos += (-y) * step;
 		y = 0;
 	}
-
-	tex_x = (int)(get_wall_x(g, r, dist) * t->w);
-	tex_x = flip_tex_x(tex_x, r, t->w);
+	tex_x = get_tex_x(g, r, dist, t->w);
 	while (y <= r->draw_end)
 	{
 		tex_y = get_tex_y(tex_pos, t->h);
