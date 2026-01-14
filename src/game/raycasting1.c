@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elengarc <elengarc@student.42Madrid.com>   +#+  +:+       +#+        */
+/*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:16:04 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/04 13:16:05 by elengarc         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:41:02 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ double	get_perp_dist(t_game *g, t_ray *r)
 void	cast_column(t_game *g, int x)
 {
 	t_ray	r;
-	double	dist;
 
 	init_ray(g, &r, x);
 	init_dda(g, &r);
 	if (!perform_dda(g, &r))
 		return ;
-	dist = get_perp_dist(g, &r);
-	draw_wall(g, x, dist, &r);
+	r.dist = get_perp_dist(g, &r);
+	draw_wall(g, x, &r);
 }

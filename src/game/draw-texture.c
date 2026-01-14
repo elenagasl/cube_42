@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:48:10 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 12:59:24 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ static void	flip_tex_x(int *tex_x, t_ray *r, int tex_width)
 		*tex_x = tex_width - *tex_x - 1;
 }
 
-static int	get_tex_x(t_game *g, t_ray *r, double dist, int tex_width)
+static int	get_tex_x(t_game *g, t_ray *r, int tex_width)
 {
 	int		tex_x;
 	double	wall_x;
 
 	if (r->side == 0)
-		wall_x = g->player.pos_y + dist * r->ray_dy;
+		wall_x = g->player.pos_y + r->dist * r->ray_dy;
 	else
-		wall_x = g->player.pos_x + dist * r->ray_dx;
+		wall_x = g->player.pos_x + r->dist * r->ray_dx;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * tex_width);
 	flip_tex_x(&tex_x, r, tex_width);
 	return (tex_x);
 }
 
-void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r)
+void	draw_texture_column(t_game *g, t_img *t, int x, t_ray *r)
 {
 	int		y;
 	int		tex_x;
@@ -74,7 +74,7 @@ void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r)
 		tex_pos += (-y) * step;
 		y = 0;
 	}
-	tex_x = get_tex_x(g, r, dist, t->w);
+	tex_x = get_tex_x(g, r, t->w);
 	while (y <= r->draw_end)
 	{
 		tex_y = get_tex_y(tex_pos, t->h);

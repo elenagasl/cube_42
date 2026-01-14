@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 12:34:52 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_ray
 	double	side_y;
 	double	delta_x;
 	double	delta_y;
+	double	dist;
 	int		map_x;
 	int		map_y;
 	int		step_x;
@@ -125,9 +126,9 @@ void	render_frame(t_game *g);
 void	cast_column(t_game *g, int x);
 
 /* draw */
-void	draw_wall(t_game *g, int x, double dist, t_ray *r);
+void	draw_wall(t_game *g, int x, t_ray *r);
 void	put_pixel(t_img *img, int x, int y, int color);
-void	draw_texture_column(t_game *g, t_img *t, int x, double dist, t_ray *r);
+void	draw_texture_column(t_game *g, t_img *t, int x, t_ray *r);
 
 /* move */
 void	update_player(t_game *g);

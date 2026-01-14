@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:43:41 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 12:30:38 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static t_img	*get_wall_texture(t_game *g, t_ray *r)
 	}
 }
 
-void	draw_wall(t_game *g, int x, double dist, t_ray *r)
+void	draw_wall(t_game *g, int x, t_ray *r)
 {
 	t_img	*texture;
 	int		height;
 
-	if (dist <= 0.0001)
+	if (r->dist <= 0.0001)
 		return ;
 	texture = get_wall_texture(g, r);
-	height = (int)(WIN_H / dist);
+	height = (int)(WIN_H / r->dist);
 	r->draw_start = -height / 2 + WIN_H / 2;
 	r->draw_end = height / 2 + WIN_H / 2;
 	if (r->draw_start < 0)
@@ -63,5 +63,5 @@ void	draw_wall(t_game *g, int x, double dist, t_ray *r)
 		r->draw_end = WIN_H - 1;
 	r->line_height = height;
 	draw_ceiling_floor(g, x, r->draw_start, r->draw_end);
-	draw_texture_column(g, texture, x, dist, r);
+	draw_texture_column(g, texture, x, r);
 }
