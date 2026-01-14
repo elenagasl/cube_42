@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:43:41 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:27:17 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	draw_ceiling_floor(t_game *g, int x, int start, int end)
 	}
 }
 
+/* Select which texture should be rendered
+according to which wall is facing the player */
 static t_img	*get_wall_texture(t_game *g, t_ray *r)
 {
 	if (r->side == 0)

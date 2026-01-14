@@ -6,12 +6,13 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 11:48:10 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:28:38 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
+/* Calculate the color of a pixel in the given texture */
 static int	get_tex_color(t_img *t, int x, int y)
 {
 	char	*pixel;
@@ -22,6 +23,8 @@ static int	get_tex_color(t_img *t, int x, int y)
 	return (color);
 }
 
+/* Turn a texture position into a safe `y` coordinate, clamping if
+necessary to avoid values below `0` or larger than the texture's height */
 static int	get_tex_y(double tex_pos, int tex_h)
 {
 	int	tex_y;
@@ -34,7 +37,8 @@ static int	get_tex_y(double tex_pos, int tex_h)
 	return (tex_y);
 }
 
-// Voltear horizontalmente
+/* Flip the texture column horizontally only if
+the wall is viewed from the opposite side */
 static void	flip_tex_x(int *tex_x, t_ray *r, int tex_width)
 {
 	if (r->side == 0 && r->ray_dx < 0)
@@ -43,6 +47,8 @@ static void	flip_tex_x(int *tex_x, t_ray *r, int tex_width)
 		*tex_x = tex_width - *tex_x - 1;
 }
 
+/* Calculate which vertical column of the
+texture should be used for the wall */
 static int	get_tex_x(t_game *g, t_ray *r, int tex_width)
 {
 	int		tex_x;
@@ -58,6 +64,7 @@ static int	get_tex_x(t_game *g, t_ray *r, int tex_width)
 	return (tex_x);
 }
 
+/* Draw one vertical textured wall on the screen */
 void	draw_texture_column(t_game *g, t_img *t, int x, t_ray *r)
 {
 	int		y;
