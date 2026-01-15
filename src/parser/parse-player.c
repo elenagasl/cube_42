@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 10:04:17 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/15 16:30:24 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 /* Set game player's initial position and orientation according to the
 passed coordinates `y` and `x`, and orientation indicated by `p` */
-static void	set_player(t_game *g, int y, int x, char p)
+static void	set_player(t_player *player, int y, int x, char p)
 {
-	g->player.pos_x = (double)x + 0.5;
-	g->player.pos_y = (double)y + 0.5;
+	player->pos_x = (double)x + 0.5;
+	player->pos_y = (double)y + 0.5;
 	if (p == 'N')
 	{
-		g->player.dir_y = -1.0;
-		g->player.plane_x = 0.66;
+		player->dir_y = -1.0;
+		player->plane_x = 0.66;
 	}
 	else if (p == 'S')
 	{
-		g->player.dir_y = 1.0;
-		g->player.plane_x = -0.66;
+		player->dir_y = 1.0;
+		player->plane_x = -0.66;
 	}
 	else if (p == 'E')
 	{
-		g->player.dir_x = 1.0;
-		g->player.plane_y = 0.66;
+		player->dir_x = 1.0;
+		player->plane_y = 0.66;
 	}
 	else if (p == 'W')
 	{
-		g->player.dir_x = -1.0;
-		g->player.plane_y = -0.66;
+		player->dir_x = -1.0;
+		player->plane_y = -0.66;
 	}
 }
 
@@ -61,7 +61,7 @@ char	get_player(t_game *g, char **arr)
 				if (player)
 					return (printf(PLYR_MULTI"\n"), 0);
 				player = arr[y][x];
-				set_player(g, y, x, player);
+				set_player(&g->player, y, x, player);
 			}
 			x++;
 		}
