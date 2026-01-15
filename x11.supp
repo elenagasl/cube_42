@@ -1,0 +1,23 @@
+{
+   x11_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libX11.so*
+}
+
+{
+   xext_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libXext.so*
+}
+
+{
+   xcb_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libxcb.so*
+}
