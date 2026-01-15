@@ -1,4 +1,4 @@
-/* Usage: valgrind --suppressions=mlx_x11.supp ./cub3d <args> */
+/* Usage: valgrind --suppressions=x11.supp ./cub3d <args> */
 
 {
    x11_reachable
