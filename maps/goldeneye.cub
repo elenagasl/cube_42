@@ -1,0 +1,18 @@
+NO ./textures/goldeneye-no.xpm
+SO ./textures/goldeneye-so.xpm
+WE ./textures/goldeneye-we.xpm
+EA ./textures/goldeneye-ea.xpm
+
+F 124,124,124
+C 49,49,67
+
+1111111111111111
+1000000000000001
+1000111000000101
+100N001111000101
+1000001000100101
+1000001000000101
+1111111100111101
+       100100001
+       100001111
+       111111
