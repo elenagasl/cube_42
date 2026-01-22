@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:00:52 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 15:37:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:17:09 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,14 @@
 # include "../libft/libft.h"
 # include "errors.h"
 # include <X11/keysym.h>
-//# include "../minilibx/mlx.h"
 
-# define WIN_W 640
-# define WIN_H 480
+# define WIN_W 1280
+# define WIN_H 960
 # define NO 0
 # define SO 1
 # define WE 2
 # define EA 3
-
-// MacOS
-/* # define KEY_ESC	53
-# define KEY_LEFT	123
-# define KEY_RIGHT	124
-# define KEY_W		13
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2 */
+# define MARGIN 0.1
 
 # define KEY_ESC	XK_Escape
 # define KEY_LEFT	XK_Left
@@ -113,40 +104,55 @@ typedef struct s_ray
 	int		line_height;
 }	t_ray;
 
-/* init */
+/* Init */
+
 void	init_game(t_game *g);
 void	init_parser(t_game *g);
 
-/* raycast */
+/* Raycast */
+
 void	init_ray(t_game *g, t_ray *r, int x);
 void	init_dda(t_game *g, t_ray *r);
-
-/* render */
-void	render_frame(t_game *g);
+int		perform_dda(t_game *g, t_ray *r);
+double	get_perp_dist(t_game *g, t_ray *r);
 void	cast_column(t_game *g, int x);
 
-/* draw */
-void	draw_wall(t_game *g, int x, t_ray *r);
+/* Render */
+
+void	render_frame(t_game *g);
 void	put_pixel(t_img *img, int x, int y, int color);
+
+/* Draw */
+
+void	draw_ceiling_floor(t_game *g, int x, int start, int end);
+void	draw_wall(t_game *g, int x, t_ray *r);
 void	draw_texture_column(t_game *g, t_img *t, int x, t_ray *r);
 
-/* move */
-void	update_player(t_game *g);
-void	move_forward(t_game *g, double speed);
-void	move_backward(t_game *g, double speed);
-void	move_left(t_game *g, double speed);
-void	move_right(t_game *g, double speed);
+/* Move */
 
-/* utils */
+int		is_walkable(t_game *g, int x, int y);
+void	rotate(t_player *p, double rot_speed);
+void	move_longitudinal(t_game *g, double speed, int dir);
+void	move_lateral(t_game *g, double speed, int dir);
+void	update_player(t_game *g);
+
+/* Utils */
+
 int		rgb(int r, int g, int b);
 double	get_time_in_seconds(void);
 
-/* exit and hooks */
-void	free_parser(t_game *g);
+/* Exit and hooks */
+
 void	free_textures(char **arr);
+void	free_arr_int(int **arr, int size);
+void	free_parser(t_game *g);
+void	destroy_images(t_game *g);
 void	exit_game(t_game *g, int status);
-int		key_press(int keycode, t_game *g);
+
+/* Hooks */
+
 int		key_release(int keycode, t_game *g);
+int		key_press(int keycode, t_game *g);
 int		close_window(t_game *g);
 
 /* Parser */
@@ -181,7 +187,6 @@ int		map_to_int_arr(t_game *g, char **arr, char p);
 void	print_parsed_data(t_game *g);
 int		is_valid_extension(char *path, char *ext);
 void	free_arr_str(char **arr);
-void	free_arr_int(int **arr, int size);
 void	init_int_arr(int *arr, int size, int value);
 int		is_char_in_set(char c, char const *set);
 void	replace_char(char **arr, char c1, char c2);

@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement_alt2.c                                    :+:      :+:    :+:   */
+/*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 16:23:27 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/16 11:24:17 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:01:56 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-
-#define MARG 0.5
 
 int	is_walkable(t_game *g, int x, int y)
 {
@@ -43,17 +41,12 @@ void	move_longitudinal(t_game *g, double speed, int dir)
 
 	new_x = g->player.pos_x + (dir * g->player.dir_x * speed);
 	new_y = g->player.pos_y + (dir * g->player.dir_y * speed);
-	marg_x = dir * g->player.dir_x * MARG;
-	marg_y = dir * g->player.dir_y * MARG;
+	marg_x = dir * g->player.dir_x * MARGIN;
+	marg_y = dir * g->player.dir_y * MARGIN;
 	if (is_walkable(g, (int)(new_x + marg_x), (int)(g->player.pos_y)))
 		g->player.pos_x = new_x;
 	if (is_walkable(g, (int)(g->player.pos_x), (int)(new_y + marg_y)))
 		g->player.pos_y = new_y;
-/* 	if (is_walkable(g, (int)(new_x + marg_x), (int)(new_y + marg_y)))
-	{
-		g->player.pos_x = new_x;
-		g->player.pos_y = new_y;
-	} */
 }
 
 void	move_lateral(t_game *g, double speed, int dir)
@@ -65,17 +58,12 @@ void	move_lateral(t_game *g, double speed, int dir)
 
 	new_x = g->player.pos_x + (dir * g->player.plane_x * speed);
 	new_y = g->player.pos_y + (dir * g->player.plane_y * speed);
-	marg_x = dir * g->player.plane_x * MARG;
-	marg_y = dir * g->player.plane_y * MARG;
+	marg_x = dir * g->player.plane_x * MARGIN;
+	marg_y = dir * g->player.plane_y * MARGIN;
 	if (is_walkable(g, (int)(new_x + marg_x), (int)(g->player.pos_y)))
 		g->player.pos_x = new_x;
 	if (is_walkable(g, (int)(g->player.pos_x), (int)(new_y + marg_y)))
 		g->player.pos_y = new_y;
-/* 	if (is_walkable(g, (int)(new_x + marg_x), (int)(new_y + marg_y)))
-	{
-		g->player.pos_x = new_x;
-		g->player.pos_y = new_y;
-	} */
 }
 
 void	update_player(t_game *g)

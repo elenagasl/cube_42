@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 18:06:09 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/13 23:51:09 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:02:51 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,6 @@ static int	is_valid_color(char *str)
 	return (comma == 2);
 }
 
-/* Previous version:
-	while (ft_isdigit(line[i]))
-	{
-		value *= 10;
-		value += line[i] - '0';
-		i++;
-	}
- */
 /* Parse an RGB color-coded string into an array of integers */
 static int	parse_rgb(char *line)
 {

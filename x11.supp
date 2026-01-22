@@ -1,5 +1,3 @@
-/* Usage: valgrind --suppressions=x11.supp ./cub3d <args> */
-
 {
    x11_reachable
    Memcheck:Leak

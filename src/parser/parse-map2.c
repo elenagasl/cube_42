@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:18:46 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 10:03:43 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:03:31 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,3 @@ int	is_surrounded(char **arr, int y, int x)
 		return (0);
 	return (1);
 }
-
-/* STRICTER VERSION */
-
-/* A `0` can't be orthogonally nor diagonally surrounded by space */
-/* int	is_surrounded(char **arr, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (i < 2)
-	{
-		j = -1;
-		while (j < 2)
-		{
-			if (ft_isspace(arr[x + i][y + j]))
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
-} */

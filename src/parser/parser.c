@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 09:54:02 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:03:54 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static int	open_cub_file(char *path)
 }
 
 /* Read file `fd` line by line an return an array
-of the read strings or `NULL` in case of error
-TODO: Free GNL static ???*/
+of the read strings or `NULL` in case of error*/
 static char	**arr_string_from_fd(int fd)
 {
 	char	**arr;

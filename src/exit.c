@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 17:23:12 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/14 10:42:13 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 17:38:50 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ void	destroy_images(t_game *g)
 	if (g->textures[EA].img)
 		mlx_destroy_image(g->mlx, g->textures[EA].img);
 }
-
-/* void	destroy_window(t_game *g)
-{
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
-} */
 
 void	exit_game(t_game *g, int status)
 {

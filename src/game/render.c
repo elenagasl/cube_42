@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 13:16:25 by elengarc          #+#    #+#             */
-/*   Updated: 2026/01/13 15:07:59 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:05:45 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	render_frame(t_game *g)
 	int	x;
 
 	x = 0;
-	while (x < WIN_W) //Recorremos pixeles por columnas
+	while (x < WIN_W)
 	{
 		cast_column(g, x);
 		x++;

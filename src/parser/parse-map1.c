@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 23:39:00 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/14 10:03:11 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:03:24 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	parse_map(t_game *g, char **arr)
 	return (1);
 }
 
-// TODO: Should we call exit() after malloc fail?
 /* Fill in with spaces every string shorter than the longest string */
 void	normalize_map_spaces(char **arr, int h, int w)
 {
