@@ -29,7 +29,7 @@ To exit the program, press `Esc` or close the window.
 
 The MinilibX library produces memory leaks. A Valgrind suppression file has been provided to silent them. To use it run:
 ```bash
-valgrind --suppressions=x11.supp ./cub3d <args>
+valgrind --suppressions=x11.supp ./cub3D maps/test.cub
 ```
 
 ## Map files
