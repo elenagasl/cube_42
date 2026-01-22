@@ -36,7 +36,7 @@ valgrind --suppressions=x11.supp ./cub3d <args>
 
 A valid `.cub` map file should indicate the path to four `.xpm` texture walls (North, South, East, West), and two RGB colors (floor and ceiling).
 
-The map uses `0` and `1` to indicate floor tiles and walls. The player's start position is indicated by an `N`, `S`, `E` or `W` character, indicating its placement and orientation. No other characters are allowed.
+The map uses `0` and `1` to indicate floor tiles and walls. An `N`, `S`, `E` or `W` character indicates the player's starting position and orientation.
 
 The map should be enclosed by walls. If the map is not valid an error message will briefly describe the cause.
 
