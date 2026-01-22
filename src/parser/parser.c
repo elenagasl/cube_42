@@ -6,7 +6,7 @@
 /*   By: danielji <danielji@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 15:27:06 by danielji          #+#    #+#             */
-/*   Updated: 2026/01/22 18:03:54 by danielji         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:38:09 by danielji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	open_rdonly_file(char *path)
 	if (fd < 0)
 	{
 		err = errno;
-		printf("Error: %s: %s\n", strerror(err), path);
+		printf("Error\n%s: %s\n", strerror(err), path);
 		return (-1);
 	}
 	return (fd);
