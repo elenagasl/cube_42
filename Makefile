@@ -16,9 +16,9 @@ BUILD		= build
 SRCS		= $(addprefix $(SRC_PATH)/, $(SRC))
 OBJS		= $(addprefix $(BUILD)/, $(SRC:.c=.o))
 
-MLX_DIR = ./minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_LDFLAGS = -lm -lXext -lX11
+MLX_DIR		= ./minilibx-linux
+MLX_LIB		= $(MLX_DIR)/libmlx.a
+MLX_LDFLAGS	= -lm -lXext -lX11
 
 INCLUDE		= -I./libft -I$(MLX_DIR)
 LDFLAGS		= libft/libft.a $(MLX_LIB) $(MLX_LDFLAGS)
